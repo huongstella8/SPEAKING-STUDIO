@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision-Making & Change — IELTS Speaking Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCF4; --surface:#FFFFFF; --sand:#FBF3DE;
+  --ink:#2A1E0A; --ink-2:#5C4B2E; --muted:#8D7B58; --line:#EADFC5;
+  --gold:#F2A81D; --gold-deep:#B87200; --ember:#E2601C;
+  --fc6:#FCE7B4; --fc7:#EFB53C; --fc8:#B87200; --fc:#B87200;
+  --lr6:#CFE8DA; --lr7:#5CAD86; --lr8:#14735A; --lr:#14735A;
+  --gr6:#DED8F3; --gr7:#8B7FD4; --gr8:#5140A6; --gr:#5140A6;
+  --pr6:#F8D8CF; --pr7:#DF8B75; --pr8:#B4392A; --pr:#B4392A;
+  --display:"Fraunces",Georgia,"Iowan Old Style",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-text-size-adjust:100%}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 90px}
+a{color:var(--gold-deep)}
+
+/* masthead */
+header.mast{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, rgba(242,168,29,.55), rgba(242,168,29,0) 68%)}
+header.mast .wrap{padding-top:24px;padding-bottom:26px;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+.modno{font-family:var(--mono);font-size:12.5px;color:#C9AE72;margin:0 0 4px}
+.mast h1{font-family:var(--display);font-size:clamp(30px,6.4vw,50px);line-height:1.02;margin:0;font-weight:700;
+  font-variation-settings:'SOFT' 60,'WONK' 1; color:var(--gold)}
+.mast .tag{margin:8px 0 0;color:#D9C79C;font-size:15px}
+.mast .blurb{margin:14px 0 0;color:#BFAE86;font-size:14px;max-width:66ch}
+.idbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.idbar input{background:#3B2B10;border:1px solid #55401A;color:#FFF8E7;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;min-width:0;flex:1 1 190px}
+.idbar input::placeholder{color:#9C8557}
+.idbar input:focus{outline:2px solid var(--gold);outline-offset:1px}
+
+/* flow strip */
+.flow{background:var(--sand);border-bottom:1px solid var(--line)}
+.flow .wrap{padding:11px 20px;font-size:13px;color:var(--ink-2)}
+.flow b{color:var(--gold-deep)}
+
+/* tabs */
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:1060px;margin:0 auto;padding:0 20px;display:flex;gap:0;overflow-x:auto}
+nav.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;
+  font-size:14px;font-family:inherit;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;align-items:baseline;gap:7px}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--gold-deep);opacity:.65}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+nav.tabs button[aria-selected="true"] .n{opacity:1}
+nav.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+
+/* generic */
+h2.sec{font-family:var(--display);font-size:26px;margin:34px 0 5px;font-weight:600;font-variation-settings:'SOFT' 40}
+h2.sec:first-child{margin-top:26px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:72ch}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.btn{background:var(--ink);color:#FFF8E7;border:0;border-radius:10px;padding:11px 18px;font-size:14.5px;font-family:inherit;font-weight:500;cursor:pointer}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.btn.gold{background:var(--gold);color:var(--ink);font-weight:600}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+select{padding:11px 12px;border-radius:10px;border:1px solid var(--line);font-family:inherit;font-size:14.5px;background:var(--surface);color:var(--ink);max-width:100%}
+.pill{display:inline-block;font-size:11.5px;padding:3px 10px;border-radius:999px;font-weight:600}
+.hint{font-size:13px;color:var(--muted)}
+.scroll{overflow-x:auto}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+.disclaimer{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-2);margin-top:20px}
+.disclaimer b{color:var(--ink)}
+
+/* vocab */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold-deep);font-weight:600;background:var(--sand)}
+.vfilter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.vfilter button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:13px;font-family:inherit;cursor:pointer;color:var(--ink-2)}
+.vfilter button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+td.term{font-weight:600;min-width:140px}
+.wc{font-size:11.5px;color:var(--muted);font-family:var(--mono);display:block;font-weight:400}
+.ipa{font-family:var(--mono);font-size:12.5px;color:var(--gold-deep)}
+.vi{color:var(--muted);font-style:italic}
+td.eg{font-style:italic;color:var(--ink-2)}
+@media(max-width:860px){
+  table,thead,tbody,tr,td,th{display:block}
+  thead{display:none}
+  tr{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:11px;padding:6px 2px}
+  td{border:0;padding:7px 14px}
+  td::before{content:attr(data-l);display:block;font-size:10.5px;letter-spacing:.1em;color:var(--gold-deep);font-weight:600;margin-bottom:2px}
+  td.term::before{display:none}
+}
+
+/* reasoning */
+.ladder{border-left:4px solid var(--line);padding-left:16px;margin-bottom:22px}
+.ladder.l6{border-color:var(--fc6)}.ladder.l7{border-color:var(--fc7)}.ladder.l8{border-color:var(--fc8)}
+.ladder h4{margin:0 0 6px;font-size:16.5px}
+.ladder ul{margin:8px 0 0;padding-left:19px;font-size:14.5px}
+.ladder li{margin-bottom:6px}
+.formula{font-family:var(--mono);font-size:12.5px;background:var(--sand);padding:7px 11px;border-radius:8px;display:inline-block;margin:4px 0}
+.argmap{display:grid;grid-template-columns:1fr;gap:13px;margin-top:12px}
+@media(min-width:780px){.argmap{grid-template-columns:1fr 1fr}}
+.argbox{border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--surface)}
+.argbox.for{border-top:4px solid var(--lr8)}
+.argbox.against{border-top:4px solid var(--ember)}
+.argbox h5{margin:0 0 8px;font-size:15px}
+.argbox li{font-size:14px;margin-bottom:7px}
+.verdict{background:var(--ink);color:#FFF8E7;border-radius:13px;padding:16px 19px;font-size:14.5px;margin-top:15px}
+.verdict b{color:var(--gold)}
+details{border-top:1px solid var(--line);padding:13px 0}
+details summary{cursor:pointer;font-weight:600;font-size:15px}
+.qgroup{margin:14px 0}
+.qgroup h3{font-family:var(--display);font-size:17px;margin:0 0 6px;font-weight:600}
+ol.q{margin:0;padding-left:22px}ol.q li{margin-bottom:5px;font-size:14.5px}
+.cue{background:var(--sand);border-left:4px solid var(--gold);border-radius:0 11px 11px 0;padding:14px 17px;margin-bottom:11px}
+.cue b{display:block;margin-bottom:6px}
+.cue ul{margin:0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+
+/* studio */
+.stage{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+.stage::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(226,96,28,.35), rgba(226,96,28,0) 70%)}
+.stage>*{position:relative;z-index:1}
+.counter{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.08em;margin:0 0 8px}
+.qtext{font-family:var(--display);font-size:clamp(19px,3.6vw,25px);line-height:1.28;margin:0 0 8px;font-weight:600}
+.bullets{margin:8px 0 0;padding-left:19px;font-size:14px;color:#CDB88C}
+.clock{font-family:var(--mono);font-size:46px;letter-spacing:-.02em;margin:16px 0 2px;font-variant-numeric:tabular-nums}
+.clock.warn{color:var(--gold)}.clock.over{color:#FF9E7A}
+.stage .btn.ghost{color:#FFF8E7;border-color:#55401A}
+.target{font-size:12.5px;color:#A8945F;font-family:var(--mono);margin:0 0 14px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.recording .dot{animation:blip 1.05s infinite}
+.take{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.take audio{height:36px;flex:1 1 220px;min-width:0}
+.take .tno{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;font-family:inherit;font-size:14.5px;line-height:1.65;min-height:140px;resize:vertical;background:var(--surface);color:var(--ink)}
+textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+
+/* models */
+.hlbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 18px}
+.hlbar button{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 12px;font-size:12.5px;font-family:inherit;cursor:pointer;font-weight:600}
+.hlbar button[aria-pressed="false"]{opacity:.42}
+.answer{font-size:16.5px;line-height:1.9}
+.answer p{margin:0 0 14px}
+mark{background:none;padding:1px 0}
+body.show-fc mark.fc{background:var(--fc6);box-shadow:0 1.5px 0 var(--fc8)}
+body.show-lr mark.lr{background:var(--lr6);box-shadow:0 1.5px 0 var(--lr8)}
+body.show-gr mark.gr{background:var(--gr6);box-shadow:0 1.5px 0 var(--gr8)}
+body.show-pr mark.pr{background:var(--pr6);box-shadow:0 1.5px 0 var(--pr8)}
+.notes{font-size:13.5px;color:var(--ink-2);background:var(--sand);border-radius:12px;padding:15px 17px;margin-top:14px}
+.notes p{margin:0 0 9px}
+.crit-tag{font-weight:700;font-size:11px;padding:2px 7px;border-radius:5px;margin-right:6px;color:#fff}
+.prosody{font-family:var(--mono);font-size:13px;line-height:2;color:var(--ink-2)}
+.prosody .st{font-weight:700;color:var(--ember)}
+.bandhead{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.bandhead .bn{font-family:var(--display);font-size:24px;font-weight:700}
+
+/* self-assessment */
+.crit{margin-bottom:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.crit>h4{margin:0;font-size:15.5px;padding:13px 17px;color:#fff}
+.crit .items{padding:4px 17px 14px}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:10px 0 10px 11px;border-bottom:1px solid #F1EADA;font-size:14.5px;border-left:4px solid transparent}
+.chk:last-child{border-bottom:0}
+.chk input{margin:4px 0 0;width:18px;height:18px;flex:0 0 auto}
+.chk label{cursor:pointer}
+.chk .lvl{font-family:var(--mono);font-size:10.5px;padding:1px 7px;border-radius:5px;margin-right:7px;font-weight:700}
+.score{background:var(--ink);color:#FFF8E7;border-radius:15px;padding:20px;margin-top:6px}
+.score .big{font-family:var(--display);font-size:40px;margin:4px 0;color:var(--gold);font-weight:700}
+.score .brk{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.score .brk span{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:7px;color:#fff}
+.warnbox{background:#FDECE2;border:1px solid #F3CBB4;border-radius:11px;padding:13px 15px;font-size:14px;margin-bottom:16px;color:#8A3A12}
+
+/* report */
+.kv{display:grid;grid-template-columns:170px 1fr;gap:7px 15px;font-size:14.5px}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+.sid{font-family:var(--mono);font-size:13px;background:var(--sand);padding:2px 8px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">HUONG STELLA PARADIGM</p>
+    <p class="modno">IELTS Speaking Forecast 2026 · Quarter 2 · Module 02 of 10</p>
+    <h1>Decision-Making & Change</h1>
+    <p class="tag">Choices, plans, advice and changing your mind</p>
+    <p class="blurb">Eight cue cards drawing on one common stock of arguments. In terms of preparation time against likely return, this is the most efficient cluster in the entire 2026 forecast.</p>
+    <div class="idbar">
+      <input id="stName" placeholder="Full name" autocomplete="name">
+      <input id="stEmail" type="email" placeholder="Email address" autocomplete="email">
+      <input id="subLink" placeholder="Submission link from your teacher">
+    </div>
+  </div>
+</header>
+
+<div class="flow"><div class="wrap">
+  Work through the tabs in order: <b>learn the language</b> → <b>study the reasoning</b> → <b>record with the AI examiner</b> → <b>compare against the band models</b> → <b>return to the studio and record again</b> → <b>rate yourself against the descriptors</b> → <b>download and submit your report</b>.
+</div></div>
+
+<nav class="tabs"><div class="inner" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+
+<!-- 1 VOCABULARY -->
+<section class="panel" id="p-vocab" role="tabpanel">
+  <h2 class="sec">Vocabulary</h2>
+  <p class="sub" id="vocabSub"></p>
+  <div class="vfilter" id="vfilter"></div>
+  <div class="card scroll" id="vocabCard">
+    <table>
+      <thead><tr><th style="width:19%">Item</th><th style="width:11%">Pronunciation</th><th style="width:24%">Meaning</th><th style="width:24%">Register &amp; usage</th><th>Example in use</th></tr></thead>
+      <tbody id="vocabBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 2 REASONING -->
+<section class="panel" id="p-reason" role="tabpanel">
+  <h2 class="sec">Reasoning &amp; structure</h2>
+  <p class="sub">The same question, answered three ways. What separates the bands is not length but the reasoning operations performed: stating and illustrating at Band 6, conceding and categorising at Band 7, redefining and weighing trade-offs at Band 8.</p>
+  <div id="reasonBody"></div>
+</section>
+
+<!-- 3 STUDIO -->
+<section class="panel" id="p-studio" role="tabpanel">
+  <h2 class="sec">Recording studio</h2>
+  <p class="sub">Choose a question set rather than a single question. The examiner reads the first question; answer it, then press <b>Next question</b> and keep going. The recorder runs continuously across the whole set, exactly as in the real interview.</p>
+
+  <div class="row" style="margin-bottom:14px">
+    <select id="partSel"><option value="p1">Part 1</option><option value="p2">Part 2</option><option value="p3">Part 3</option></select>
+    <select id="setSel" style="flex:1 1 260px"></select>
+  </div>
+
+  <div class="stage" id="stage">
+    <p class="counter" id="counter">—</p>
+    <p class="qtext" id="qNow">Select a question set to begin.</p>
+    <ul class="bullets" id="qBullets" hidden></ul>
+    <p class="clock" id="clock">00:00</p>
+    <p class="target" id="target"></p>
+    <div class="row">
+      <button class="btn ghost" id="btnAsk">Read question aloud</button>
+      <button class="btn ghost" id="btnNext">Next question</button>
+      <button class="btn ghost" id="btnPrep" hidden>Start 1-minute preparation</button>
+      <button class="btn ember" id="btnRec"><span class="dot"></span>Record set</button>
+      <button class="btn gold" id="btnStop" disabled>Stop &amp; save</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 8px;font-size:16px">Recorded takes</h3>
+    <div id="takes"><p class="hint" style="margin:6px 0">No recordings yet.</p></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 6px;font-size:16px">Transcript</h3>
+    <p class="hint" style="margin:0 0 10px">Chrome and Edge will transcribe automatically as you speak. In other browsers, play the recording back and type it out — transcribing your own speech is the single most effective error-correction exercise available to you.</p>
+    <textarea id="transcript" placeholder="Your transcript will appear here…"></textarea>
+    <p class="hint" id="wcount">0 words</p>
+  </div>
+</section>
+
+<!-- 4 MODELS -->
+<section class="panel" id="p-models" role="tabpanel">
+  <h2 class="sec">Band model answers</h2>
+  <p class="sub">Three responses to one question. Toggle the highlighting to see which features are credited under each assessment criterion, then return to the studio and record the same question again.</p>
+  <div class="hlbar" id="hlbar">
+    <button data-c="fc" aria-pressed="true" style="color:var(--fc8)">Fluency &amp; Coherence</button>
+    <button data-c="lr" aria-pressed="true" style="color:var(--lr8)">Lexical Resource</button>
+    <button data-c="gr" aria-pressed="true" style="color:var(--gr8)">Grammatical Range</button>
+    <button data-c="pr" aria-pressed="true" style="color:var(--pr8)">Pronunciation</button>
+  </div>
+  <div id="modelBody"></div>
+</section>
+
+<!-- 5 SELF-ASSESSMENT -->
+<section class="panel" id="p-check" role="tabpanel">
+  <h2 class="sec">Self-assessment</h2>
+  <p class="sub">Tick only what your recording demonstrably does, not what you intended it to do. The statements below translate the four public IELTS Speaking assessment criteria into observable behaviour. Each criterion has its own colour; within a criterion, the shade darkens as the band rises.</p>
+  <div class="warnbox" id="fmtWarn" hidden></div>
+  <div id="chkBody"></div>
+  <div class="score">
+    <div style="font-size:13px;color:#C9AE72">Self-rated band — mean of the four criteria, rounded to the nearest half band</div>
+    <div class="big" id="scoreVal">—</div>
+    <div class="brk" id="scoreBrk"></div>
+    <p class="hint" id="scoreNote" style="color:#A8945F;margin:12px 0 0"></p>
+  </div>
+</section>
+
+<!-- 6 REPORT -->
+<section class="panel" id="p-report" role="tabpanel">
+  <h2 class="sec">Submission report</h2>
+  <p class="sub">Download the formatted report together with your audio file, then upload both to the link your teacher has given you. The two files share a submission ID so they can be matched after upload.</p>
+  <div class="card"><dl class="kv" id="repPreview"></dl></div>
+  <div class="row">
+    <button class="btn gold" id="btnReport">Download report (.html)</button>
+    <button class="btn ghost" id="btnAudio">Download latest recording</button>
+    <button class="btn ghost" id="btnJson">Download data (.json)</button>
+    <button class="btn" id="btnOpen">Open submission link</button>
+  </div>
+  <p class="hint" style="margin-top:10px">The report records your name, email, submission time, module, question set, number of takes, total practice time, the duration of your final take, your full transcript, and every self-assessment statement with its result. Open it and print to PDF if a PDF is required.</p>
+  <div class="disclaimer" id="disclaimerBox"></div>
+</section>
+
+<footer id="foot"></footer>
+</main>
+
+<script>
+const TOPIC = {"id":"decision-making-and-change","no":"02","name":"Decision-Making & Change","tagline":"Choices, plans, advice and changing your mind","blurb":"Eight cue cards drawing on one common stock of arguments. In terms of preparation time against likely return, this is the most efficient cluster in the entire 2026 forecast.","vocab":[{"t":"weigh up the pros and cons","wc":"collocation","g":"coll","ipa":"/weɪ ʌp/","def":"to consider the advantages and disadvantages before deciding","vi":"cân nhắc thiệt hơn","n":"Neutral and safe in all three parts. British English prefers <i>weigh up</i>; American English drops the particle.","eg":"I spent a fortnight weighing up the pros and cons before I turned the offer down."},{"t":"have second thoughts","wc":"idiom","g":"idiom","ipa":"/ˈsekənd θɔːts/","def":"to begin to doubt a decision you have already taken","vi":"đâm ra do dự sau khi đã quyết","n":"The doubt follows the decision — that sequence is what the phrase encodes, and using it before a decision is a common error.","eg":"I had already signed the contract when I started having second thoughts."},{"t":"go with your gut","wc":"idiom","g":"idiom","ipa":"/ɡʌt/","def":"to decide on instinct rather than analysis","vi":"quyết theo trực giác","n":"Informal. The more formal equivalent, <i>trust my instincts</i>, is preferable if the surrounding register is measured.","eg":"There wasn't time to research it properly, so I went with my gut and never regretted it."},{"t":"sleep on it","wc":"idiom","g":"idiom","ipa":"/sliːp ɒn ɪt/","def":"to postpone a decision until the following day","vi":"để qua đêm rồi quyết","n":"Highly idiomatic and genuinely common in everyday speech, which is what gives it value in Part 1.","eg":"My father's advice was always to sleep on any decision involving money."},{"t":"a leap of faith","wc":"noun phrase","g":"noun","ipa":"/liːp/","def":"a decision taken in the absence of adequate evidence","vi":"một bước nhảy liều lĩnh","n":"Slightly formal and strongly figurative. Reserve it for consequential decisions; applied to trivia it sounds inflated.","eg":"Moving abroad at nineteen was a leap of faith, and it happened to pay off."},{"t":"back out of","wc":"phrasal verb","g":"pv","ipa":"/bæk aʊt/","def":"to withdraw from something you had committed to","vi":"rút lui khỏi cam kết","n":"Carries mild disapproval: the commitment was real and the withdrawal let someone down.","eg":"He backed out of the trip two days before we were due to fly."},{"t":"talk something through","wc":"phrasal verb","g":"pv","ipa":"/θruː/","def":"to discuss something in enough detail to resolve it","vi":"bàn cho ra nhẽ","n":"Positive. Distinct from <i>talk about</i>, which implies discussion without resolution — the particle carries the difference.","eg":"Once we had talked it through properly, the decision more or less made itself."},{"t":"with hindsight","wc":"fixed phrase","g":"coll","ipa":"/ˈhaɪnsaɪt/","def":"judging with the benefit of knowing how things turned out","vi":"nhìn lại mới thấy","n":"Almost always fronted, and ideally placed in the closing sentence of a Part 2 narrative. <i>In hindsight</i> is an accepted variant.","eg":"With hindsight, turning that job down was the single best call I have made."},{"t":"a change of heart","wc":"noun phrase","g":"noun","ipa":"/tʃeɪndʒ əv hɑːt/","def":"a reversal of opinion driven by feeling rather than by new evidence","vi":"đổi ý vì cảm xúc","n":"More graceful than <i>I changed my mind</i>, and semantically narrower: the cause is emotional, not informational.","eg":"She had been dead set against the idea, then had a complete change of heart overnight."},{"t":"be torn between","wc":"collocation","g":"coll","ipa":"/tɔːn/","def":"to be unable to choose between two things you want equally","vi":"giằng xé giữa","n":"Conveys genuine conflict rather than mere uncertainty. Followed by two noun phrases or two -ing forms.","eg":"I was torn between staying somewhere safe and starting again from scratch."},{"t":"a spur-of-the-moment decision","wc":"noun phrase","g":"noun","ipa":"/spɜː/","def":"a decision made suddenly, without prior thought","vi":"quyết định bột phát","n":"Informal and neutral in judgement; the surrounding clause supplies the approval or regret. Its opposite is <i>a considered decision</i>.","eg":"It was a spur-of-the-moment decision and, frankly, a reckless one."},{"t":"burn your bridges","wc":"idiom","g":"idiom","ipa":"/bɜːn/","def":"to act so as to destroy any possibility of return","vi":"tự chặt cầu sau lưng","n":"Negative. Useful when discussing irreversible choices and the value of leaving options open.","eg":"Resigning that way burned a few bridges I would rather have kept."},{"t":"choice overload","wc":"noun phrase","g":"noun","ipa":"/tʃɔɪs ˈəʊvələʊd/","def":"the paralysis that results from having too many options","vi":"tê liệt vì quá nhiều lựa chọn","n":"Academic and precise; a strong Part 3 item for questions about whether decisions are harder now than in the past.","eg":"Choice overload is precisely why young people today find decisions harder, not easier."},{"t":"be in two minds","wc":"idiom","g":"idiom","ipa":"/tuː maɪndz/","def":"to be undecided between two possibilities","vi":"còn phân vân","n":"British English. The American form is <i>of two minds</i>. Milder and more polite than <i>torn between</i>.","eg":"I am still in two minds about whether it was the right thing to do."},{"t":"see it through","wc":"phrasal verb","g":"pv","ipa":"/θruː/","def":"to continue with something until it is finished, despite difficulty","vi":"theo đến cùng","n":"Positive, with an implication of endurance rather than enthusiasm.","eg":"Once I had committed, I was determined to see it through even when the funding fell apart."},{"t":"weigh heavily on someone","wc":"collocation","g":"coll","ipa":"/ˈhevɪli/","def":"to cause someone prolonged worry or guilt","vi":"đè nặng lên ai","n":"Formal and emotionally serious. Suited to decisions with moral weight rather than practical inconvenience.","eg":"That choice weighed heavily on me for months afterwards."}],"q":{"p1":[{"g":"Stage of life","items":["Are you satisfied with your age now?","What's the most important thing you've done so far?","At what age do you think people enjoy their lives most?","What do you want to do five years from now?"]},{"g":"Dreams and ambition","items":["When you were a child, what job did you dream of doing?","Do you think you are an ambitious person?","What kind of job do you want to do in the future?","Do you have any dreams or hopes for your life?"]}],"p2":[{"t":"Describe a difficult decision you made that had a good result","b":["What the decision was","Why it was difficult to make","What helped you to decide","And explain why the decision had a good result"]},{"t":"Describe a time when you had to make an important decision","b":["What decision you had to make","How you made the decision","Why this decision was important","And explain whether you think it was the right decision"]},{"t":"Describe a time you had to change your plan or changed your mind","b":["When this happened","What made you change the plan","What the new plan was","And how you felt about the change"]},{"t":"Describe a time you changed your opinion","b":["When it was","What your opinion was","Why you changed your opinion","And explain how you felt about it"]},{"t":"Describe a time when you changed a decision","b":["What decision you made","Why you changed the decision","Whether it was a good result","And explain how you felt about it"]},{"t":"Describe a person who you think is good at planning things","b":["Who he/she is and how you know him/her","What this person usually plans","What this person does to plan things","And explain why you think this person is good at planning"]},{"t":"Describe a time you gave advice to someone","b":["When and who you gave the advice to","What the advice was","Why you gave it","And explain how this person felt about the advice"]},{"t":"Describe a time when you encouraged somebody to do something they didn't want to do","b":["Who this person is","What you encouraged him/her to do","How he/she reacted","And explain when you encouraged him/her to do this"]}],"p3":[{"g":"How people decide","items":["Why do some people find it difficult to make important decisions?","Do young people make decisions differently from older people?","Do men and women make decisions differently?","Is it better to make decisions alone or ask for advice?","How can experience improve decision-making?"]},{"g":"Advice","items":["When is it better to ask friends for advice rather than family?","Why do older people sometimes ask younger people for advice?","What problems can someone have when they ask lots of different people for advice?","What personal qualities do people need to give good advice?"]},{"g":"Planning and flexibility","items":["Is it important to be flexible in life?","Can changing plans sometimes lead to better results?","Why don't some people like to plan their social life in advance?","Do you agree that a successful career is only possible if it has been carefully planned?"]},{"g":"Changing your mind","items":["Is it easy for people to admit they were wrong?","Do older people change their opinions less often than young people?","Can other people influence our opinions? How?","Should people always stick to their own opinions?"]}]},"strategy":{"p1":{"q":"Do you think you are an ambitious person?","b6":{"h":"A position with a reason and an example","f":"Yes/No → Because → Example","pts":["Answer directly; do not open by repeating the question back.","One reason and one everyday example is enough at this level.","Keep to the present simple and resist drifting into a long anecdote, which belongs in Part 2."]},"b7":{"h":"Define the key word on your own terms","f":"Distinguish → Position → Specific proof","pts":["Separate the senses: professional ambition and personal ambition are not the same thing, and saying so is visible reasoning.","Add one less common item — <i>set the bar high</i>, <i>quietly driven</i>.","Close on a concrete detail that is demonstrably true of you."]},"b8":{"h":"Take a stance towards the word itself","f":"Comment on the term → Admit a tension → Vivid proof → Short landing","pts":["Remark on what <i>ambitious</i> connotes in your culture; the word is not neutral everywhere.","Acknowledge a contradiction in yourself. Slight self-deprecation reads as unrehearsed and confident at once.","End on a short clause after a run of longer ones. Rhythm is part of the assessment."]}},"p2":{"q":"Describe a difficult decision you made that had a good result","b6":{"h":"Four prompts, two or three sentences each","f":"What → Why hard → What helped → Result","pts":["Choose a decision that is easy to narrate: a school, a job, a move.","Hold the past simple throughout; unmotivated tense shifts are the commonest Band 6 error.","Aim for at least ninety seconds. Finishing under a minute is penalised even when the content is sound."]},"b7":{"h":"Show the conflict, not only the outcome","f":"Two options → The pull of each → Turning point → Outcome → What it taught me","pts":["Set out both options concretely so the listener can feel the weight of the choice.","Use <i>was going to</i> and <i>had been planning to</i> for the abandoned course of action.","Bring in a second person and give them one line of speech."]},"b8":{"h":"Treat the decision as a collision of values","f":"Stakes → Competing values → Cost admitted → Outcome → Non-obvious reflection","pts":["Show that the decision revealed who you are, not merely what you chose.","Admit what it cost. A narrative with no loss in it sounds invented.","Close with <i>with hindsight</i>, but say something that was not already obvious in the first sentence."]}},"p3":{"q":"Is it better to make decisions alone or ask for advice?","b6":{"h":"Choose one side and support it","f":"Stance → Reason 1 → Reason 2","pts":["State the position immediately.","Two supported reasons; balance is not required at this level.","Use <i>I think</i> or <i>in my opinion</i>, but not more than twice in one answer."]},"b7":{"h":"Sort the question into cases","f":"It depends on X → Case A → Case B → Governing principle","pts":["Divide by decision type: personal against professional, reversible against irreversible.","Raise the risk of consulting too many people, which most candidates overlook.","Finish on a principle rather than on an empty <i>it depends</i>."]},"b8":{"h":"Ask what is being sought, and from whom","f":"Split the question → Name the paradox → Propose a test → Qualified verdict","pts":["Distinguish asking for <i>information</i> from asking for <i>permission</i>; most people conflate the two.","Name the paradox: more consultation often produces less decisiveness, through choice overload and diffusion of responsibility.","Offer a usable test — has the person you are asking actually paid the price of a comparable decision?"]}},"critical":{"q":"Is it better to make decisions alone or ask for advice?","for":{"h":"The case for seeking advice","main":"An individual's judgement is distorted by biases that the individual is, by definition, not positioned to see.","sup":["<b>Blind spots.</b> People systematically overrate their own capability and underrate risk. An outsider does not share that particular distortion.","<b>Borrowed experience.</b> Someone who has already made a comparable decision knows its real cost, which no amount of private analysis will reveal.","<b>Forced articulation.</b> Merely stating the problem aloud exposes the weak joints in the reasoning. The listener need not reply at all for this to work."]},"against":{"h":"The case for deciding alone","main":"Advice is always offered from a position that does not bear the consequences.","sup":["<b>Misaligned incentives.</b> The adviser does not live with the outcome and therefore tends to recommend what is safe for them rather than what is best for you.","<b>Diffusion of ownership.</b> The more people consulted, the weaker the sense of authorship; and when the decision fails, nobody learns from it.","<b>Paralysis by input.</b> Five conflicting opinions are worse than none. Consultation is often procrastination that feels like diligence."]},"verdict":"The Band 8 resolution: consult for the information you genuinely lack, not for the permission you already hold. The filter is simple — ask only those who have actually paid for a comparable decision."}},"models":[{"band":"6","part":"Part 2","q":"Describe a difficult decision you made that had a good result","html":"<p><mark class=\"fc\">I want to talk about a decision I made two years ago.</mark> <mark class=\"gr\">I decided to change my major from business to computer science.</mark></p><p><mark class=\"fc\">It was difficult because</mark> my parents didn't agree. <mark class=\"lr\">They thought business was a safer choice</mark> and I would find a job easily. <mark class=\"gr\">Also, I was worried because I didn't know anything about programming.</mark></p><p><mark class=\"fc\">What helped me was</mark> my cousin. <mark class=\"gr\">He works in IT and he told me the field was growing.</mark> <mark class=\"lr\">I also did some research on the internet.</mark></p><p><mark class=\"fc\">In the end,</mark> it was a good result. <mark class=\"gr\">Now I enjoy my studies and I already have a part-time job.</mark> <mark class=\"lr\">So I think I made the right decision.</mark></p>","notes":{"fc":"Each paragraph answers one prompt in turn. The organisation is sound but the scaffolding is audible, and the opening formula announces preparation rather than thought.","lr":"Accurate but high-frequency throughout: <i>safer choice, did some research, growing</i>. No idiomatic item and no evidence of stylistic awareness.","gr":"The past simple is controlled and there are <i>because</i> and <i>and</i> clauses. No past perfect, no relative clause, no conditional.","pr":"Clear and easily intelligible, but the rhythm is flat and contrastive stress is largely absent."},"prosody":"I <span class=\"st\">WANT</span> to talk‿about‿a de<span class=\"st\">CI</span>sion / I made two years‿a<span class=\"st\">GO</span> ↘","tip":"This runs to roughly fifty-five seconds. Part 2 requires between one and two minutes; falling short costs marks on Fluency and Coherence however accurate the language is."},{"band":"7","part":"Part 2","q":"Describe a difficult decision you made that had a good result","html":"<p><mark class=\"pr\">Two years ago I did something my family still hasn't quite forgiven me for</mark> — <mark class=\"gr\">I dropped business studies halfway through and switched to computer science.</mark></p><p><mark class=\"fc\">What made it so hard</mark> <mark class=\"lr\">was that everyone around me had a stake in it.</mark> <mark class=\"gr\">My parents had been putting money aside for that degree since I was small</mark>, <mark class=\"lr\">and business felt like the safe bet to them</mark> — <mark class=\"gr\">something they could explain to relatives without a long conversation.</mark> <mark class=\"fc\">Meanwhile</mark> I'd never written a line of code in my life.</p><p><mark class=\"fc\">The thing that tipped it</mark> was a weekend I spent with my cousin, who works in software. <mark class=\"pr\">He didn't try to sell me on it at all.</mark> <mark class=\"lr\">He just said, \"Sit with the boring part for two days and see if you're still curious.\"</mark> <mark class=\"gr\">I was, and that told me everything I needed to know.</mark></p><p><mark class=\"fc\">With hindsight</mark> <mark class=\"lr\">it was the best call I've made</mark>. <mark class=\"gr\">I've got a part-time job now, and more importantly my parents have come round</mark> — <mark class=\"lr\">though it took a full year and a very awkward Tết.</mark></p>","notes":{"fc":"The opening is a dramatic detail rather than a formula, and transitions vary in function throughout. The long turn is produced without noticeable effort, which is the operative phrase in the Band 7 descriptor.","lr":"<i>Have a stake in, the safe bet, tipped it, come round, the best call</i>. Less common items appear naturally, and the line of direct speech brings a second register into the narrative.","gr":"Past perfect continuous, a relative clause, and extended compound sentences without error. A few sentences remain simple, which is what still separates this from Band 8.","pr":"Stress on <i>hasn't quite forgiven</i> creates the humour, and the falling contour on <i>a very awkward Tết</i> delivers the joke. Intonation is being used, not merely produced."},"prosody":"Two years‿a<span class=\"st\">GO</span> / I did something my family <span class=\"st\">STILL</span> hasn't quite for<span class=\"st\">GIV</span>en me for ↗ // I <span class=\"st\">DROPPED</span> business studies halfway <span class=\"st\">THROUGH</span> / and switched to com<span class=\"st\">PU</span>ter science ↘","tip":"Direct speech is the cheapest high-yield device in Part 2: it obliges you to change intonation, and the examiner hears phonological control immediately."},{"band":"8+","part":"Part 2","q":"Describe a difficult decision you made that had a good result","html":"<p><mark class=\"pr\">The decision itself took about forty seconds. Living with it took two years.</mark></p><p><mark class=\"fc\">Halfway through a business degree</mark> <mark class=\"lr\">my parents had scrimped for since I was six</mark>, <mark class=\"gr\">I filled in a transfer form for computer science and handed it in before I could talk myself out of it.</mark> <mark class=\"lr\">The difficulty wasn't the subject.</mark> <mark class=\"gr\">It was that everyone I loved had quietly invested in a version of me that I was about to withdraw.</mark></p><p><mark class=\"fc\">What actually settled it</mark> <mark class=\"lr\">was a piece of advice so unhelpful it turned out to be perfect.</mark> <mark class=\"gr\">My cousin, who's been in software for a decade, refused point-blank to tell me what to do.</mark> <mark class=\"pr\">He said, \"Spend a weekend on the tedious part. Not the exciting part — the tedious part.\"</mark> <mark class=\"lr\">I did, and I was still interested on the Sunday evening, which frankly surprised me more than anyone.</mark></p><p><mark class=\"fc\">The outcome has been good</mark>, <mark class=\"gr\">though I'd be lying if I said there was no cost</mark> — <mark class=\"lr\">there was a stretch of about eight months where dinner at home was distinctly chilly.</mark> <mark class=\"pr\">What I took from it wasn't 'follow your passion', which I think is fairly useless advice.</mark> <mark class=\"lr\">It was that the decisions worth making are the ones where you can't outsource the consequences</mark> — <mark class=\"fc\">and if you can't outsource those, you probably shouldn't outsource the choice either.</mark></p>","notes":{"fc":"Two short opposed clauses establish rhythm at once. All four prompts are addressed, yet none is visible as a prompt: topic development is coherent and appropriately extended rather than administered.","lr":"<i>Scrimped, talk myself out of it, quietly invested, point-blank, a stretch of, distinctly chilly, outsource the consequences</i>. Precise, idiomatic, and capable of dry humour.","gr":"Embedded relative clauses, a <i>so … that</i> construction with the conjunction elided, <i>I'd be lying if I said</i>, and a temporal <i>where</i> clause. Sentence shape changes with rhetorical function and errors are essentially absent.","pr":"The opening is a rhythmic exercise: parallel clauses with contrastive stress on <i>FORty seconds</i> and <i>TWO years</i>. The self-correction inside the quotation forces a mid-utterance intonation shift, and <i>distinctly chilly</i> falls into understatement."},"prosody":"The de<span class=\"st\">CI</span>sion‿itself took‿about <span class=\"st\">FOR</span>ty seconds ↘ ‖ <i>(pause 0.5s)</i> <span class=\"st\">LIV</span>ing with‿it took <span class=\"st\">TWO</span> years ↘↘","tip":"The half-second silence after the first sentence is the most valuable thing in the answer. Do not fill it with <i>um</i>. A deliberate pause counts as hesitation used to prepare content, which is a Band 9 feature rather than a fault."}]};
+
+/* ---------- assessment criteria ---------- */
+const CRITERIA = [
+ {k:"fc", name:"Fluency and Coherence", items:[
+  {b:6,t:"I kept going and produced extended turns rather than one-clause replies."},
+  {b:6,t:"I used connectives and discourse markers, although not always the most fitting ones."},
+  {b:6,t:"Coherence broke down occasionally because of hesitation, repetition or self-correction."},
+  {b:7,t:"I sustained long turns without noticeable effort."},
+  {b:7,t:"Hesitation and self-correction occurred mid-sentence but did not disrupt the argument."},
+  {b:7,t:"My discourse markers varied in function — conceding, contrasting, attributing — rather than repeating two or three."},
+  {b:8,t:"Hesitation was rare, and most pauses were spent preparing content rather than retrieving language."},
+  {b:8,t:"The topic was developed coherently and relevantly, with no drift away from the question."},
+  {b:0,t:"Part 2: I spoke for at least one minute thirty (the specified range is one to two minutes).",fmt:1},
+  {b:0,t:"Part 1: I gave two to four sentences per question rather than a bare answer.",fmt:1},
+  {b:0,t:"Part 3: I spoke for roughly thirty to forty-five seconds per question, with development.",fmt:1}
+ ]},
+ {k:"lr", name:"Lexical Resource", items:[
+  {b:6,t:"My vocabulary was sufficient to discuss the topic at length and my meaning was always clear."},
+  {b:6,t:"Some word choices were inappropriate, but the listener could still follow."},
+  {b:6,t:"I paraphrased successfully when a word escaped me."},
+  {b:7,t:"I used some less common and idiomatic items, with evident awareness of collocation."},
+  {b:7,t:"I used my vocabulary flexibly across several topics, not only familiar ones."},
+  {b:7,t:"A few items were stylistically inappropriate for the register."},
+  {b:8,t:"My resource was wide and used readily and flexibly to convey precise meaning."},
+  {b:8,t:"I used less common and idiomatic items skilfully, with only occasional inaccuracy."},
+  {b:8,t:"I paraphrased effectively when required, without stalling."}
+ ]},
+ {k:"gr", name:"Grammatical Range and Accuracy", items:[
+  {b:6,t:"I produced a mix of simple and complex sentence forms, with limited flexibility."},
+  {b:6,t:"Errors occurred frequently in complex structures but rarely impeded communication."},
+  {b:7,t:"I used a range of structures flexibly according to what I wanted to say."},
+  {b:7,t:"Error-free sentences were frequent."},
+  {b:7,t:"A few basic errors persisted — articles, plurals, subject-verb agreement or tense."},
+  {b:8,t:"The majority of my sentences were error free."},
+  {b:8,t:"Errors were non-systematic and occasional rather than patterned."},
+  {b:8,t:"I used advanced structures accurately where they served a purpose — inversion, reduced clauses, mixed conditionals."}
+ ]},
+ {k:"pr", name:"Pronunciation", items:[
+  {b:6,t:"My chunking was generally appropriate."},
+  {b:6,t:"I used stress and intonation to some effect, but did not sustain it."},
+  {b:6,t:"Individual words or sounds were mispronounced, causing only occasional loss of clarity."},
+  {b:7,t:"I showed all the positive features of Band 6 together with some, though not all, of Band 8."},
+  {b:8,t:"I sustained an appropriate rhythm across long utterances."},
+  {b:8,t:"I used stress and intonation flexibly to convey precise or subtle meaning — contrast, irony, doubt."},
+  {b:8,t:"I could be easily understood throughout, with accent having minimal effect on intelligibility."},
+  {b:0,t:"Connected speech was audible: linking such as used‿to, depends‿on, goes‿down.",fmt:1},
+  {b:0,t:"I stressed content words rather than giving every word equal weight.",fmt:1}
+ ]}
+];
+
+const DISCLAIMER = `<b>About this studio.</b> The IELTS Speaking Studio is produced and maintained by <b>Huong Stella AI Academic</b>, and is provided to enrolled learners as a structured rehearsal environment: a curated lexical set, explicit reasoning frames, calibrated band models, an automated examiner for timed practice, and a self-rating instrument derived from the publicly published IELTS Speaking assessment criteria.
+<br><br><b>On the self-assessment.</b> The band figure generated here is an indicative training signal only. It reflects your own judgement of your own performance and has no official standing. It does not constitute, predict or substitute for a rating awarded by a qualified instructor, by Huong Stella AI Academic, or by a certified IELTS examiner, and it must not be reported as an IELTS score. Learners should treat any divergence between their self-rating and their teacher's rating as the most informative part of the exercise, and bring it to their next tutorial.
+<br><br><b>Source of criteria.</b> Descriptor wording is adapted from the IELTS Speaking Band Descriptors published at ielts.org. Timing conventions follow the published test format: Part 1 lasts four to five minutes; Part 2 allows one minute of preparation and one to two minutes of speaking; Part 3 lasts four to five minutes.`;
+
+/* ---------- state ---------- */
+const S={tab:"vocab", vfilter:"all", part:"p1", queue:[], qi:0, setLabel:"",
+  takes:[], attempts:0, totalMs:0, lastMs:0, checks:{}, scores:null,
+  recorder:null, chunks:[], stream:null, t0:0, timerId:null, prepId:null, recog:null, sid:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+
+S.sid = "HSP-"+TOPIC.no+"-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+
+const TABS=[["vocab","Vocabulary"],["reason","Reasoning"],["studio","Studio"],["models","Band models"],["check","Self-assessment"],["report","Report"]];
+function buildTabs(){
+  $("#tabs").innerHTML=TABS.map(([k,l],i)=>`<button role="tab" data-t="${k}" aria-selected="${k===S.tab}"><span class="n">${i+1}</span>${l}</button>`).join("");
+  $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tab=b.dataset.t;buildTabs();show();};
+  show();
+}
+function show(){ TABS.forEach(([k])=>$("#p-"+k).classList.toggle("on",k===S.tab)); if(S.tab==="report") renderReport(); }
+
+/* ---------- 1 vocabulary ---------- */
+const GROUPS=[["all","All"],["coll","Collocations"],["pv","Phrasal verbs"],["idiom","Idioms"],["noun","Nouns"],["adj","Adjectives"]];
+function renderVocab(){
+  if(!TOPIC.vocab.length){
+    $("#vocabSub").textContent="The lexical set for this module is in preparation. The question bank, the recording studio, the self-assessment instrument and the report are all fully operational in the meantime.";
+    $("#vfilter").innerHTML=""; $("#vocabCard").innerHTML='<p class="hint" style="margin:0">No entries yet.</p>'; return;
+  }
+  $("#vocabSub").textContent=`${TOPIC.vocab.length} items. Take four per session, rewrite each example sentence using something that actually happened to you, and say it aloud three times. Four items used are worth more than eighteen items read.`;
+  $("#vfilter").innerHTML=GROUPS.map(([k,l])=>`<button data-g="${k}" aria-pressed="${k===S.vfilter}">${l}</button>`).join("");
+  $("#vfilter").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.vfilter=b.dataset.g;renderVocab();};
+  const rows=TOPIC.vocab.filter(v=>S.vfilter==="all"||v.g===S.vfilter);
+  $("#vocabBody").innerHTML=rows.length?rows.map(v=>`<tr>
+    <td class="term" data-l="ITEM">${esc(v.t)}<span class="wc">${esc(v.wc)}</span></td>
+    <td class="ipa" data-l="PRONUNCIATION">${esc(v.ipa)}</td>
+    <td data-l="MEANING">${esc(v.def)} <span class="vi">(${esc(v.vi)})</span></td>
+    <td data-l="REGISTER &amp; USAGE">${v.n}</td>
+    <td class="eg" data-l="EXAMPLE">${esc(v.eg)}</td></tr>`).join("")
+   :`<tr><td colspan="5" class="hint">No items in this category.</td></tr>`;
+}
+
+/* ---------- 2 reasoning ---------- */
+function ladder(n,label,d){
+  return `<div class="ladder l${n}"><h4><span class="pill" style="background:var(--fc${n});color:var(--ink)">Band ${label}</span> &nbsp;${esc(d.h)}</h4>
+   <div class="formula">${esc(d.f)}</div><ul>${d.pts.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+}
+function renderReason(){
+  let h="";
+  if(TOPIC.strategy){
+    [["p1","Part 1"],["p2","Part 2"],["p3","Part 3"]].forEach(([k,l])=>{
+      const d=TOPIC.strategy[k];
+      h+=`<h2 class="sec">${l}</h2><p class="sub">Worked question: <b>${esc(d.q)}</b></p><div class="card">${ladder(6,"6",d.b6)}${ladder(7,"7",d.b7)}${ladder(8,"8+",d.b8)}</div>`;
+    });
+    const c=TOPIC.strategy.critical;
+    h+=`<h2 class="sec">Argument map for Part 3</h2><p class="sub">Question: <b>${esc(c.q)}</b>. A Band 8 answer is not a longer answer. It is one that can hold two positions apart and identify precisely where they conflict.</p>
+    <div class="argmap">
+      <div class="argbox for"><h5>${esc(c.for.h)}</h5><p style="font-size:14px;margin:0 0 9px"><b>Central claim.</b> ${esc(c.for.main)}</p><ul style="padding-left:18px;margin:0">${c.for.sup.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+      <div class="argbox against"><h5>${esc(c.against.h)}</h5><p style="font-size:14px;margin:0 0 9px"><b>Central claim.</b> ${esc(c.against.main)}</p><ul style="padding-left:18px;margin:0">${c.against.sup.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+    </div><div class="verdict">${c.verdict.replace(/^(.*?resolution:)/,'<b>$1</b>')}</div>`;
+  } else {
+    h+=`<div class="card"><p style="margin:0" class="hint">The reasoning frames and argument maps for this module are in preparation. The full question bank below is ready to use with the recording studio.</p></div>`;
+  }
+  // question bank
+  const q=TOPIC.q;
+  h+=`<h2 class="sec">Question bank</h2><p class="sub">Every question in this module, taken from the 2026 forecast. These are the same sets the studio works through.</p><div class="card">`;
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:4px 0 8px">Part 1</h3>`;
+  q.p1.forEach(g=>{h+=`<div class="qgroup"><h3>${esc(g.g)}</h3><ol class="q">${g.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ol></div>`});
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:22px 0 10px">Part 2 — cue cards</h3>`;
+  q.p2.forEach(c=>{h+=`<div class="cue"><b>${esc(c.t)}</b><ul>${c.b.map(b=>`<li>${esc(b)}</li>`).join("")}</ul></div>`});
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:22px 0 8px">Part 3</h3>`;
+  q.p3.forEach(g=>{h+=`<div class="qgroup"><h3>${esc(g.g)}</h3><ol class="q">${g.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ol></div>`});
+  h+=`</div>`;
+  $("#reasonBody").innerHTML=h;
+}
+
+/* ---------- 3 studio ---------- */
+const PER={p1:35,p2:120,p3:45};
+function fillSets(){
+  const q=TOPIC.q,p=S.part;
+  const opts = p==="p2" ? q.p2.map(c=>c.t) : q[p].map(g=>`${g.g} (${g.items.length} questions)`);
+  $("#setSel").innerHTML=opts.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join("");
+  loadSet();
+}
+function loadSet(){
+  const q=TOPIC.q,p=S.part,i=+$("#setSel").value||0;
+  if(p==="p2"){const c=q.p2[i];S.queue=[{text:c.t,bullets:c.b}];S.setLabel=c.t;}
+  else {const g=q[p][i];S.queue=g.items.map(t=>({text:t,bullets:null}));S.setLabel=g.g;}
+  S.qi=0; $("#btnPrep").hidden = p!=="p2";
+  $("#clock").textContent="00:00"; $("#clock").className="clock";
+  paintQ();
+}
+function paintQ(){
+  const item=S.queue[S.qi]; if(!item)return;
+  $("#counter").textContent=`${S.setLabel.toUpperCase()} · QUESTION ${S.qi+1} OF ${S.queue.length}`;
+  $("#qNow").textContent=item.text;
+  const ul=$("#qBullets");
+  if(item.bullets){ul.hidden=false;ul.innerHTML=item.bullets.map(b=>`<li>${esc(b)}</li>`).join("")}else{ul.hidden=true;ul.innerHTML=""}
+  const total=S.queue.length*PER[S.part];
+  $("#target").textContent=`Target for this set: about ${fmt(total*1000)} in total · ${PER[S.part]}s per question`;
+  $("#btnNext").disabled = S.qi>=S.queue.length-1;
+}
+function speak(text,cb){
+  if(!("speechSynthesis" in window)){cb&&cb();return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text); u.lang="en-GB"; u.rate=.93;
+  const vs=speechSynthesis.getVoices();
+  const v=vs.find(v=>/en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang)); if(v)u.voice=v;
+  if(cb)u.onend=cb; speechSynthesis.speak(u);
+}
+$("#partSel").onchange=e=>{S.part=e.target.value;fillSets()};
+$("#setSel").onchange=loadSet;
+$("#btnAsk").onclick=()=>{const it=S.queue[S.qi];if(!it)return;
+  let t=it.text; if(it.bullets)t+=". You should say: "+it.bullets.join(", ")+".";
+  speak(t)};
+$("#btnNext").onclick=()=>{ if(S.qi>=S.queue.length-1)return; S.qi++; paintQ();
+  const it=S.queue[S.qi]; speak(it.text)};
+$("#btnPrep").onclick=()=>{clearInterval(S.prepId);let left=60;const c=$("#clock");
+  c.className="clock warn";c.textContent="01:00";
+  S.prepId=setInterval(()=>{left--;c.textContent=fmt(left*1000);
+    if(left<=0){clearInterval(S.prepId);c.className="clock";c.textContent="00:00";
+      speak("You have one to two minutes for this. You may begin.")}},1000)};
+
+async function startRec(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("This browser cannot record audio. Use a recent version of Chrome, Edge or Safari.");return}
+  try{S.stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+  catch(e){alert("Microphone access was refused. Allow the microphone and try again. Note that recording requires the page to be served over HTTPS.");return}
+  clearInterval(S.prepId);
+  S.chunks=[]; S.recorder=new MediaRecorder(S.stream);
+  S.recorder.ondataavailable=e=>{if(e.data.size)S.chunks.push(e.data)};
+  S.recorder.onstop=saveTake; S.recorder.start(); S.t0=Date.now();
+  $("#stage").classList.add("recording"); $("#btnRec").disabled=true; $("#btnStop").disabled=false;
+  const limit=S.queue.length*PER[S.part]*1000;
+  S.timerId=setInterval(()=>{const d=Date.now()-S.t0,c=$("#clock");
+    c.textContent=fmt(d); c.className="clock"+(d>limit*1.2?" over":d>limit*.8?" warn":"")},200);
+  startRecog();
+}
+function stopRec(){ if(S.recorder&&S.recorder.state!=="inactive")S.recorder.stop();
+  clearInterval(S.timerId); $("#stage").classList.remove("recording");
+  $("#btnRec").disabled=false; $("#btnStop").disabled=true;
+  if(S.stream)S.stream.getTracks().forEach(t=>t.stop());
+  try{S.recog&&S.recog.stop()}catch(e){}}
+function saveTake(){
+  const ms=Date.now()-S.t0, blob=new Blob(S.chunks,{type:(S.chunks[0]&&S.chunks[0].type)||"audio/webm"});
+  S.attempts++; S.totalMs+=ms; S.lastMs=ms;
+  S.takes.push({n:S.attempts,ms,blob,url:URL.createObjectURL(blob),set:S.setLabel,part:S.part,
+    questions:S.queue.map(q=>q.text),at:new Date()});
+  renderTakes(); countWords();
+}
+$("#btnRec").onclick=startRec; $("#btnStop").onclick=stopRec;
+function renderTakes(){
+  if(!S.takes.length){$("#takes").innerHTML='<p class="hint" style="margin:6px 0">No recordings yet.</p>';return}
+  $("#takes").innerHTML=S.takes.slice().reverse().map(t=>`<div class="take">
+    <span class="tno">Take ${t.n} · ${fmt(t.ms)} · ${esc(t.set)}</span>
+    <audio controls src="${t.url}"></audio>
+    <a class="btn ghost" style="text-decoration:none;font-size:13px;padding:8px 13px" download="${S.sid}-take${t.n}.webm" href="${t.url}">Download</a></div>`).join("");
+}
+function startRecog(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR)return;
+  try{S.recog=new SR()}catch(e){return}
+  S.recog.lang="en-GB"; S.recog.continuous=true; S.recog.interimResults=false;
+  const base=$("#transcript").value?$("#transcript").value+"\n\n":""; let acc="";
+  S.recog.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)acc+=e.results[i][0].transcript+" ";
+    $("#transcript").value=base+acc; countWords()};
+  try{S.recog.start()}catch(e){}
+}
+function countWords(){
+  const w=$("#transcript").value.trim().split(/\s+/).filter(Boolean).length;
+  let s=`${w} words`;
+  if(S.lastMs>4000){const wpm=Math.round(w/(S.lastMs/60000));
+    s+=` · ${wpm} words per minute — `+(wpm<110?"below the range associated with Band 7 and above, which typically sits between 130 and 160":wpm>180?"fast enough that clarity is likely to suffer":"within the range associated with Band 7 and above");}
+  $("#wcount").textContent=s;
+}
+$("#transcript").oninput=countWords;
+
+/* ---------- 4 models ---------- */
+const CTAG={fc:["FC","--fc8"],lr:["LR","--lr8"],gr:["GRA","--gr8"],pr:["P","--pr8"]};
+function renderModels(){
+  if(!TOPIC.models.length){$("#modelBody").innerHTML='<div class="card"><p class="hint" style="margin:0">Band models for this module are in preparation.</p></div>';return}
+  $("#modelBody").innerHTML=TOPIC.models.map(m=>{
+    const n=m.band==="6"?6:m.band==="7"?7:8;
+    return `<div class="card">
+     <div class="bandhead" style="border-bottom-color:var(--fc${n})">
+       <span class="bn" style="color:var(--fc${n===6?7:n})">Band ${esc(m.band)}</span>
+       <span class="hint">${esc(m.part)} · ${esc(m.q)}</span></div>
+     <div class="answer">${m.html}</div>
+     <div class="notes">
+       ${Object.keys(CTAG).map(k=>`<p><span class="crit-tag" style="background:var(${CTAG[k][1]})">${CTAG[k][0]}</span>${m.notes[k]}</p>`).join("")}
+       <p style="margin:14px 0 5px"><b>Rhythm and stress — read this aloud:</b></p>
+       <p class="prosody" style="margin:0 0 12px">${m.prosody}</p>
+       <p style="margin:0"><b>Practice note.</b> ${m.tip}</p>
+     </div></div>`}).join("");
+}
+$("#hlbar").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  const on=b.getAttribute("aria-pressed")!=="true";
+  b.setAttribute("aria-pressed",on); document.body.classList.toggle("show-"+b.dataset.c,on)};
+["fc","lr","gr","pr"].forEach(c=>document.body.classList.add("show-"+c));
+
+/* ---------- 5 self-assessment ---------- */
+function renderCheck(){
+  $("#chkBody").innerHTML=CRITERIA.map(c=>`<div class="crit">
+   <h4 style="background:var(--${c.k}8)">${c.name}</h4><div class="items">
+   ${c.items.map((it,i)=>{
+     const id=c.k+"-"+i;
+     const shade = it.fmt?"var(--line)":`var(--${c.k}${it.b})`;
+     const chip  = it.fmt?`background:var(--sand);color:var(--muted)`:`background:var(--${c.k}${it.b});color:${it.b===6?'var(--ink)':'#fff'}`;
+     return `<div class="chk" style="border-left-color:${shade}">
+       <input type="checkbox" id="${id}" style="accent-color:var(--${c.k}8)"${S.checks[id]?" checked":""}>
+       <label for="${id}"><span class="lvl" style="${chip}">${it.fmt?"FORMAT":"BAND "+it.b}</span>${esc(it.t)}</label></div>`}).join("")}
+   </div></div>`).join("");
+  $("#chkBody").onchange=e=>{S.checks[e.target.id]=e.target.checked;scoreIt()};
+  scoreIt();
+}
+function scoreIt(){
+  const out={}; let anyAll=true;
+  CRITERIA.forEach(c=>{
+    const got={6:0,7:0,8:0},tot={6:0,7:0,8:0}; let ticked=0;
+    c.items.forEach((it,i)=>{if(it.fmt)return; tot[it.b]++; if(S.checks[c.k+"-"+i]){got[it.b]++;ticked++}});
+    if(!ticked){out[c.k]=null;anyAll=false;return}
+    const r=b=>tot[b]?got[b]/tot[b]:0;
+    let s=5.5;
+    if(r(6)>=.6)s=6;
+    if(r(6)>=.6&&r(7)>=.4)s=6.5;
+    if(r(7)>=.7)s=7;
+    if(r(7)>=.7&&r(8)>=.4)s=7.5;
+    if(r(7)>=.7&&r(8)>=.75)s=8;
+    out[c.k]=s;
+  });
+  S.scores=out;
+  const vals=CRITERIA.map(c=>out[c.k]).filter(v=>v!==null);
+  if(vals.length===4){
+    const avg=Math.round(vals.reduce((a,b)=>a+b,0)/4*2)/2;
+    S.scores.overall=avg; $("#scoreVal").textContent=avg.toFixed(1);
+    $("#scoreNote").textContent="An indicative training signal only. It carries no official standing and does not substitute for a rating by your teacher.";
+  } else {
+    S.scores.overall=null; $("#scoreVal").textContent="—";
+    $("#scoreNote").textContent=`No band is calculated until all four criteria have been rated. ${4-vals.length} still untouched.`;
+  }
+  $("#scoreBrk").innerHTML=CRITERIA.map(c=>
+    `<span style="background:var(--${c.k}8)">${c.name.split(" ")[0].slice(0,4).toUpperCase()} ${out[c.k]===null?"—":out[c.k]}</span>`).join("");
+  const miss=[];
+  CRITERIA.forEach(c=>c.items.forEach((it,i)=>{if(it.fmt&&!S.checks[c.k+"-"+i])miss.push(it.t)}));
+  const w=$("#fmtWarn");
+  if(miss.length){w.hidden=false;w.innerHTML="<b>Format requirements not yet met.</b> These do not carry a band on their own, but the criteria above are difficult to satisfy without them.<br>"+miss.map(m=>"— "+esc(m)).join("<br>")}
+  else w.hidden=true;
+}
+
+/* ---------- 6 report ---------- */
+function reportData(){
+  const last=S.takes[S.takes.length-1];
+  const words=$("#transcript").value.trim().split(/\s+/).filter(Boolean).length;
+  return {
+    submissionId:S.sid, schemaVersion:"hsp-speaking-1.0",
+    module:{no:TOPIC.no,id:TOPIC.id,name:TOPIC.name},
+    student:{name:$("#stName").value.trim()||"(name not supplied)",email:$("#stEmail").value.trim()||"(email not supplied)"},
+    submittedAt:new Date().toISOString(),
+    submittedAtLocal:new Date().toLocaleString("en-GB",{dateStyle:"full",timeStyle:"short"}),
+    part:{p1:"Part 1",p2:"Part 2",p3:"Part 3"}[S.part],
+    questionSet:S.setLabel||"(no set selected)",
+    questions:S.queue.map(q=>q.text),
+    attempts:S.attempts,
+    totalPracticeMs:S.totalMs, totalPractice:fmt(S.totalMs),
+    finalTakeMs:S.lastMs, finalTake:fmt(S.lastMs),
+    audioFile:last?`${S.sid}-take${last.n}.webm`:null,
+    transcript:$("#transcript").value.trim()||"(no transcript recorded)",
+    wordCount:words,
+    wordsPerMinute:S.lastMs>4000?Math.round(words/(S.lastMs/60000)):null,
+    scores:S.scores||{fc:null,lr:null,gr:null,pr:null,overall:null},
+    checklist:CRITERIA.map(c=>({criterion:c.name,key:c.k,band:S.scores?S.scores[c.k]:null,
+      items:c.items.map((it,i)=>({level:it.fmt?"format":"band"+it.b,statement:it.t,checked:!!S.checks[c.k+"-"+i]}))}))
+  };
+}
+function renderReport(){
+  const d=reportData();
+  $("#repPreview").innerHTML=[
+   ["Submission ID",`<span class="sid">${esc(d.submissionId)}</span>`],
+   ["Student",esc(d.student.name)],["Email",esc(d.student.email)],
+   ["Submitted",esc(d.submittedAtLocal)],["Module",esc(d.module.no+" · "+d.module.name)],
+   ["Part",esc(d.part)],["Question set",esc(d.questionSet)],
+   ["Takes recorded",d.attempts],["Total practice time",d.totalPractice],
+   ["Final take",d.finalTake],["Audio file",esc(d.audioFile||"(none yet)")],
+   ["Self-rated band",d.scores.overall===null?"not yet complete":d.scores.overall]
+  ].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("");
+}
+function dl(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click()}
+$("#btnReport").onclick=()=>{
+  const d=reportData();
+  const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Speaking practice report — ${esc(d.student.name)}</title>
+<style>body{font-family:Georgia,'Times New Roman',serif;max-width:780px;margin:36px auto;padding:0 24px;color:#2A1E0A;line-height:1.6}
+.eb{font-size:11px;letter-spacing:.24em;color:#B87200;font-family:Arial,sans-serif;font-weight:700;margin:0 0 6px}
+h1{font-size:25px;border-bottom:3px solid #F2A81D;padding-bottom:9px;margin:0 0 4px}
+h2{font-size:17px;margin-top:28px;border-bottom:1px solid #EADFC5;padding-bottom:5px}
+h3{font-size:14px;margin:18px 0 4px}
+dl{display:grid;grid-template-columns:190px 1fr;gap:5px 15px;font-size:14.5px}dt{color:#8D7B58}dd{margin:0}
+.sid{font-family:monospace;background:#FBF3DE;padding:2px 8px;border-radius:5px}
+.sc{background:#2A1E0A;color:#FFF8E7;padding:16px 20px;border-radius:11px;margin:18px 0;font-size:14px}
+.sc b{font-size:30px;display:block;margin:3px 0;color:#F2A81D}
+.brk span{display:inline-block;font-family:monospace;font-size:12px;padding:3px 9px;border-radius:6px;margin:3px 5px 0 0;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+td{padding:6px 8px;border-bottom:1px solid #F1EADA;vertical-align:top}
+td.y{color:#14735A;width:24px;font-weight:700}td.n{color:#CFC5AE;width:24px}
+td.lv{color:#8D7B58;width:74px;font-family:monospace;font-size:11px}
+.tr{background:#FFFCF4;border:1px solid #EADFC5;padding:15px 18px;border-radius:11px;white-space:pre-wrap;font-size:14.5px;font-family:Arial,Helvetica,sans-serif}
+.dis{background:#FBF3DE;border:1px solid #EADFC5;border-radius:11px;padding:15px 18px;font-size:12.5px;color:#5C4B2E;margin-top:28px;font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+@media print{body{margin:0}}</style>
+<p class="eb">HUONG STELLA PARADIGM</p>
+<h1>IELTS Speaking practice report</h1>
+<p style="color:#8D7B58;font-size:13px;margin:0 0 20px">Module ${esc(d.module.no)} — ${esc(d.module.name)} · Submission <span class="sid">${esc(d.submissionId)}</span></p>
+<dl>
+<dt>Student</dt><dd>${esc(d.student.name)}</dd>
+<dt>Email</dt><dd>${esc(d.student.email)}</dd>
+<dt>Submitted</dt><dd>${esc(d.submittedAtLocal)}</dd>
+<dt>Part</dt><dd>${esc(d.part)}</dd>
+<dt>Question set</dt><dd>${esc(d.questionSet)}</dd>
+<dt>Takes recorded</dt><dd>${d.attempts}</dd>
+<dt>Total practice time</dt><dd>${d.totalPractice}</dd>
+<dt>Final take duration</dt><dd>${d.finalTake}</dd>
+<dt>Audio file</dt><dd>${esc(d.audioFile||"(not downloaded)")}</dd>
+<dt>Transcript length</dt><dd>${d.wordCount} words${d.wordsPerMinute?` · ${d.wordsPerMinute} wpm`:""}</dd>
+</dl>
+<h2>Questions attempted</h2><ol style="font-size:14.5px">${d.questions.map(q=>`<li>${esc(q)}</li>`).join("")}</ol>
+<div class="sc">Self-rated band<b>${d.scores.overall===null?"not completed":d.scores.overall}</b>
+<div class="brk">
+<span style="background:#B87200">FLUENCY ${d.scores.fc===null?"—":d.scores.fc}</span>
+<span style="background:#14735A">LEXIS ${d.scores.lr===null?"—":d.scores.lr}</span>
+<span style="background:#5140A6">GRAMMAR ${d.scores.gr===null?"—":d.scores.gr}</span>
+<span style="background:#B4392A">PRONUNCIATION ${d.scores.pr===null?"—":d.scores.pr}</span></div></div>
+<h2>Transcript</h2><div class="tr">${esc(d.transcript)}</div>
+<h2>Self-assessment against the published criteria</h2>
+${d.checklist.map(c=>`<h3>${esc(c.criterion)} — self-rated ${c.band===null?"not rated":c.band}</h3><table>${c.items.map(i=>`<tr><td class="${i.checked?'y':'n'}">${i.checked?'✓':'○'}</td><td class="lv">${esc(i.level)}</td><td>${esc(i.statement)}</td></tr>`).join("")}</table>`).join("")}
+<div class="dis">${DISCLAIMER}</div>
+</html>`;
+  dl(new Blob([html],{type:"text/html;charset=utf-8"}),`${d.submissionId}-report.html`);
+};
+$("#btnAudio").onclick=()=>{const t=S.takes[S.takes.length-1];
+  if(!t){alert("There is no recording to download yet.");return}
+  dl(t.blob,`${S.sid}-take${t.n}.webm`)};
+$("#btnJson").onclick=()=>dl(new Blob([JSON.stringify(reportData(),null,2)],{type:"application/json"}),`${S.sid}-data.json`);
+$("#btnOpen").onclick=()=>{const u=$("#subLink").value.trim();
+  if(!u){alert("Paste your teacher's submission link into the field at the top of the page first.");return}
+  window.open(/^https?:/.test(u)?u:"https://"+u,"_blank","noopener")};
+
+/* ---------- boot ---------- */
+$("#disclaimerBox").innerHTML=DISCLAIMER;
+$("#foot").innerHTML=`Question source: IELTS Speaking Forecast, Quarter 2 2026. Assessment criteria adapted from the IELTS Speaking Band Descriptors published at ielts.org. Studio produced by Huong Stella AI Academic. Nothing is stored on a server — download your report before closing this tab.`;
+buildTabs(); renderVocab(); renderReason(); renderModels(); fillSets(); renderCheck(); renderTakes();
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+</script>
+</body>
+</html>
