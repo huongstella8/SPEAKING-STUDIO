@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Triển khai IELTS Speaking Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#FFFCF4;--surface:#fff;--sand:#FBF3DE;--ink:#2A1E0A;--ink2:#5C4B2E;
+ --muted:#8D7B58;--line:#EADFC5;--gold:#F2A81D;--gold2:#B87200;--ember:#E2601C;--green:#14735A;
+ --display:"Fraunces",Georgia,serif;--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px 80px}
+
+header{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;right:-90px;top:-100px;width:320px;height:320px;border-radius:50%;
+ background:radial-gradient(circle at 35% 35%,rgba(242,168,29,.55),rgba(242,168,29,0) 68%)}
+header .wrap{padding:26px 22px 30px;position:relative;z-index:1}
+.eb{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+h1{font-family:var(--display);font-size:clamp(28px,5.6vw,42px);margin:0;color:var(--gold);font-weight:700;line-height:1.05}
+header .sub{color:#D9C79C;margin:10px 0 0;font-size:15px;max-width:62ch}
+header .meta{color:#A8945F;margin:14px 0 0;font-size:13px;font-family:var(--mono)}
+
+h2{font-family:var(--display);font-size:25px;margin:40px 0 6px;font-weight:600;scroll-margin-top:16px}
+h2 .n{font-family:var(--mono);font-size:14px;color:var(--gold2);margin-right:10px}
+h3{font-size:16.5px;margin:24px 0 6px;font-weight:600}
+p.lead{color:var(--ink2);font-size:15px;margin:0 0 14px;max-width:72ch}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:12px 0 18px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold2);background:var(--sand);font-weight:600;letter-spacing:.02em}
+code{font-family:var(--mono);font-size:13px;background:var(--sand);padding:1.5px 6px;border-radius:5px;color:var(--ink)}
+pre{background:var(--ink);color:#FFF8E7;border-radius:11px;padding:15px 18px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.75;margin:12px 0}
+pre .c{color:#A8945F}
+pre b{color:var(--gold);font-weight:400}
+
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 14px 38px;margin:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;border-radius:50%;
+ background:var(--gold);color:var(--ink);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+ul.plain{padding-left:20px;margin:10px 0}
+ul.plain li{margin-bottom:7px}
+
+.box{border-radius:12px;padding:15px 18px;margin:16px 0;font-size:14.5px}
+.rule{background:var(--ink);color:#FFF8E7}
+.rule b{color:var(--gold)}
+.warn{background:#FDECE2;border:1px solid #F3CBB4;color:#8A3A12}
+.ok{background:#E9F3EE;border:1px solid #C6E0D3;color:#0F5B47}
+.note{background:var(--sand);border:1px solid var(--line);color:var(--ink2)}
+.box b.hd{display:block;margin-bottom:6px}
+
+.tree{background:var(--sand);border:1px solid var(--line);border-radius:11px;padding:16px 19px;
+ font-family:var(--mono);font-size:12.5px;line-height:1.9;margin:14px 0;overflow-x:auto;white-space:pre}
+.tree .d{color:var(--gold2);font-weight:600}
+.tree .cm{color:var(--muted)}
+
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:24px 0 0}
+.toc ol{margin:8px 0 0;padding-left:20px;font-size:14.5px}
+.toc li{margin-bottom:5px}
+.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.toc a:hover{border-color:var(--gold)}
+
+details.code{margin:14px 0;border:1px solid var(--line);border-radius:11px;background:var(--surface);overflow:hidden}
+details.code summary{cursor:pointer;padding:12px 17px;font-weight:600;font-size:14.5px;background:var(--sand);color:var(--gold2)}
+details.code pre{margin:0;border-radius:0;font-size:11.5px;line-height:1.62}
+@media print{details.code summary{display:none}details.code pre{font-size:8pt;line-height:1.45}}
+
+footer{border-top:1px solid var(--line);margin-top:46px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+
+@media print{
+ body{background:#fff;font-size:11.5pt}
+ header{background:#2A1E0A !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ header::after{display:none}
+ .wrap{max-width:100%;padding:0 0 10mm}
+ h2{page-break-after:avoid;margin-top:22px}
+ table,pre,.box,.tree,ol.steps li{page-break-inside:avoid}
+ .toc{display:none}
+ pre,.rule{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ a{text-decoration:none;color:inherit}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+ <p class="eb">HUONG STELLA PARADIGM</p>
+ <h1>Triển khai IELTS Speaking Studio</h1>
+ <p class="sub">Hệ thống chỉ có ba trang ứng dụng dùng chung cho mọi module. Mỗi nội dung mới, cô chỉ tải lên một file JSON nhỏ. Không có bước nào trong Apps Script.</p>
+ <p class="meta">Bản 10/2026 · Forecast Quý 3 2026 · 16 nội dung, 3 vỏ ứng dụng</p>
+</div></header>
+
+<main class="wrap">
+
+<div class="toc">
+ <b>Nội dung</b>
+ <ol>
+  <li><a href="#tp">Hệ thống gồm những gì</a></li>
+  <li><a href="#s1">Bước 1 — Đưa cả thư mục lên GitHub (làm một lần)</a></li>
+  <li><a href="#s2">Bước 2 — Kiểm tra trước khi gửi học sinh</a></li>
+  <li><a href="#s3">Bước 3 — Gửi link cho học sinh</a></li>
+  <li><a href="#s4">Bước 4 — Nhận kết quả về Google Sheet</a></li>
+  <li><a href="#s5">Bước 5 — Mỗi nội dung mới</a></li>
+  <li><a href="#s6">Bước 6 — Khi cần sửa ứng dụng</a></li>
+  <li><a href="#tr">Xử lý sự cố</a></li>
+ </ol>
+</div>
+
+<h2 id="tp"><span class="n">A</span>Hệ thống gồm những gì</h2>
+<p class="lead">Bốn loại file, nhưng chỉ hai loại cô phải động tới thường xuyên.</p>
+
+<table>
+<thead><tr><th style="width:27%">Thành phần</th><th style="width:30%">Ở đâu</th><th>Ai dùng</th></tr></thead>
+<tbody>
+<tr><td><b>Ba trang ứng dụng</b><br><code>app.html</code> <code>skills.html</code> <code>practice.html</code></td>
+    <td>GitHub, thư mục <code>speaking/</code></td><td>Học sinh, qua link GitHub. Hiếm khi phải sửa.</td></tr>
+<tr><td><b>Mười sáu file nội dung</b><br><code>data/…/*.json</code></td>
+    <td>GitHub, thư mục <code>speaking/data/</code></td><td>Tự động. Đây là thứ cô tải lên mỗi khi có nội dung mới.</td></tr>
+<tr><td><b>Trang chủ</b><br><code>index.html</code></td>
+    <td>GitHub</td><td>Học sinh, nếu cô muốn gửi một link duy nhất thay vì mười sáu link.</td></tr>
+<tr><td><b>Cấu hình</b><br><code>config.json</code></td>
+    <td>GitHub</td><td>Chứa địa chỉ nhận kết quả. Sửa một lần, cả hệ thống theo.</td></tr>
+</tbody>
+</table>
+
+<div class="tree">
+<span class="d">ARIES/speaking/</span>
+  index.html          <span class="cm">trang chủ, liệt kê đủ 16 link</span>
+  app.html            <span class="cm">vỏ cho 10 module chủ đề</span>
+  skills.html         <span class="cm">vỏ cho 3 file kỹ năng</span>
+  practice.html       <span class="cm">vỏ cho 3 file luyện tập</span>
+  config.json         <span class="cm">địa chỉ nhận kết quả + số phiên bản</span>
+  manifest.json       <span class="cm">danh mục, trang chủ đọc từ đây</span>
+  <span class="d">data/modules/</span>   01.json … 10.json
+  <span class="d">data/skills/</span>    p1.json p2.json p3.json
+  <span class="d">data/practice/</span>  p1.json p2.json p3.json
+</div>
+
+<h3>Cách ba trang nhận nội dung</h3>
+<p class="lead">Mỗi trang không mang sẵn nội dung nào. Nó nhìn vào đuôi link để biết cần đọc file nào.</p>
+<table>
+<thead><tr><th style="width:42%">Link</th><th>Trang đọc file</th></tr></thead>
+<tbody>
+<tr><td><code>app.html?m=05</code></td><td><code>data/modules/05.json</code></td></tr>
+<tr><td><code>skills.html?p=2</code></td><td><code>data/skills/p2.json</code></td></tr>
+<tr><td><code>practice.html?p=1</code></td><td><code>data/practice/p1.json</code></td></tr>
+</tbody>
+</table>
+<p class="lead">Vì vậy thêm module mới là thêm một file JSON, không phải thêm một trang.</p>
+
+<div class="box rule">
+<b class="hd">Quy tắc vàng</b>
+Sửa <b>nội dung</b> → tải lên một file trong <code style="background:#3B2B10;color:#FFF8E7">data/</code>.
+Sửa <b>ứng dụng</b> → tải lên một file HTML.
+Hai việc này không bao giờ phải làm cùng lúc, và không việc nào cần đụng tới Apps Script.
+</div>
+
+<h2 id="s1"><span class="n">1</span>Đưa cả thư mục lên GitHub</h2>
+<p class="lead">Làm một lần, khoảng năm phút. Sau bước này cô không phải lặp lại nữa.</p>
+
+<ol class="steps">
+<li>Giải nén <code>speaking-site.zip</code>. Bên trong là thư mục <code>site</code> chứa 22 file.</li>
+<li>Đổi tên thư mục <code>site</code> thành <code>speaking</code>.</li>
+<li>Mở <code>github.com</code>, vào repository <b>ARIES</b>.</li>
+<li>Bấm <b>Add file → Upload files</b>.</li>
+<li>Kéo nguyên <b>cả thư mục</b> <code>speaking</code> vào vùng thả file. GitHub giữ nguyên cấu trúc thư mục con, không cần kéo từng file.</li>
+<li>Bấm <b>Commit changes</b>, đợi một đến hai phút để GitHub Pages cập nhật.</li>
+</ol>
+
+<div class="box ok">
+<b class="hd">Kiểm tra nhanh</b>
+Mở <code>https://huongstella8.github.io/ARIES/speaking/</code>. Phải thấy trang chủ màu vàng hổ phách với ba nhóm link: Skills, Practice, Topic modules. Nếu thấy danh sách file thay vì trang chủ, nghĩa là <code>index.html</code> chưa tải lên — kéo lại file đó.
+</div>
+
+<h2 id="s2"><span class="n">2</span>Kiểm tra trước khi gửi học sinh</h2>
+<p class="lead">Hai phút. Mở bằng cửa sổ ẩn danh (Cmd + Shift + N) để thấy đúng như học sinh thấy.</p>
+
+<ul class="plain">
+<li>Từ trang chủ, bấm vào <b>Part 2 — Long Turn</b>. Trang phải hiện đủ bảy tab, không trống.</li>
+<li>Quay lại, bấm vào <b>01 Technology &amp; Media</b>. Tab <b>Vocabulary</b> phải có bảng từ vựng, không phải dòng "in preparation".</li>
+<li>Vào tab <b>Studio</b>, chọn Part 1, bấm <b>Start</b>. Phải nghe thấy giọng đọc câu hỏi, và màn hình chỉ hiện "Question 1 of 4 — listening only".</li>
+<li>Chuyển sang Part 2. Cue card phải hiện đầy đủ ngay, không có nút Start.</li>
+<li>Bấm <b>Record set</b>. Trình duyệt phải hỏi quyền micro. Cho phép, nói vài câu, bấm <b>Stop &amp; save</b>, rồi nghe lại.</li>
+<li>Vào tab <b>Report</b>, bấm <b>Download report</b>. File mở được bằng trình duyệt.</li>
+</ul>
+
+<div class="box note">
+<b class="hd">Vì sao phải mở qua link GitHub</b>
+Ba trang này <b>không chạy</b> khi bấm đúp mở từ máy. Trình duyệt chặn trang mở kiểu <code>file://</code> đọc file dữ liệu của chính nó, và cũng chặn micro. Nếu mở nhầm, trang sẽ hiện một thông báo giải thích rõ chứ không trắng. Đây cũng là lý do bản GitHub tốt hơn bản tải về: GitHub Pages chạy HTTPS nên micro hoạt động trên mọi trình duyệt.
+</div>
+
+<h2 id="s3"><span class="n">3</span>Gửi link cho học sinh</h2>
+<p class="lead">Có hai cách, chọn một.</p>
+
+<h3>Cách đơn giản — một link duy nhất</h3>
+<pre>https://huongstella8.github.io/ARIES/<b>speaking/</b></pre>
+<p class="lead">Học sinh tự vào trang chủ và chọn phần mình cần. Gửi một lần, không phải gửi lại khi có module mới, vì trang chủ tự cập nhật.</p>
+
+<h3>Cách chỉ định — gửi đúng phần cần luyện tuần này</h3>
+<table>
+<thead><tr><th style="width:34%">Muốn học sinh luyện</th><th>Gửi link</th></tr></thead>
+<tbody>
+<tr><td>Kỹ năng Part 2</td><td><code>…/speaking/skills.html?p=2</code></td></tr>
+<tr><td>Ngân hàng đề Part 1</td><td><code>…/speaking/practice.html?p=1</code></td></tr>
+<tr><td>Module 05 — Places</td><td><code>…/speaking/app.html?m=05</code></td></tr>
+</tbody>
+</table>
+<p class="lead">Thứ tự nên theo: file <b>Skills</b> của phần đang học trước, rồi <b>Practice</b>, rồi <b>module chủ đề</b> để lấy ngôn ngữ.</p>
+
+<div class="box warn">
+<b class="hd">Nhắc học sinh ba điều</b>
+Điền tên và email ở đầu trang trước khi làm, nếu không báo cáo sẽ không có tên.<br>
+Thu âm xong hẵng mở tab Band models — mở trước thì chỉ còn là bắt chước.<br>
+Tải báo cáo trước khi đóng tab. Trang không lưu gì trên máy chủ.
+</div>
+
+<h2 id="s4"><span class="n">4</span>Nhận kết quả về Google Sheet</h2>
+<p class="lead">Không bắt buộc. Nếu bỏ qua bước này, học sinh vẫn tải được báo cáo và file CSV rồi gửi cho cô theo cách thông thường.</p>
+
+<ol class="steps">
+<li>Tạo một Google Sheet mới, đặt tên <code>Speaking — Practice Results</code>.</li>
+<li>Vào <b>Extensions → Apps Script</b>, xoá hết mã mẫu, dán toàn bộ đoạn dưới đây rồi bấm <b>Save</b>. Đoạn này cũng nằm trong file rời <code>Apps_Script_Code.gs</code> kèm theo.</li>
+<li>Bấm <b>Deploy → New deployment</b>, chọn <b>Web app</b>, <i>Execute as</i> là <b>Me</b>, <i>Who has access</i> là <b>Anyone</b>. Sao chép địa chỉ dạng <code>…/exec</code>.</li>
+<li>Mở file <code>config.json</code> trên GitHub, bấm biểu tượng bút chì, dán địa chỉ vào ô <code>submitUrl</code>, bấm <b>Commit changes</b>.</li>
+</ol>
+
+<details class="code" open>
+<summary>Mã Apps Script — sao chép toàn bộ đoạn này</summary>
+<pre>const SHEET_NAME = &#x27;results&#x27;;
+
+const COLUMNS = [
+  &#x27;received_at&#x27;,&#x27;session_id&#x27;,&#x27;student_name&#x27;,&#x27;student_email&#x27;,&#x27;part&#x27;,&#x27;module_set&#x27;,
+  &#x27;date_local&#x27;,&#x27;take_number&#x27;,&#x27;take_seconds&#x27;,&#x27;take_time&#x27;,&#x27;take_after_models&#x27;,
+  &#x27;recorded_before_models&#x27;,&#x27;models_opened&#x27;,&#x27;total_takes&#x27;,&#x27;total_practice_seconds&#x27;,
+  &#x27;audio_file&#x27;,&#x27;notes&#x27;
+];
+
+function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const payload = JSON.parse(e.postData.contents);
+    const rows = payload.rows || [];
+    const sheet = getSheet_();
+    const now = new Date();
+
+    const values = rows.map(function (r) {
+      return COLUMNS.map(function (c) {
+        return c === &#x27;received_at&#x27; ? now : (r[c] !== undefined ? r[c] : &#x27;&#x27;);
+      });
+    });
+
+    if (values.length) {
+      sheet.getRange(sheet.getLastRow() + 1, 1, values.length, COLUMNS.length)
+           .setValues(values);
+    }
+    return json_({ ok: true, added: values.length });
+  } catch (err) {
+    return json_({ ok: false, error: String(err) });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function doGet() {
+  return json_({ ok: true, message: &#x27;Endpoint is live. Post practice results here.&#x27; });
+}
+
+function getSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_NAME);
+  }
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(COLUMNS);
+    sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight(&#x27;bold&#x27;);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function json_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+</details>
+
+<p class="lead">Bảng tính tự tạo tab <code>results</code> kèm dòng tiêu đề ngay lần nhận dữ liệu đầu tiên. Mỗi lần thu âm là một dòng; tên và email lặp lại ở mọi dòng để nhiều học sinh gộp chung vào một sheet được.</p>
+
+<pre><span class="c">// config.json sau khi điền</span>
+{
+  "version": "202610091030",
+  <b>"submitUrl": "https://script.google.com/macros/s/AKfy…/exec"</b>
+}</pre>
+
+<div class="box ok">
+<b class="hd">Điểm quan trọng</b>
+Sau bước này học sinh <b>không phải dán link nữa</b>. Ô nhập link ở đầu trang tự điền sẵn và khoá lại. Nếu sau này địa chỉ Apps Script thay đổi vì bất kỳ lý do gì, cô sửa đúng <b>một file</b> <code>config.json</code> và mười sáu trang cùng cập nhật — không phải build lại gì cả.
+</div>
+
+<h2 id="s5"><span class="n">5</span>Mỗi nội dung mới</h2>
+<p class="lead">Hiện có bốn module đã soạn đầy đủ (01, 02, 04, 05), phủ 30 trên 66 cue card của quý. Sáu module còn lại đang ở trạng thái đủ ngân hàng câu hỏi, Studio và phần tự chấm vẫn chạy, chỉ thiếu ba tab dạy nội dung.</p>
+
+<ol class="steps">
+<li>Nhắn cho Claude tên module muốn soạn, ví dụ <i>soạn tiếp 09 Experiences</i>.</li>
+<li>Nhận về một file, ví dụ <code>09.json</code>.</li>
+<li>Trên GitHub, vào <code>speaking/data/modules/</code>, bấm <b>Add file → Upload files</b>, kéo file vào. File trùng tên sẽ ghi đè.</li>
+<li>Bấm <b>Commit changes</b>, đợi một phút, mở <code>app.html?m=09</code> kiểm tra tab Vocabulary đã có nội dung.</li>
+</ol>
+
+<p class="lead">Link không đổi. Học sinh đang mở trang chỉ cần tải lại. Trang chủ tự chuyển nhãn module đó từ trống sang <b>full</b>.</p>
+
+<div class="box note">
+<b class="hd">Sửa một lỗi nhỏ cũng vậy</b>
+Sai một từ trong bảng từ vựng module 04 thì cũng chỉ tải lại <code>04.json</code> — khoảng 25 KB, không phải một file HTML 75 KB. Đây chính là chỗ kiến trúc mới tiết kiệm công nhất.
+</div>
+
+<h2 id="s6"><span class="n">6</span>Khi cần sửa ứng dụng</h2>
+<p class="lead">Ví dụ đổi cách hiển thị, thêm nút, đổi quy tắc tính giờ. Trước đây việc này phải build lại và tải lên cả mười sáu file; bây giờ là một.</p>
+
+<table>
+<thead><tr><th style="width:46%">Sửa thứ gì</th><th>Tải lên file nào</th></tr></thead>
+<tbody>
+<tr><td>Giao diện hoặc chức năng của 10 module chủ đề</td><td><code>app.html</code></td></tr>
+<tr><td>Ba file kỹ năng Part 1/2/3</td><td><code>skills.html</code></td></tr>
+<tr><td>Ba file luyện tập Part 1/2/3</td><td><code>practice.html</code></td></tr>
+<tr><td>Danh sách trên trang chủ</td><td><code>index.html</code> và <code>manifest.json</code></td></tr>
+</tbody>
+</table>
+
+<p class="lead">Sau khi tải lên, bảo học sinh bấm <b>Cmd + Shift + R</b> một lần. Nếu cô sửa <code>version</code> trong <code>config.json</code> thì không cần bước đó, vì trình duyệt tự nhận ra bản mới.</p>
+
+<h2 id="tr"><span class="n">B</span>Xử lý sự cố</h2>
+
+<table>
+<thead><tr><th style="width:30%">Hiện tượng</th><th style="width:30%">Nguyên nhân</th><th>Cách sửa</th></tr></thead>
+<tbody>
+<tr><td>Trang báo <i>"This page could not load its content"</i> và nói đã mở từ máy</td>
+    <td>Bấm đúp mở file từ Finder thay vì mở link GitHub</td>
+    <td>Mở link <code>huongstella8.github.io/ARIES/speaking/</code></td></tr>
+<tr><td>Trang báo không tải được, nhưng mở từ link GitHub</td>
+    <td>File JSON tương ứng chưa tải lên, hoặc sai tên</td>
+    <td>Kiểm tra trong <code>data/</code> có đúng file đó chưa. Tên phải khớp chính xác, kể cả số 0 ở đầu: <code>05.json</code> chứ không phải <code>5.json</code></td></tr>
+<tr><td>Nút Record không hỏi quyền micro</td>
+    <td>Trang không chạy trên HTTPS</td>
+    <td>Phải mở qua link GitHub Pages. Nếu đang dùng link <code>http://</code> thì đổi sang <code>https://</code></td></tr>
+<tr><td>Không nghe thấy giọng giám khảo</td>
+    <td>Máy chưa cài giọng tiếng Anh</td>
+    <td>Mở bằng <b>Microsoft Edge</b> để có giọng Libby hoặc Sonia. Trong lúc chờ, bấm <b>Show</b> để đọc câu hỏi</td></tr>
+<tr><td>Module hiện "in preparation" dù đã tải JSON</td>
+    <td>GitHub còn giữ bản cũ trong bộ nhớ đệm</td>
+    <td>Đợi hai phút, bấm <b>Cmd + Shift + R</b>. Nếu vẫn vậy, sửa <code>version</code> trong <code>config.json</code></td></tr>
+<tr><td>Trang chủ không hiện module mới</td>
+    <td><code>manifest.json</code> chưa cập nhật</td>
+    <td>Tải lên <code>manifest.json</code> mới cùng với file JSON nội dung</td></tr>
+<tr><td>Bấm <i>Send to class spreadsheet</i> báo không gửi được</td>
+    <td><code>submitUrl</code> trong <code>config.json</code> còn trống hoặc sai</td>
+    <td>Kiểm tra lại địa chỉ <code>/exec</code>. Trong lúc chờ, học sinh tải CSV và gửi cho cô</td></tr>
+<tr><td>Báo cáo không có tên học viên</td>
+    <td>Học sinh chưa điền ô tên trước khi tải</td>
+    <td>Nhắc điền tên và email ở đầu trang. Nút tải CSV đã chặn sẵn nếu thiếu tên</td></tr>
+</tbody>
+</table>
+
+<h2><span class="n">C</span>Về mười sáu file HTML bản cũ</h2>
+<p class="lead">Các file <code>01-technology-and-media.html</code>, <code>SKILLS-part-1.html</code>, <code>PRACTICE-part-1.html</code>… vẫn chạy được bình thường và vẫn tự chứa đầy đủ nội dung. Cô có thể giữ lại để gửi cho học sinh không tiện vào mạng.</p>
+<p class="lead">Nhưng không nên dùng song song cả hai bản lâu dài: sửa nội dung ở bản tách sẽ không tự lan sang bản tự chứa, và ngược lại. Nếu đã chuyển sang bản GitHub thì nên coi mười sáu file cũ là bản lưu trữ của tháng 10, và từ đó chỉ cập nhật một nơi.</p>
+
+<footer>
+Tiêu chí chấm trích từ IELTS Speaking Band Descriptors, ielts.org · Nguồn đề: Bộ dự đoán IELTS Speaking Quý 3 2026 · Huong Stella AI Academic · Bản 10/2026
+</footer>
+
+</main>
+</body>
+</html>
