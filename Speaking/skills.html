@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speaking Skills Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#FFFCF4;--surface:#FFFFFF;--sand:#FBF3DE;
+ --ink:#2A1E0A;--ink-2:#5C4B2E;--muted:#8D7B58;--line:#EADFC5;
+ --gold:#F2A81D;--gold-deep:#B87200;--ember:#E2601C;
+ --fc:#B87200;--lr:#14735A;--gr:#5140A6;--pr:#B4392A;--x:#2A1E0A;
+ --fc6:#FCE7B4;--fc7:#EFB53C;--fc8:#B87200;
+ --display:"Fraunces",Georgia,serif;--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 90px}
+header.mast{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;right:-90px;top:-100px;width:320px;height:320px;border-radius:50%;
+ background:radial-gradient(circle at 35% 35%,rgba(242,168,29,.55),rgba(242,168,29,0) 68%)}
+header.mast .wrap{padding:24px 20px 26px;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+.kicker{font-family:var(--mono);font-size:12.5px;color:#C9AE72;margin:0 0 4px}
+.mast h1{font-family:var(--display);font-size:clamp(29px,6vw,47px);line-height:1.03;margin:0;font-weight:700;
+ font-variation-settings:'SOFT' 60,'WONK' 1;color:var(--gold)}
+.mast .tag{margin:8px 0 0;color:#D9C79C;font-size:15px}
+.mast .blurb{margin:14px 0 0;color:#BFAE86;font-size:14px;max-width:70ch}
+.idbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.idbar input{background:#3B2B10;border:1px solid #55401A;color:#FFF8E7;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;min-width:0;flex:1 1 200px}
+.idbar input::placeholder{color:#9C8557}
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto}
+nav.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;
+ font-size:14px;font-family:inherit;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;gap:7px;align-items:baseline}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--gold-deep);opacity:.6}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+h2.sec{font-family:var(--display);font-size:26px;margin:30px 0 5px;font-weight:600}
+h2.sec:first-child{margin-top:26px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:74ch}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.hint{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td,th{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold-deep);background:var(--sand);font-weight:600}
+.btn{background:var(--ink);color:#FFF8E7;border:0;border-radius:10px;padding:11px 18px;font-size:14.5px;font-family:inherit;cursor:pointer}
+.btn.gold{background:var(--gold);color:var(--ink);font-weight:600}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+select,textarea{font-family:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+select{padding:11px 12px;font-size:14.5px;max-width:100%}
+textarea{width:100%;padding:12px;font-size:14.5px;min-height:110px;resize:vertical}
+
+/* brief */
+.myth{border-left:4px solid var(--ember);background:var(--surface);border-radius:0 12px 12px 0;padding:14px 17px;margin-bottom:11px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.myth b{display:block;margin-bottom:5px;color:var(--ember)}
+.whatbox{background:var(--ink);color:#FFF8E7;border-radius:14px;padding:19px 22px;font-size:15px;margin:16px 0}
+.whatbox i{color:var(--gold);font-style:normal;font-weight:600}
+
+/* tactics */
+.tac{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.tac h3{font-family:var(--display);font-size:20px;margin:0 0 3px;font-weight:600;display:flex;gap:11px;align-items:baseline}
+.tac h3 .num{font-family:var(--mono);font-size:13px;color:var(--gold-deep)}
+.tac .why{color:var(--ink-2);font-size:14.5px;margin:0 0 13px}
+.dd{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}
+@media(min-width:720px){.dd{grid-template-columns:1fr 1fr}}
+.dd div{border-radius:11px;padding:13px 15px;font-size:14.5px}
+.dd .do{background:#E9F3EE;border:1px solid #C6E0D3}
+.dd .no{background:#FBEDE8;border:1px solid #F0CFC2}
+.dd b{display:block;font-size:11px;letter-spacing:.11em;margin-bottom:5px}
+.dd .do b{color:var(--lr)}.dd .no b{color:var(--pr)}
+.bands{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:720px){.bands{grid-template-columns:repeat(3,1fr)}}
+.bands div{border-top:3px solid;padding:9px 0 0;font-size:14px}
+.bands .b6{border-color:var(--fc6)}.bands .b7{border-color:var(--fc7)}.bands .b8{border-color:var(--fc8)}
+.bands em{display:block;font-family:var(--mono);font-size:11px;font-style:normal;color:var(--muted);margin-bottom:3px}
+
+/* strategies */
+.shape{font-family:var(--mono);font-size:12.5px;background:var(--sand);color:var(--gold-deep);padding:8px 13px;border-radius:8px;display:inline-block;margin:0 0 12px;font-weight:600}
+ul.mv{margin:0 0 14px;padding-left:19px;font-size:14.5px}
+ul.mv li{margin-bottom:6px}
+.exq{background:var(--ink);color:#FFF8E7;border-radius:12px;padding:15px 18px;font-size:15px;margin-bottom:11px}
+.exq b{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--gold);margin-bottom:8px}
+.exq .qq{display:block;font-family:var(--display);font-size:17px;color:#D9C79C;margin-bottom:9px}
+.exq b:not(:first-child){display:inline}
+.tp{background:#FBEDE8;border:1px solid #F0CFC2;border-radius:11px;padding:13px 15px;font-size:14.5px}
+.tp b{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--pr);margin-bottom:5px}
+blockquote{font-size:15px;color:var(--ink-2)}
+
+/* language */
+.lset{margin-bottom:22px}
+.lset h3{font-family:var(--display);font-size:19px;margin:0 0 8px;font-weight:600}
+.ipa{font-family:var(--mono);font-size:12.5px;color:var(--gold-deep)}
+td.itm{font-weight:600;width:27%}
+
+/* phonology */
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.ph h3{font-family:var(--display);font-size:20px;margin:0 0 8px;font-weight:600}
+.drillline{background:var(--ink);color:#FFF8E7;border-radius:11px;padding:15px 18px;font-family:var(--mono);font-size:14px;line-height:2.1;margin:12px 0}
+.drillline b{color:var(--gold)}
+.drillline i{color:#A8945F}
+
+/* drill bay */
+.stage{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+.stage::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;
+ background:radial-gradient(circle at 50% 50%,rgba(226,96,28,.35),rgba(226,96,28,0) 70%)}
+.stage>*{position:relative;z-index:1}
+.stage h3{font-family:var(--display);font-size:22px;margin:0 0 6px;font-weight:600}
+.stage .aim{color:#CDB88C;font-size:14px;margin:0 0 4px}
+.stage .setline{color:#A8945F;font-size:13.5px;font-family:var(--mono);margin:0}
+.clock{font-family:var(--mono);font-size:46px;margin:16px 0 4px;font-variant-numeric:tabular-nums}
+.clock.warn{color:var(--gold)}.clock.over{color:#FF9E7A}
+.stage .btn.ghost{color:#FFF8E7;border-color:#55401A}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.recording .dot{animation:blip 1.05s infinite}
+.take{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.take audio{height:36px;flex:1 1 220px;min-width:0}
+.take .tno{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+
+/* diagnostic */
+.chk{display:flex;gap:11px;align-items:flex-start;padding:11px 0 11px 12px;border-bottom:1px solid #F1EADA;font-size:14.5px;border-left:4px solid}
+.chk input{margin:4px 0 0;width:18px;height:18px;flex:0 0 auto}
+.chk .tag{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:5px;margin-right:8px;color:#fff;font-weight:700}
+.tally{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.tally span{font-family:var(--mono);font-size:12.5px;padding:6px 12px;border-radius:8px;color:#fff}
+.disclaimer{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-2);margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+ <p class="eyebrow">HUONG STELLA PARADIGM</p>
+ <p class="kicker">Speaking Skills Lab ·  · Forecast 2026</p>
+ <h1></h1>
+ <p class="tag"></p>
+ <p class="blurb"></p>
+ <div class="idbar">
+  <input id="stName" placeholder="Full name" autocomplete="name">
+  <input id="stEmail" type="email" placeholder="Email address" autocomplete="email">
+ </div>
+</div></header>
+
+<nav class="tabs"><div class="inner" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+ <section class="panel" id="p-brief" role="tabpanel"><h2 class="sec">The examiner's brief</h2>
+  <p class="sub">What happens in the room, what is actually being rated, and the beliefs that cost candidates marks every session.</p>
+  <div id="briefBody"></div></section>
+
+ <section class="panel" id="p-tactics" role="tabpanel"><h2 class="sec">Tactics</h2>
+  <p class="sub">Each move below is a decision you make once, in advance, so that you do not have to make it under pressure. The three columns show what the same move looks like at Band 6, Band 7 and Band 8.</p>
+  <div id="tacBody"></div></section>
+
+ <section class="panel" id="p-strat" role="tabpanel"><h2 class="sec">Strategies by question type</h2>
+  <p class="sub" id="stratIntro"></p>
+  <div id="stratBody"></div></section>
+
+ <section class="panel" id="p-lang" role="tabpanel"><h2 class="sec">Language engine</h2>
+  <p class="sub" id="langIntro"></p>
+  <div id="langBody"></div></section>
+
+ <section class="panel" id="p-phon" role="tabpanel"><h2 class="sec">Pronunciation focus</h2>
+  <p class="sub" id="phonIntro"></p>
+  <div id="phonBody"></div></section>
+
+ <section class="panel" id="p-drill" role="tabpanel"><h2 class="sec">Drill bay</h2>
+  <p class="sub">Pick a drill, set yourself going, and record. The timer counts up to the target for this part so you can hear where your natural length sits.</p>
+  <div class="row" style="margin-bottom:14px"><select id="drillSel" style="flex:1 1 320px"></select></div>
+  <div class="stage" id="stage">
+   <h3 id="dName">—</h3>
+   <p class="aim" id="dAim"></p>
+   <p class="setline" id="dSet"></p>
+   <p class="clock" id="clock">00:00</p>
+   <div class="row">
+    <button class="btn ghost" id="btnPrep">Preparation timer (60s)</button>
+    <button class="btn ember" id="btnRec"><span class="dot"></span>Record</button>
+    <button class="btn gold" id="btnStop" disabled>Stop</button>
+   </div>
+  </div>
+  <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Takes</h3><div id="takes"><p class="hint" style="margin:6px 0">No recordings yet.</p></div></div>
+  <div class="card"><h3 style="margin:0 0 6px;font-size:16px">Notes to yourself</h3>
+   <p class="hint" style="margin:0 0 9px">After listening back, write down one thing that worked and one thing to change. This goes into the practice log.</p>
+   <textarea id="notes" placeholder="What worked · what to change next take…"></textarea></div>
+ </section>
+
+ <section class="panel" id="p-diag" role="tabpanel"><h2 class="sec">Diagnostic</h2>
+  <p class="sub">Part-specific checks derived from the published assessment criteria. This is a diagnostic, not a band estimate — it tells you which criterion is leaking marks in this part, and nothing more.</p>
+  <div class="card" id="diagBody"></div>
+  <div class="tally" id="tally"></div>
+  <div class="row" style="margin-top:20px">
+   <button class="btn gold" id="btnLog">Download practice log</button>
+   <button class="btn ghost" id="btnAudio">Download latest take</button>
+  </div>
+  <div class="disclaimer" id="disc"></div>
+ </section>
+
+ <footer id="foot"></footer>
+</main>
+
+<script>
+
+/* ---------- content loader ----------
+   The page ships with no content. It reads one JSON file chosen by the URL,
+   so changing the app means uploading this file alone, and changing content
+   means uploading one small JSON. */
+let P;
+const _params = new URLSearchParams(location.search);
+const _slug = ("p" + (_params.get("p") || "1")).replace(/[^0-9a-zA-Z_-]/g, "");
+
+function _loadError(detail, offline){
+  document.body.innerHTML =
+   '<div style="max-width:620px;margin:60px auto;padding:0 24px;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#2A1E0A">'
+   + '<p style="font-size:11px;letter-spacing:.24em;font-weight:700;color:#B87200;margin:0 0 10px">HUONG STELLA PARADIGM</p>'
+   + '<h1 style="font-family:Georgia,serif;font-size:26px;margin:0 0 14px">This page could not load its content.</h1>'
+   + (offline
+      ? '<p style="font-size:16px;line-height:1.6">It was opened straight from your computer, and browsers block pages opened that way from reading their own data files.</p>'
+        + '<p style="font-size:16px;line-height:1.6">Open the GitHub link instead — the same page works normally there.</p>'
+      : '<p style="font-size:16px;line-height:1.6">The content file for this page is missing or has not finished uploading. Wait a minute and refresh; if it persists, re-upload the data file.</p>')
+   + '<p style="font-size:13px;color:#8D7B58;margin-top:20px;font-family:monospace">requested: data/skills/' + _slug + '.json<br>' + String(detail).slice(0,160) + '</p></div>';
+}
+
+(async function(){
+  const offline = location.protocol === "file:";
+  try{
+    let v = "";
+    try{
+      const c = await fetch("./config.json?_=" + Date.now());
+      if(c.ok){ const cfg = await c.json(); window.__CFG = cfg || {}; if(cfg && cfg.version) v = "?v=" + encodeURIComponent(cfg.version); }
+    }catch(e){ /* config.json is optional */ }
+    const r = await fetch("./data/skills/" + _slug + ".json" + v);
+    if(!r.ok) throw new Error("HTTP " + r.status);
+    P = await r.json();
+  }catch(err){ _loadError(err && err.message ? err.message : err, offline); return; }
+  document.title = P.name + " — Speaking Skills Lab";
+  const _h = document.querySelector(".mast h1"); if(_h) _h.textContent = P.name;
+  const _k = document.querySelector(".kicker"); if(_k) _k.textContent = "Speaking Skills Lab · " + P.no + " · Forecast 2026";
+  const _t = document.querySelector(".mast .tag"); if(_t) _t.textContent = P.tagline;
+  const _b = document.querySelector(".mast .blurb"); if(_b) _b.textContent = P.blurb;
+  run();
+})();
+
+function run(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const CRIT={fc:["FLUENCY","--fc"],lr:["LEXIS","--lr"],gr:["GRAMMAR","--gr"],pr:["PRONUN.","--pr"],x:["REASONING","--x"]};
+const S={voiceName:null, tab:"brief",drill:0,takes:[],attempts:0,totalMs:0,lastMs:0,checks:{},
+ recorder:null,chunks:[],stream:null,t0:0,timerId:null,prepId:null,
+ sid:"HSP-"+P.no+"-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase()};
+
+/* ---------- British female voice selection ---------- */
+const V_PREF=["libby","sonia","serena","kate","stephanie","martha","google uk english female",
+ "hazel","abbi","bella","hollie","olivia","amy","maisie","female"];
+const V_MALE=/daniel|oliver|ryan|thomas|arthur|george|alfie|elliot|\bmale\b|uk english male/i;
+const V_OFF=/fiona|moira|scottish|irish|welsh|karen|tessa|veena|rishi/i;
+function vRank(v){
+ const n=(v.name||"").toLowerCase(), lang=(v.lang||"").replace("_","-");
+ if(!/^en/i.test(lang)) return -1;
+ let s=/^en-GB/i.test(lang)?100:15;
+ if(V_OFF.test(n)) s-=45;
+ if(V_MALE.test(n)) s-=70;
+ const i=V_PREF.findIndex(x=>n.includes(x));
+ if(i>=0) s+=60-i*3;
+ if(/natural|online|premium|enhanced|neural/.test(n)) s+=18;
+ return s;
+}
+function vList(){
+ if(!("speechSynthesis" in window)) return [];
+ return speechSynthesis.getVoices().map(v=>({v,s:vRank(v)}))
+  .filter(o=>o.s>=0).sort((a,b)=>b.s-a.s).map(o=>o.v);
+}
+function vChosen(){
+ const all=vList(); if(!all.length) return null;
+ if(S.voiceName){const m=all.find(v=>v.name===S.voiceName); if(m) return m;}
+ return all[0];
+}
+function speak(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text), v=vChosen();
+ if(v){u.voice=v;u.lang=v.lang} else {u.lang="en-GB"}
+ u.rate=0.94; speechSynthesis.speak(u);
+}
+
+const TABS=[["brief","Examiner's brief"],["tactics","Tactics"],["strat","Strategies"],["lang","Language engine"],["phon","Pronunciation"],["drill","Drill bay"],["diag","Diagnostic"]];
+function tabs(){$("#tabs").innerHTML=TABS.map(([k,l],i)=>`<button role="tab" data-t="${k}" aria-selected="${k===S.tab}"><span class="n">${i+1}</span>${l}</button>`).join("");
+ $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tab=b.dataset.t;tabs()};
+ TABS.forEach(([k])=>$("#p-"+k).classList.toggle("on",k===S.tab))}
+
+/* brief */
+$("#briefBody").innerHTML=`<div class="card"><table><tbody>${P.brief.facts.map(f=>`<tr><th style="width:26%">${esc(f[0])}</th><td>${f[1]}</td></tr>`).join("")}</tbody></table></div>
+ <div class="whatbox"><b style="color:var(--gold)">What is actually being rated.</b> ${P.brief.what}</div>
+ <h2 class="sec">What candidates get wrong</h2><p class="sub">Each of these is believed widely enough to shape how people prepare, and each of them costs marks.</p>
+ ${P.brief.myths.map(m=>`<div class="myth"><b>${esc(m[0])}</b>${m[1]}</div>`).join("")}`;
+
+/* tactics */
+$("#tacBody").innerHTML=P.tactics.map(t=>`<div class="tac">
+ <h3><span class="num">${esc(t.n)}</span>${esc(t.name)}</h3>
+ <p class="why">${t.why}</p>
+ <div class="dd"><div class="do"><b>DO THIS</b>${t.do}</div><div class="no"><b>NOT THIS</b>${t.dont}</div></div>
+ <div class="bands">
+  <div class="b6"><em>BAND 6</em>${t.band.b6}</div>
+  <div class="b7"><em>BAND 7</em>${t.band.b7}</div>
+  <div class="b8"><em>BAND 8</em>${t.band.b8}</div>
+ </div></div>`).join("");
+
+/* strategies */
+$("#stratIntro").innerHTML=P.strategies.intro;
+$("#stratBody").innerHTML=P.strategies.groups.map(g=>`<div class="tac">
+ <h3>${g.type}</h3>
+ <p class="hint" style="margin:0 0 10px">${g.cue}</p>
+ <div class="shape">${esc(g.shape)}</div>
+ <ul class="mv">${g.moves.map(m=>`<li>${m}</li>`).join("")}</ul>
+ <div class="exq"><b>WORKED EXAMPLE</b><span class="qq">${esc(g.ex.q)}</span>${g.ex.a}</div>
+ <div class="tp"><b>THE TRAP</b>${g.trap}</div>
+</div>`).join("")+`<div class="card" style="margin-top:22px;border-top:4px solid var(--gold)">
+ <h3 style="font-family:var(--display);font-size:21px;margin:0 0 10px;font-weight:600">${P.strategies.extra.title}</h3>
+ ${P.strategies.extra.html}</div>`;
+
+/* language */
+$("#langIntro").innerHTML=P.lang.intro;
+$("#langBody").innerHTML=P.lang.sets.map(s=>`<div class="lset"><h3>${s.g}</h3><div class="card" style="padding:4px 14px">
+ <table><tbody>${s.items.map(i=>`<tr><td class="itm">${esc(i[0])}<br><span class="ipa">${esc(i[1])}</span></td><td>${i[2]}</td></tr>`).join("")}</tbody></table>
+ </div></div>`).join("");
+
+/* phonology */
+$("#phonIntro").innerHTML=P.phon.intro;
+$("#phonBody").innerHTML=P.phon.items.map(p=>`<div class="ph"><h3>${esc(p.t)}</h3>
+ <p style="margin:0 0 4px">${p.what}</p>
+ <div class="drillline">${p.drill}</div>
+ <p style="margin:0;font-size:14.5px;color:var(--ink-2)"><b>How to drill it.</b> ${p.note}</p></div>`).join("");
+
+/* drill bay */
+$("#drillSel").innerHTML=P.drills.map((d,i)=>`<option value="${i}">${esc(d.name)}</option>`).join("");
+function paintDrill(){const d=P.drills[S.drill];
+ $("#dName").textContent=d.name; $("#dAim").innerHTML=d.aim;
+ $("#dSet").textContent=`${d.set}  ·  target ${fmt(d.target*1000)}${d.count>1?" × "+d.count:""}`;
+ $("#clock").textContent="00:00";$("#clock").className="clock"}
+$("#drillSel").onchange=e=>{S.drill=+e.target.value;paintDrill()};
+paintDrill();
+
+$("#btnPrep").onclick=()=>{clearInterval(S.prepId);let l=60;const c=$("#clock");c.className="clock warn";c.textContent="01:00";
+ S.prepId=setInterval(()=>{l--;c.textContent=fmt(l*1000);if(l<=0){clearInterval(S.prepId);c.className="clock";c.textContent="00:00";
+  speak("Time is up. You may begin.")}},1000)};
+
+async function startRec(){
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("This browser cannot record audio. Use a recent Chrome, Edge or Safari.");return}
+ try{S.stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+ catch(e){alert("Microphone access was refused. Recording requires the page to be served over HTTPS.");return}
+ clearInterval(S.prepId);S.chunks=[];S.recorder=new MediaRecorder(S.stream);
+ S.recorder.ondataavailable=e=>{if(e.data.size)S.chunks.push(e.data)};
+ S.recorder.onstop=save;S.recorder.start();S.t0=Date.now();
+ $("#stage").classList.add("recording");$("#btnRec").disabled=true;$("#btnStop").disabled=false;
+ const lim=P.drills[S.drill].target*1000*(P.drills[S.drill].count||1);
+ S.timerId=setInterval(()=>{const d=Date.now()-S.t0,c=$("#clock");c.textContent=fmt(d);
+  c.className="clock"+(d>lim*1.25?" over":d>lim*.85?" warn":"")},200)}
+function stopRec(){if(S.recorder&&S.recorder.state!=="inactive")S.recorder.stop();
+ clearInterval(S.timerId);$("#stage").classList.remove("recording");
+ $("#btnRec").disabled=false;$("#btnStop").disabled=true;
+ if(S.stream)S.stream.getTracks().forEach(t=>t.stop())}
+function save(){const ms=Date.now()-S.t0,blob=new Blob(S.chunks,{type:(S.chunks[0]&&S.chunks[0].type)||"audio/webm"});
+ S.attempts++;S.totalMs+=ms;S.lastMs=ms;
+ S.takes.push({n:S.attempts,ms,blob,url:URL.createObjectURL(blob),drill:P.drills[S.drill].name,at:new Date()});
+ renderTakes()}
+$("#btnRec").onclick=startRec;$("#btnStop").onclick=stopRec;
+function renderTakes(){if(!S.takes.length){$("#takes").innerHTML='<p class="hint" style="margin:6px 0">No recordings yet.</p>';return}
+ $("#takes").innerHTML=S.takes.slice().reverse().map(t=>`<div class="take">
+  <span class="tno">Take ${t.n} · ${fmt(t.ms)} · ${esc(t.drill)}</span>
+  <audio controls src="${t.url}"></audio>
+  <a class="btn ghost" style="text-decoration:none;font-size:13px;padding:8px 13px" download="${S.sid}-take${t.n}.webm" href="${t.url}">Download</a></div>`).join("")}
+
+/* diagnostic */
+function renderDiag(){
+ $("#diagBody").innerHTML=P.check.map((c,i)=>{
+  const [tag,varname]=CRIT[c[0]];
+  return `<div class="chk" style="border-left-color:var(${varname})">
+   <input type="checkbox" id="c${i}" style="accent-color:var(${varname})"${S.checks[i]?" checked":""}>
+   <label for="c${i}"><span class="tag" style="background:var(${varname})">${tag}</span>${c[1]}</label></div>`}).join("");
+ $("#diagBody").onchange=e=>{S.checks[+e.target.id.slice(1)]=e.target.checked;tally()};
+ tally()}
+function tally(){
+ const agg={};P.check.forEach((c,i)=>{agg[c[0]]=agg[c[0]]||[0,0];agg[c[0]][1]++;if(S.checks[i])agg[c[0]][0]++});
+ $("#tally").innerHTML=Object.keys(agg).map(k=>
+  `<span style="background:var(${CRIT[k][1]})">${CRIT[k][0]} ${agg[k][0]}/${agg[k][1]}</span>`).join("")}
+renderDiag();
+
+function dl(b,n){const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=n;a.click()}
+$("#btnAudio").onclick=()=>{const t=S.takes[S.takes.length-1];if(!t){alert("No recording yet.");return}dl(t.blob,`${S.sid}-take${t.n}.webm`)};
+$("#btnLog").onclick=()=>{
+ const agg={};P.check.forEach((c,i)=>{agg[c[0]]=agg[c[0]]||[0,0];agg[c[0]][1]++;if(S.checks[i])agg[c[0]][0]++});
+ const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Practice log — ${esc($("#stName").value||"student")}</title>
+<style>body{font-family:Georgia,serif;max-width:760px;margin:36px auto;padding:0 24px;color:#2A1E0A;line-height:1.6}
+.eb{font-size:11px;letter-spacing:.24em;color:#B87200;font-family:Arial,sans-serif;font-weight:700;margin:0 0 6px}
+h1{font-size:24px;border-bottom:3px solid #F2A81D;padding-bottom:9px;margin:0 0 4px}
+h2{font-size:16px;margin-top:26px;border-bottom:1px solid #EADFC5;padding-bottom:5px}
+dl{display:grid;grid-template-columns:180px 1fr;gap:5px 15px;font-size:14.5px}dt{color:#8D7B58}dd{margin:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+td{padding:6px 8px;border-bottom:1px solid #F1EADA;vertical-align:top}
+td.y{color:#14735A;width:24px;font-weight:700}td.n{color:#CFC5AE;width:24px}
+td.lv{color:#8D7B58;width:84px;font-family:monospace;font-size:11px}
+.tl span{display:inline-block;font-family:monospace;font-size:12px;padding:4px 10px;border-radius:6px;margin:4px 6px 0 0;color:#fff}
+.nb{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;white-space:pre-wrap;font-family:Arial,sans-serif;font-size:14px}
+.dis{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;font-size:12.5px;color:#5C4B2E;margin-top:26px;font-family:Arial,sans-serif;line-height:1.55}
+@media print{body{margin:0}}</style>
+<p class="eb">HUONG STELLA PARADIGM</p><h1>Speaking Skills Lab — practice log</h1>
+<p style="color:#8D7B58;font-size:13px;margin:0 0 18px">${esc(P.name)} · ${esc(S.sid)}</p>
+<dl><dt>Student</dt><dd>${esc($("#stName").value||"(not supplied)")}</dd>
+<dt>Email</dt><dd>${esc($("#stEmail").value||"(not supplied)")}</dd>
+<dt>Date</dt><dd>${new Date().toLocaleString("en-GB",{dateStyle:"full",timeStyle:"short"})}</dd>
+<dt>Drill</dt><dd>${esc(P.drills[S.drill].name)}</dd>
+<dt>Takes recorded</dt><dd>${S.attempts}</dd>
+<dt>Total practice time</dt><dd>${fmt(S.totalMs)}</dd>
+<dt>Latest take</dt><dd>${fmt(S.lastMs)} · target ${fmt(P.drills[S.drill].target*1000)}</dd></dl>
+<h2>Take history</h2><table>${S.takes.map(t=>`<tr><td class="lv">Take ${t.n}</td><td>${fmt(t.ms)}</td><td>${esc(t.drill)}</td><td>${t.at.toLocaleTimeString("en-GB")}</td></tr>`).join("")||"<tr><td>No takes recorded.</td></tr>"}</table>
+<h2>Diagnostic</h2><div class="tl">${Object.keys(agg).map(k=>`<span style="background:${{fc:"#B87200",lr:"#14735A",gr:"#5140A6",pr:"#B4392A",x:"#2A1E0A"}[k]}">${CRIT[k][0]} ${agg[k][0]}/${agg[k][1]}</span>`).join("")}</div>
+<table>${P.check.map((c,i)=>`<tr><td class="${S.checks[i]?'y':'n'}">${S.checks[i]?'✓':'○'}</td><td class="lv">${CRIT[c[0]][0]}</td><td>${c[1].replace(/<[^>]+>/g,"")}</td></tr>`).join("")}</table>
+<h2>Notes</h2><div class="nb">${esc($("#notes").value||"(none)")}</div>
+<div class="dis">${DISC}</div></html>`;
+ dl(new Blob([html],{type:"text/html;charset=utf-8"}),`${S.sid}-practice-log.html`)};
+
+const DISC=`<b>About this lab.</b> The Speaking Skills Lab is produced and maintained by <b>Huong Stella AI Academic</b> as a structured rehearsal environment for enrolled learners. It sets out what happens in the examination room, the tactical choices that distinguish one band from the next, the functional language each part actually calls for, and the phonological features that carry meaning in that part.
+<br><br><b>On the diagnostic.</b> The counts recorded here indicate which assessment criterion is losing you marks in this part of the test. They are a teaching signal, not a score. They do not constitute, predict or substitute for a rating awarded by a qualified instructor, by Huong Stella AI Academic, or by a certified IELTS examiner, and must not be reported as an IELTS result.
+<br><br><b>Source of criteria.</b> All descriptor wording is adapted from the IELTS Speaking Band Descriptors published at ielts.org. Timing and format conventions follow the published test specification: Part 1 lasts four to five minutes; Part 2 allows one minute of preparation and one to two minutes of speaking; Part 3 lasts four to five minutes.`;
+$("#disc").innerHTML=DISC;
+$("#foot").innerHTML="Assessment criteria adapted from the IELTS Speaking Band Descriptors, ielts.org. Question material: IELTS Speaking Forecast, Quarter 3 2026. Produced by Huong Stella AI Academic. Nothing is stored on a server — download your log before closing this tab.";
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+tabs();renderTakes();
+
+}
+</script>
+</body>
+</html>

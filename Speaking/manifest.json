@@ -1,0 +1,109 @@
+{
+ "generated": "2026-10-09T09:18:17.204Z",
+ "modules": [
+  {
+   "slug": "01",
+   "name": "Technology & Media",
+   "tagline": "Screens, software, streaming and the social web",
+   "cards": 4,
+   "full": true
+  },
+  {
+   "slug": "02",
+   "name": "Decision-Making & Change",
+   "tagline": "Choices, plans, advice and changing your mind",
+   "cards": 8,
+   "full": true
+  },
+  {
+   "slug": "03",
+   "name": "Work & Career",
+   "tagline": "Jobs, ambition, enterprise and the future of work",
+   "cards": 6,
+   "full": false
+  },
+  {
+   "slug": "04",
+   "name": "Education & Learning",
+   "tagline": "Teaching, self-study, language and intelligence",
+   "cards": 6,
+   "full": true
+  },
+  {
+   "slug": "05",
+   "name": "Places, Cities & Housing",
+   "tagline": "Where we live, where we travel, what we build",
+   "cards": 12,
+   "full": true
+  },
+  {
+   "slug": "06",
+   "name": "Environment & Nature",
+   "tagline": "Conservation, climate, plants and wildlife",
+   "cards": 4,
+   "full": false
+  },
+  {
+   "slug": "07",
+   "name": "Food, Shopping & Money",
+   "tagline": "Consumption, advertising and personal finance",
+   "cards": 5,
+   "full": false
+  },
+  {
+   "slug": "08",
+   "name": "People & Relationships",
+   "tagline": "Family, friendship, fame and generosity",
+   "cards": 7,
+   "full": false
+  },
+  {
+   "slug": "09",
+   "name": "Experiences & Emotions",
+   "tagline": "Events, feelings and things that went wrong",
+   "cards": 11,
+   "full": false
+  },
+  {
+   "slug": "10",
+   "name": "Culture & Tradition",
+   "tagline": "Customs, craft and celebration",
+   "cards": 3,
+   "full": false
+  }
+ ],
+ "skills": [
+  {
+   "slug": "1",
+   "name": "Part 1 — Interview",
+   "tagline": "Four minutes, twelve questions, no time to think"
+  },
+  {
+   "slug": "2",
+   "name": "Part 2 — Long Turn",
+   "tagline": "One minute to plan, two minutes alone with the examiner listening"
+  },
+  {
+   "slug": "3",
+   "name": "Part 3 — Discussion",
+   "tagline": "Four minutes of abstract questions, and an examiner who will push back"
+  }
+ ],
+ "practice": [
+  {
+   "slug": "1",
+   "name": "Part 1 — Practice",
+   "tagline": "The full Quarter 3 question bank, with the language to answer it"
+  },
+  {
+   "slug": "2",
+   "name": "Part 2 — Practice",
+   "tagline": "Sixty-six cue cards, one minute to plan, two minutes to fill"
+  },
+  {
+   "slug": "3",
+   "name": "Part 3 — Practice",
+   "tagline": "Abstract questions, four minutes, and an examiner who will push back"
+  }
+ ]
+}

@@ -1,0 +1,5 @@
+{
+  "version": "202610090918",
+  "submitUrl": "",
+  "note": "submitUrl: paste the Apps Script /exec address here once; every page reads it from this file."
+}
