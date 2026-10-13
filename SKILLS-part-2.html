@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 2 — Long Turn — Speaking Skills Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#FFFCF4;--surface:#FFFFFF;--sand:#FBF3DE;
+ --ink:#2A1E0A;--ink-2:#5C4B2E;--muted:#8D7B58;--line:#EADFC5;
+ --gold:#F2A81D;--gold-deep:#B87200;--ember:#E2601C;
+ --fc:#B87200;--lr:#14735A;--gr:#5140A6;--pr:#B4392A;--x:#2A1E0A;
+ --fc6:#FCE7B4;--fc7:#EFB53C;--fc8:#B87200;
+ --display:"Fraunces",Georgia,serif;--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 90px}
+header.mast{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;right:-90px;top:-100px;width:320px;height:320px;border-radius:50%;
+ background:radial-gradient(circle at 35% 35%,rgba(242,168,29,.55),rgba(242,168,29,0) 68%)}
+header.mast .wrap{padding:24px 20px 26px;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+.kicker{font-family:var(--mono);font-size:12.5px;color:#C9AE72;margin:0 0 4px}
+.mast h1{font-family:var(--display);font-size:clamp(29px,6vw,47px);line-height:1.03;margin:0;font-weight:700;
+ font-variation-settings:'SOFT' 60,'WONK' 1;color:var(--gold)}
+.mast .tag{margin:8px 0 0;color:#D9C79C;font-size:15px}
+.mast .blurb{margin:14px 0 0;color:#BFAE86;font-size:14px;max-width:70ch}
+.idbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.idbar input{background:#3B2B10;border:1px solid #55401A;color:#FFF8E7;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;min-width:0;flex:1 1 200px}
+.idbar input::placeholder{color:#9C8557}
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:1000px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto}
+nav.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;
+ font-size:14px;font-family:inherit;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;gap:7px;align-items:baseline}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--gold-deep);opacity:.6}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+h2.sec{font-family:var(--display);font-size:26px;margin:30px 0 5px;font-weight:600}
+h2.sec:first-child{margin-top:26px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:74ch}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.hint{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td,th{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold-deep);background:var(--sand);font-weight:600}
+.btn{background:var(--ink);color:#FFF8E7;border:0;border-radius:10px;padding:11px 18px;font-size:14.5px;font-family:inherit;cursor:pointer}
+.btn.gold{background:var(--gold);color:var(--ink);font-weight:600}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+select,textarea{font-family:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+select{padding:11px 12px;font-size:14.5px;max-width:100%}
+textarea{width:100%;padding:12px;font-size:14.5px;min-height:110px;resize:vertical}
+
+/* brief */
+.myth{border-left:4px solid var(--ember);background:var(--surface);border-radius:0 12px 12px 0;padding:14px 17px;margin-bottom:11px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.myth b{display:block;margin-bottom:5px;color:var(--ember)}
+.whatbox{background:var(--ink);color:#FFF8E7;border-radius:14px;padding:19px 22px;font-size:15px;margin:16px 0}
+.whatbox i{color:var(--gold);font-style:normal;font-weight:600}
+
+/* tactics */
+.tac{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.tac h3{font-family:var(--display);font-size:20px;margin:0 0 3px;font-weight:600;display:flex;gap:11px;align-items:baseline}
+.tac h3 .num{font-family:var(--mono);font-size:13px;color:var(--gold-deep)}
+.tac .why{color:var(--ink-2);font-size:14.5px;margin:0 0 13px}
+.dd{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:14px}
+@media(min-width:720px){.dd{grid-template-columns:1fr 1fr}}
+.dd div{border-radius:11px;padding:13px 15px;font-size:14.5px}
+.dd .do{background:#E9F3EE;border:1px solid #C6E0D3}
+.dd .no{background:#FBEDE8;border:1px solid #F0CFC2}
+.dd b{display:block;font-size:11px;letter-spacing:.11em;margin-bottom:5px}
+.dd .do b{color:var(--lr)}.dd .no b{color:var(--pr)}
+.bands{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:720px){.bands{grid-template-columns:repeat(3,1fr)}}
+.bands div{border-top:3px solid;padding:9px 0 0;font-size:14px}
+.bands .b6{border-color:var(--fc6)}.bands .b7{border-color:var(--fc7)}.bands .b8{border-color:var(--fc8)}
+.bands em{display:block;font-family:var(--mono);font-size:11px;font-style:normal;color:var(--muted);margin-bottom:3px}
+
+/* strategies */
+.shape{font-family:var(--mono);font-size:12.5px;background:var(--sand);color:var(--gold-deep);padding:8px 13px;border-radius:8px;display:inline-block;margin:0 0 12px;font-weight:600}
+ul.mv{margin:0 0 14px;padding-left:19px;font-size:14.5px}
+ul.mv li{margin-bottom:6px}
+.exq{background:var(--ink);color:#FFF8E7;border-radius:12px;padding:15px 18px;font-size:15px;margin-bottom:11px}
+.exq b{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--gold);margin-bottom:8px}
+.exq .qq{display:block;font-family:var(--display);font-size:17px;color:#D9C79C;margin-bottom:9px}
+.exq b:not(:first-child){display:inline}
+.tp{background:#FBEDE8;border:1px solid #F0CFC2;border-radius:11px;padding:13px 15px;font-size:14.5px}
+.tp b{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--pr);margin-bottom:5px}
+blockquote{font-size:15px;color:var(--ink-2)}
+
+/* language */
+.lset{margin-bottom:22px}
+.lset h3{font-family:var(--display);font-size:19px;margin:0 0 8px;font-weight:600}
+.ipa{font-family:var(--mono);font-size:12.5px;color:var(--gold-deep)}
+td.itm{font-weight:600;width:27%}
+
+/* phonology */
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.ph h3{font-family:var(--display);font-size:20px;margin:0 0 8px;font-weight:600}
+.drillline{background:var(--ink);color:#FFF8E7;border-radius:11px;padding:15px 18px;font-family:var(--mono);font-size:14px;line-height:2.1;margin:12px 0}
+.drillline b{color:var(--gold)}
+.drillline i{color:#A8945F}
+
+/* drill bay */
+.stage{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+.stage::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;
+ background:radial-gradient(circle at 50% 50%,rgba(226,96,28,.35),rgba(226,96,28,0) 70%)}
+.stage>*{position:relative;z-index:1}
+.stage h3{font-family:var(--display);font-size:22px;margin:0 0 6px;font-weight:600}
+.stage .aim{color:#CDB88C;font-size:14px;margin:0 0 4px}
+.stage .setline{color:#A8945F;font-size:13.5px;font-family:var(--mono);margin:0}
+.clock{font-family:var(--mono);font-size:46px;margin:16px 0 4px;font-variant-numeric:tabular-nums}
+.clock.warn{color:var(--gold)}.clock.over{color:#FF9E7A}
+.stage .btn.ghost{color:#FFF8E7;border-color:#55401A}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.recording .dot{animation:blip 1.05s infinite}
+.take{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.take audio{height:36px;flex:1 1 220px;min-width:0}
+.take .tno{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+
+/* diagnostic */
+.chk{display:flex;gap:11px;align-items:flex-start;padding:11px 0 11px 12px;border-bottom:1px solid #F1EADA;font-size:14.5px;border-left:4px solid}
+.chk input{margin:4px 0 0;width:18px;height:18px;flex:0 0 auto}
+.chk .tag{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:5px;margin-right:8px;color:#fff;font-weight:700}
+.tally{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.tally span{font-family:var(--mono);font-size:12.5px;padding:6px 12px;border-radius:8px;color:#fff}
+.disclaimer{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-2);margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+ <p class="eyebrow">HUONG STELLA PARADIGM</p>
+ <p class="kicker">Speaking Skills Lab · P2 · Forecast 2026</p>
+ <h1>Part 2 — Long Turn</h1>
+ <p class="tag">One minute to plan, two minutes alone with the examiner listening</p>
+ <p class="blurb">The long turn is the only part of the test where nobody rescues you. It is also the easiest part to prepare for, because the cue cards are finite in type and a well-built story adapts across many of them.</p>
+ <div class="idbar">
+  <input id="stName" placeholder="Full name" autocomplete="name">
+  <input id="stEmail" type="email" placeholder="Email address" autocomplete="email">
+ </div>
+</div></header>
+
+<nav class="tabs"><div class="inner" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+ <section class="panel" id="p-brief" role="tabpanel"><h2 class="sec">The examiner's brief</h2>
+  <p class="sub">What happens in the room, what is actually being rated, and the beliefs that cost candidates marks every session.</p>
+  <div id="briefBody"></div></section>
+
+ <section class="panel" id="p-tactics" role="tabpanel"><h2 class="sec">Tactics</h2>
+  <p class="sub">Each move below is a decision you make once, in advance, so that you do not have to make it under pressure. The three columns show what the same move looks like at Band 6, Band 7 and Band 8.</p>
+  <div id="tacBody"></div></section>
+
+ <section class="panel" id="p-strat" role="tabpanel"><h2 class="sec">Strategies by question type</h2>
+  <p class="sub" id="stratIntro"></p>
+  <div id="stratBody"></div></section>
+
+ <section class="panel" id="p-lang" role="tabpanel"><h2 class="sec">Language engine</h2>
+  <p class="sub" id="langIntro"></p>
+  <div id="langBody"></div></section>
+
+ <section class="panel" id="p-phon" role="tabpanel"><h2 class="sec">Pronunciation focus</h2>
+  <p class="sub" id="phonIntro"></p>
+  <div id="phonBody"></div></section>
+
+ <section class="panel" id="p-drill" role="tabpanel"><h2 class="sec">Drill bay</h2>
+  <p class="sub">Pick a drill, set yourself going, and record. The timer counts up to the target for this part so you can hear where your natural length sits.</p>
+  <div class="row" style="margin-bottom:14px"><select id="drillSel" style="flex:1 1 320px"></select></div>
+  <div class="stage" id="stage">
+   <h3 id="dName">—</h3>
+   <p class="aim" id="dAim"></p>
+   <p class="setline" id="dSet"></p>
+   <p class="clock" id="clock">00:00</p>
+   <div class="row">
+    <button class="btn ghost" id="btnPrep">Preparation timer (60s)</button>
+    <button class="btn ember" id="btnRec"><span class="dot"></span>Record</button>
+    <button class="btn gold" id="btnStop" disabled>Stop</button>
+   </div>
+  </div>
+  <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Takes</h3><div id="takes"><p class="hint" style="margin:6px 0">No recordings yet.</p></div></div>
+  <div class="card"><h3 style="margin:0 0 6px;font-size:16px">Notes to yourself</h3>
+   <p class="hint" style="margin:0 0 9px">After listening back, write down one thing that worked and one thing to change. This goes into the practice log.</p>
+   <textarea id="notes" placeholder="What worked · what to change next take…"></textarea></div>
+ </section>
+
+ <section class="panel" id="p-diag" role="tabpanel"><h2 class="sec">Diagnostic</h2>
+  <p class="sub">Part-specific checks derived from the published assessment criteria. This is a diagnostic, not a band estimate — it tells you which criterion is leaking marks in this part, and nothing more.</p>
+  <div class="card" id="diagBody"></div>
+  <div class="tally" id="tally"></div>
+  <div class="row" style="margin-top:20px">
+   <button class="btn gold" id="btnLog">Download practice log</button>
+   <button class="btn ghost" id="btnAudio">Download latest take</button>
+  </div>
+  <div class="disclaimer" id="disc"></div>
+ </section>
+
+ <footer id="foot"></footer>
+</main>
+
+<script>
+const P = {"id":"part-2","no":"P2","name":"Part 2 — Long Turn","tagline":"One minute to plan, two minutes alone with the examiner listening","blurb":"The long turn is the only part of the test where nobody rescues you. It is also the easiest part to prepare for, because the cue cards are finite in type and a well-built story adapts across many of them.","brief":{"facts":[["Preparation","Exactly one minute, with paper and a pencil provided. You may write anything you like."],["Speaking","One to two minutes. The examiner starts a timer."],["Being stopped","At two minutes the examiner will stop you. This is the outcome to aim for, not a failure."],["The card","A topic plus three or four prompts, and a final <i>and explain…</i> which is the one that carries most of the development."],["Rounding-off","One or two short questions afterwards. These are not part of the long turn but they are assessed, and they are where memorised answers tend to collapse."]],"what":"The descriptors for this part turn on two phrases. Band 7 requires that you <i>speak at length without noticeable effort</i>; Band 8 requires that you <i>develop topics coherently and appropriately</i>. Note what is absent from both: any requirement to cover every prompt, and any requirement for the content to be true. The prompts are scaffolding for candidates who would otherwise run dry. If you have a better structure, the scaffolding is optional.","myths":[["“I must cover all four bullet points.”","There are no marks attached to the bullets. There are marks attached to running out of material at ninety seconds, which is what the bullets exist to prevent."],["“A memorised story is safe.”","Examiners are trained to detect memorisation, and the rounding-off question is designed to expose it. A memorised answer that unravels under one follow-up question costs more than an imperfect spontaneous one."],["“I should write full sentences in the minute.”","Sentences get read aloud, and reading aloud is instantly audible. Notes should be nouns."],["“Stopping early is fine if I've said everything.”","Under Fluency and Coherence, an answer that ends at fifty seconds has not demonstrated the ability to speak at length. It caps the band regardless of accuracy."]]},"tactics":[{"n":"01","name":"The sixty-second note","why":"What you write in the preparation minute determines whether you narrate or recite.","do":"Five to seven nouns down the left margin, plus two verbs. Nouns are retrieval cues; they cannot be read aloud. For a cue card about a difficult decision: <i>transfer form · Tết dinner · cousin's weekend · eight months · outsource</i>.","dont":"Full sentences, or a copy of the four bullets. Copying the bullets produces a list.","band":{"b6":"Notes cover the four prompts.","b7":"Notes are cues, not sentences, and include one vivid detail.","b8":"Notes include the closing line, written first. Knowing where you land lets you pace everything before it."}},{"n":"02","name":"Open in the middle of the action","why":"<i>I would like to talk about…</i> announces preparation and spends five seconds saying nothing. The first sentence is where the examiner decides whether this is a person talking or a person reciting.","do":"Start with the event, a time stamp, or a contradiction. <i>Two years ago I did something my family still hasn't quite forgiven me for.</i>","dont":"<i>Today I am going to describe a difficult decision that I made in my life.</i>","band":{"b6":"Opens with a clear statement of the topic.","b7":"Opens with a specific moment or detail rather than a label.","b8":"Opens with two short opposed clauses that set a rhythm — <i>The decision took forty seconds. Living with it took two years.</i>"}},{"n":"03","name":"The tense spine","why":"Grammatical Range in Part 2 is won almost entirely on narrative tenses, and they arrive naturally only if you know which does what.","do":"Past simple carries the events. Past continuous sets the scene behind them. Past perfect handles anything that happened earlier. <i>I <b>was revising</b> for finals when the message <b>came through</b>. I <b>had been waiting</b> three weeks for it.</i>","dont":"Past simple for everything, which flattens the story and caps Grammatical Range at Band 6.","band":{"b6":"Past simple, controlled.","b7":"Past simple with past continuous and at least one past perfect.","b8":"Tense shifts used for effect — a switch to present for the vivid moment, then back."}},{"n":"04","name":"One line of direct speech","why":"This is the cheapest high-yield device available. Quoting somebody forces a change of voice, pitch and pace, which is exactly the flexible intonation the Band 8 pronunciation descriptor asks for.","do":"<i>He said, “Sit with the boring part for two days and see if you're still curious.”</i>","dont":"Reported speech throughout, which keeps the delivery monotone.","band":{"b6":"Reports what was said.","b7":"Quotes one line directly.","b8":"Quotes a line containing a self-correction, which forces a mid-utterance intonation shift."}},{"n":"05","name":"Bank a reflection ending","why":"Running out of material at ninety seconds is the commonest Part 2 failure, and a prepared closing move solves it permanently.","do":"Keep three portable endings that fit any cue card: <i>What stayed with me was…</i> / <i>With hindsight…</i> / <i>I still think about it whenever…</i> Each buys twenty to thirty seconds of genuine development.","dont":"<i>So that is the story I wanted to tell. Thank you.</i> This forfeits the ending and signals rehearsal.","band":{"b6":"Closes with how you felt.","b7":"Closes with what you learned.","b8":"Closes on an observation that outlives the anecdote and was not obvious from the opening."}},{"n":"06","name":"The stretch kit","why":"When the examiner has not stopped you and you have said everything, you need three reliable ways to add twenty seconds without padding.","do":"<b>Sensory detail</b> — what the place smelled or sounded like. <b>Contrast with now</b> — how you would handle it today. <b>A second person's reaction</b> — what somebody else said or did about it.","dont":"Repeating the same point in different words, which the descriptors name explicitly as repetition.","band":{"b6":"Adds another fact.","b7":"Adds one of the three moves above.","b8":"Adds the move that most advances the point, not the first one to hand."}},{"n":"07","name":"One story, many cards","why":"There are sixty-six cue cards in the forecast and perhaps eight underlying story shapes. Preparing sixty-six stories is neither possible nor useful.","do":"Build four story stems and learn to re-angle them. A single story about switching university course serves <i>a difficult decision</i>, <i>a change you made</i>, <i>a time you changed an opinion</i>, <i>an important decision</i>, <i>a person who influenced you</i> and <i>an ambition</i>. Change the first and last thirty seconds; the middle stays.","dont":"Telling the identical story regardless of the card, which examiners hear as off-topic and which costs coherence marks.","band":{"b6":"Has a story ready for the common types.","b7":"Re-angles the opening and closing to the card asked.","b8":"Re-angles the emphasis throughout so the same events genuinely answer a different question."}}],"lang":{"intro":"Part 2 language is narrative language. Four functions carry almost every long turn: sequencing time, setting a scene, reporting reaction, and reflecting at the close.","sets":[{"g":"Sequencing time","items":[["by the time","/baɪ ðə ˈtaɪm/","Compresses two events into one clause. <i>By the time I got there, it had already started.</i>"],["the moment (that)","/ðə ˈməʊmənt/","Instant sequence, more vivid than <i>when</i>. <i>The moment I saw her face I knew.</i>"],["no sooner had … than","/nəʊ ˈsuːnə/","Inversion, and therefore high-value grammar. Use once. <i>No sooner had we sat down than the power went out.</i>"],["in the end / eventually","/ɪn ði ˈend/","<i>In the end</i> is the outcome; <i>at the end</i> is a position in time. Candidates confuse these constantly."],["it wasn't until … that","/ɪt ˈwɒznt ənˈtɪl/","Delays a reveal, which is how you build tension. <i>It wasn't until the following week that I understood why.</i>"]]},{"g":"Setting a scene","items":[["it was one of those …","/wʌn əv ˈðəʊz/","Invites recognition without description. <i>It was one of those afternoons where nothing quite works.</i>"],["picture a …","/ˈpɪktʃər ə/","Direct address to the listener. Used sparingly it is striking; twice it is a mannerism."],["the place was heaving","/ˈhiːvɪŋ/","British and informal: extremely crowded."],["you could hear a pin drop","/pɪn drɒp/","Complete silence. Reserve for a genuinely tense moment."],["tucked away","/tʌkt əˈweɪ/","Hidden and hard to find, with positive connotation. <i>A tiny café tucked away behind the market.</i>"]]},{"g":"Reporting reaction","items":[["my heart sank","/hɑːt ˈsæŋk/","Sudden disappointment. Past simple only."],["I was completely thrown","/θrəʊn/","Disoriented by something unexpected."],["it threw me off","/θruː mi ˈɒf/","Disrupted my composure or plan."],["I couldn't quite believe it","/ˈkʊdnt kwaɪt/","Understated astonishment, which lands better in English than an emphatic version."],["I froze","/frəʊz/","One syllable, maximum effect. Short sentences at the crisis point are a pacing device as much as a lexical one."]]},{"g":"Reflecting at the close","items":[["with hindsight","/wɪð ˈhaɪnsaɪt/","Judging with knowledge you did not have at the time. Almost always fronted."],["what stayed with me was","/steɪd wɪð ˈmiː/","Introduces the lasting impression. A reliable closing frame."],["it taught me that","/ɪt ˈtɔːt mi/","Direct and slightly plain — upgrade to <i>what I took from it was</i>."],["looking back","/ˈlʊkɪŋ bæk/","Common and safe; vary it with <i>in retrospect</i> for a more formal register."],["I'd be lying if I said","/aɪd bi ˈlaɪɪŋ/","Admits a cost honestly. A narrative with no cost in it sounds invented."]]}]},"phon":{"intro":"Two minutes of continuous speech is enough time for rhythm to become the dominant impression. These three features are what turn an accurate long turn into a fluent one.","items":[{"t":"Chunking and the deliberate pause","what":"Speech is delivered in thought groups of roughly four to seven words, with a brief pause between them. A pause at a thought boundary reads as planning; a pause in the middle of a phrase reads as searching for a word. The descriptors treat these very differently: hesitation to prepare content is a Band 9 feature, hesitation to find language is not.","drill":"The de<b>CI</b>sion itself / took about <b>FOR</b>ty seconds ↘ ‖ <i>(silence, half a second)</i> ‖ <b>LIV</b>ing with it / took <b>TWO</b> years ↘","note":"Do not fill the pause with <i>um</i>. Filled pauses are heard as hesitation; silent ones are heard as control. This is the single highest-value pronunciation habit in Part 2."},{"t":"Pace variation","what":"A story told at one speed flattens. Crisis points want short clauses delivered quickly; reflection wants longer clauses delivered slowly.","drill":"Fast and clipped: <i>I froze. The screen went black. Nothing.</i> ‖ Slow and extended: <i>What stayed with me, more than the panic itself, was how calmly everybody around me carried on.</i>","note":"Record both halves and check that the second is audibly slower. Most candidates produce no difference at all on the first attempt."},{"t":"Voice change in direct speech","what":"When you quote somebody, English speakers shift pitch and often pace. Delivering a quotation in your own narrative voice wastes the device entirely.","drill":"He said — <i>(lower, slower)</i> <b>“SPEND</b> a weekend on the <b>TE</b>dious part. <b>NOT</b> the exciting part — the <b>TE</b>dious part.”","note":"The self-correction inside the quotation forces a mid-utterance intonation shift, which is precisely what the Band 8 descriptor means by using intonation flexibly."}]},"drills":[{"name":"Full simulation","set":"One cue card, sixty seconds of notes, then speak until stopped at two minutes.","target":120,"count":1,"aim":"The only drill that tests the real thing. Do it at least twice a week. Check the recording ends because the timer ended, not because you did."},{"name":"Ninety-second floor","set":"One cue card, no preparation at all, minimum ninety seconds.","target":110,"count":1,"aim":"Builds the stretch kit. When you feel yourself running dry, reach for sensory detail, contrast with now, or a second person's reaction."},{"name":"Same story, four cards","set":"One story stem told four times against four different cue cards.","target":120,"count":4,"aim":"Trains re-angling. The middle should stay constant while the first and last thirty seconds change completely."},{"name":"Rounding-off survival","set":"One cue card, then answer two follow-up questions immediately with no pause.","target":120,"count":1,"aim":"Memorised answers fail here. If the follow-up feels hard, the long turn was recited rather than told."}],"check":[["fc","The recording ran to at least ninety seconds and I did not stop before the timer."],["fc","I opened with a specific moment rather than an announcement of the topic."],["fc","Pauses fell at thought boundaries rather than inside phrases."],["fc","The turn had a shape — opening, complication, resolution, reflection — not a list of four prompts."],["lr","There was at least one vivid concrete detail nobody could have memorised for me."],["lr","I closed on a reflection rather than on <i>that is my story</i>."],["gr","The narrative used past continuous for background and at least one past perfect."],["gr","Sentence length varied with the moment — short at the crisis, long at the reflection."],["pr","At least one line of direct speech was delivered in a changed voice."],["pr","There was at least one deliberate silent pause, unfilled."]],"strategies":{"intro":"Every cue card in the forecast belongs to one of six families, and each family has a shape that reliably fills two minutes. Learning six shapes is a far better investment than preparing sixty-six answers — and it is what lets one prepared story serve five or six different cards.","groups":[{"type":"PERSON — <i>Describe a person who…</i>","cue":"Twenty-one of the sixty-six Q3 cue cards. The largest family by some distance.","shape":"Identity → Relationship → One defining scene → What they changed in you","moves":["Spend no more than fifteen seconds on who they are. Candidates routinely spend a minute on biography and run out of time before saying anything interesting.","The defining scene is the whole answer. One occasion, narrated properly, with what they said.","Close on effect, not on adjectives. <i>She is very kind</i> is Band 6. <i>I still hear her voice when I want to give up</i> is not.","Physical description is almost always wasted time. Nobody is marking you on appearance."],"ex":{"q":"Describe a person you know who is very organised","a":"Open on a scene — <b>the shared spreadsheet that appeared in the group chat forty minutes after the project was assigned</b> — then work outwards to who she is and what that habit does to everyone around her."},"trap":"A list of admirable qualities. Four adjectives with no scene behind them reads as a character reference, not a description."},{"type":"PLACE — <i>Describe a place that…</i>","cue":"Twelve cards in the Q3 set, including quiet, noisy, crowded, boring, natural and recommended places.","shape":"Locate in one line → Two senses → What you do there → Why it persists in memory","moves":["Locate it quickly and move on. Directions are not description.","Two senses, not five. Sound and smell do more than sight because candidates never use them.","The middle section should be an activity, not a survey. What you <i>do</i> there is more interesting than what is there.","For negative cards — boring, noisy — the reason must be specific to that place, not a general complaint about noise."],"ex":{"q":"Describe a quiet place that you would love to go to","a":"<b>The reading room smells of dust and floor polish, and the loudest sound is the radiator.</b> Then: what you would do there, who you would take, and why quiet has become something you have to go looking for."},"trap":"Turning it into a travel brochure. Adjectives such as <i>beautiful</i>, <i>amazing</i> and <i>peaceful</i> carry no lexical weight because everyone uses them."},{"type":"OBJECT — <i>Describe a thing you…</i>","cue":"Gifts, purchases, technology, cakes, traditional products.","shape":"What it is → How it came to you → How you actually use it → What it says about you","moves":["The acquisition story is where the narrative tenses live. Use it.","Describe use, not specification. Nobody is marking the product; they are marking your relationship to it.","The final move — what it reveals about you — is what separates this from a catalogue entry.","One physical detail is enough, and it should be an odd one: a scratch, a smell, a fault you have never fixed."],"ex":{"q":"Describe a gift you would like to buy for your friend","a":"Since the card is hypothetical, the tense spine is conditional: <b>I'd probably go for…, because she'd never buy it herself, and she'd pretend not to like it for about a week.</b>"},"trap":"Listing features. A specification is not a description, and it produces no grammar beyond the present simple."},{"type":"EVENT — <i>Describe a time when…</i>","cue":"The narrative family: decisions, problems, journeys, parties, waiting, things going wrong.","shape":"Setting → Complication → Reaction → Resolution → Reflection","moves":["This is the only family where a true story clearly outperforms an invented one, because the details come free.","The complication must arrive within thirty seconds. A story where nothing goes wrong has no second minute.","Reaction is where the emotional vocabulary belongs — <i>my heart sank</i>, <i>I was completely thrown</i>.","Resolution can be partial or negative. A story that fails is often better material than one that succeeds."],"ex":{"q":"Describe a time when you were stuck in a traffic jam for a very long time","a":"Setting in two lines, then the complication — <b>the moment the radio said the bridge was closed</b> — then what you did for three hours, then what it changed about how you travel now."},"trap":"Telling the events in the order they happened with no shape. Chronology is not structure."},{"type":"ACTIVITY — <i>Describe an activity you…</i>","cue":"Habits, routines, hobbies, sports, things you regret doing.","shape":"What → How it started → What it looks like in practice → Why it persists","moves":["The origin story gives you the past tenses that a pure habit description cannot.","Describe one typical instance in the present tense rather than summarising all instances.","<i>Why it persists</i> is a better closing question than <i>why I like it</i>, because it forces something more honest.","For negative cards — a waste of time — be specific about what the time could have bought instead."],"ex":{"q":"Describe an activity you do regularly that you think is a waste of time","a":"<b>Forty minutes every evening scrolling through videos I will not remember tomorrow.</b> Then: when it started, what a typical evening actually looks like, and why knowing it is a waste has changed nothing."},"trap":"Explaining the benefits of the activity in general. Health benefits of exercise are not a description of your exercise."},{"type":"MEDIA &amp; ABSTRACT — <i>Describe an advertisement / law / piece of news / video</i>","cue":"The family candidates handle worst, because there is no story to fall back on.","shape":"Content in thirty seconds → Your encounter with it → Your reaction → Why it matters beyond you","moves":["Summarise the content fast and stop. A two-minute plot summary is the standard failure here.","<i>Your encounter</i> — where you were, why you were watching — supplies the narrative the card lacks.","Reaction must be specific. <i>I found it interesting</i> is the weakest sentence available in Part 2.","The closing move is the Part 3 move brought forward: why this matters to people other than you."],"ex":{"q":"Describe an advertisement with a famous person in it","a":"Thirty seconds on what happens in the advert, then <b>where you were when you first saw it and why it stopped you</b>, then what it was really selling, which is never the product."},"trap":"Describing the thing and never appearing in the answer yourself. The card says <i>describe</i>, but the marks are in your relationship to it."}],"extra":{"title":"One story, five cards — the re-angling table","html":"<p>Sixty-six cue cards, six families, and perhaps eight underlying stories. The work is not writing sixty-six answers; it is learning to re-angle four or five stories so that they genuinely answer different questions.</p>\n  <p>A single story — switching university course against family expectation — legitimately serves all of these from the Q3 forecast:</p>\n  <table style=\"margin:12px 0\"><tbody>\n  <tr><th style=\"width:44%\">Cue card</th><th>What changes</th></tr>\n  <tr><td>A time you changed an important decision</td><td>Open on the reversal; the family conflict is background.</td></tr>\n  <tr><td>A change that you made recently</td><td>Open on life before and after; the decision itself is one line.</td></tr>\n  <tr><td>A time you changed an important opinion</td><td>Foreground what you believed about safe careers and why it broke.</td></tr>\n  <tr><td>A person you know who did something difficult</td><td>Re-centre on the cousin who refused to advise you. You become the witness.</td></tr>\n  <tr><td>A long-term goal you would like to achieve</td><td>Use the story as the origin of the goal; spend the second minute forward, not back.</td></tr>\n  </tbody></table>\n  <p><b>The rule.</b> The first thirty seconds and the last thirty seconds change completely. The middle minute stays. If the opening does not use the exact language of the card, the examiner hears an off-topic answer — and off-topic costs more than any lexical gain the prepared story delivers.</p>\n  <p><b>Build four stems, not eight.</b> One about a decision, one about a failure, one about a person who changed something, one about a place that matters. Between them they reach roughly forty of the sixty-six cards in this quarter's forecast.</p>"}}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const CRIT={fc:["FLUENCY","--fc"],lr:["LEXIS","--lr"],gr:["GRAMMAR","--gr"],pr:["PRONUN.","--pr"],x:["REASONING","--x"]};
+const S={voiceName:null, tab:"brief",drill:0,takes:[],attempts:0,totalMs:0,lastMs:0,checks:{},
+ recorder:null,chunks:[],stream:null,t0:0,timerId:null,prepId:null,
+ sid:"HSP-"+P.no+"-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase()};
+
+/* ---------- British female voice selection ---------- */
+const V_PREF=["libby","sonia","serena","kate","stephanie","martha","google uk english female",
+ "hazel","abbi","bella","hollie","olivia","amy","maisie","female"];
+const V_MALE=/daniel|oliver|ryan|thomas|arthur|george|alfie|elliot|\bmale\b|uk english male/i;
+const V_OFF=/fiona|moira|scottish|irish|welsh|karen|tessa|veena|rishi/i;
+function vRank(v){
+ const n=(v.name||"").toLowerCase(), lang=(v.lang||"").replace("_","-");
+ if(!/^en/i.test(lang)) return -1;
+ let s=/^en-GB/i.test(lang)?100:15;
+ if(V_OFF.test(n)) s-=45;
+ if(V_MALE.test(n)) s-=70;
+ const i=V_PREF.findIndex(x=>n.includes(x));
+ if(i>=0) s+=60-i*3;
+ if(/natural|online|premium|enhanced|neural/.test(n)) s+=18;
+ return s;
+}
+function vList(){
+ if(!("speechSynthesis" in window)) return [];
+ return speechSynthesis.getVoices().map(v=>({v,s:vRank(v)}))
+  .filter(o=>o.s>=0).sort((a,b)=>b.s-a.s).map(o=>o.v);
+}
+function vChosen(){
+ const all=vList(); if(!all.length) return null;
+ if(S.voiceName){const m=all.find(v=>v.name===S.voiceName); if(m) return m;}
+ return all[0];
+}
+function speak(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text), v=vChosen();
+ if(v){u.voice=v;u.lang=v.lang} else {u.lang="en-GB"}
+ u.rate=0.94; speechSynthesis.speak(u);
+}
+
+const TABS=[["brief","Examiner's brief"],["tactics","Tactics"],["strat","Strategies"],["lang","Language engine"],["phon","Pronunciation"],["drill","Drill bay"],["diag","Diagnostic"]];
+function tabs(){$("#tabs").innerHTML=TABS.map(([k,l],i)=>`<button role="tab" data-t="${k}" aria-selected="${k===S.tab}"><span class="n">${i+1}</span>${l}</button>`).join("");
+ $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tab=b.dataset.t;tabs()};
+ TABS.forEach(([k])=>$("#p-"+k).classList.toggle("on",k===S.tab))}
+
+/* brief */
+$("#briefBody").innerHTML=`<div class="card"><table><tbody>${P.brief.facts.map(f=>`<tr><th style="width:26%">${esc(f[0])}</th><td>${f[1]}</td></tr>`).join("")}</tbody></table></div>
+ <div class="whatbox"><b style="color:var(--gold)">What is actually being rated.</b> ${P.brief.what}</div>
+ <h2 class="sec">What candidates get wrong</h2><p class="sub">Each of these is believed widely enough to shape how people prepare, and each of them costs marks.</p>
+ ${P.brief.myths.map(m=>`<div class="myth"><b>${esc(m[0])}</b>${m[1]}</div>`).join("")}`;
+
+/* tactics */
+$("#tacBody").innerHTML=P.tactics.map(t=>`<div class="tac">
+ <h3><span class="num">${esc(t.n)}</span>${esc(t.name)}</h3>
+ <p class="why">${t.why}</p>
+ <div class="dd"><div class="do"><b>DO THIS</b>${t.do}</div><div class="no"><b>NOT THIS</b>${t.dont}</div></div>
+ <div class="bands">
+  <div class="b6"><em>BAND 6</em>${t.band.b6}</div>
+  <div class="b7"><em>BAND 7</em>${t.band.b7}</div>
+  <div class="b8"><em>BAND 8</em>${t.band.b8}</div>
+ </div></div>`).join("");
+
+/* strategies */
+$("#stratIntro").innerHTML=P.strategies.intro;
+$("#stratBody").innerHTML=P.strategies.groups.map(g=>`<div class="tac">
+ <h3>${g.type}</h3>
+ <p class="hint" style="margin:0 0 10px">${g.cue}</p>
+ <div class="shape">${esc(g.shape)}</div>
+ <ul class="mv">${g.moves.map(m=>`<li>${m}</li>`).join("")}</ul>
+ <div class="exq"><b>WORKED EXAMPLE</b><span class="qq">${esc(g.ex.q)}</span>${g.ex.a}</div>
+ <div class="tp"><b>THE TRAP</b>${g.trap}</div>
+</div>`).join("")+`<div class="card" style="margin-top:22px;border-top:4px solid var(--gold)">
+ <h3 style="font-family:var(--display);font-size:21px;margin:0 0 10px;font-weight:600">${P.strategies.extra.title}</h3>
+ ${P.strategies.extra.html}</div>`;
+
+/* language */
+$("#langIntro").innerHTML=P.lang.intro;
+$("#langBody").innerHTML=P.lang.sets.map(s=>`<div class="lset"><h3>${s.g}</h3><div class="card" style="padding:4px 14px">
+ <table><tbody>${s.items.map(i=>`<tr><td class="itm">${esc(i[0])}<br><span class="ipa">${esc(i[1])}</span></td><td>${i[2]}</td></tr>`).join("")}</tbody></table>
+ </div></div>`).join("");
+
+/* phonology */
+$("#phonIntro").innerHTML=P.phon.intro;
+$("#phonBody").innerHTML=P.phon.items.map(p=>`<div class="ph"><h3>${esc(p.t)}</h3>
+ <p style="margin:0 0 4px">${p.what}</p>
+ <div class="drillline">${p.drill}</div>
+ <p style="margin:0;font-size:14.5px;color:var(--ink-2)"><b>How to drill it.</b> ${p.note}</p></div>`).join("");
+
+/* drill bay */
+$("#drillSel").innerHTML=P.drills.map((d,i)=>`<option value="${i}">${esc(d.name)}</option>`).join("");
+function paintDrill(){const d=P.drills[S.drill];
+ $("#dName").textContent=d.name; $("#dAim").innerHTML=d.aim;
+ $("#dSet").textContent=`${d.set}  ·  target ${fmt(d.target*1000)}${d.count>1?" × "+d.count:""}`;
+ $("#clock").textContent="00:00";$("#clock").className="clock"}
+$("#drillSel").onchange=e=>{S.drill=+e.target.value;paintDrill()};
+paintDrill();
+
+$("#btnPrep").onclick=()=>{clearInterval(S.prepId);let l=60;const c=$("#clock");c.className="clock warn";c.textContent="01:00";
+ S.prepId=setInterval(()=>{l--;c.textContent=fmt(l*1000);if(l<=0){clearInterval(S.prepId);c.className="clock";c.textContent="00:00";
+  speak("Time is up. You may begin.")}},1000)};
+
+async function startRec(){
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("This browser cannot record audio. Use a recent Chrome, Edge or Safari.");return}
+ try{S.stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+ catch(e){alert("Microphone access was refused. Recording requires the page to be served over HTTPS.");return}
+ clearInterval(S.prepId);S.chunks=[];S.recorder=new MediaRecorder(S.stream);
+ S.recorder.ondataavailable=e=>{if(e.data.size)S.chunks.push(e.data)};
+ S.recorder.onstop=save;S.recorder.start();S.t0=Date.now();
+ $("#stage").classList.add("recording");$("#btnRec").disabled=true;$("#btnStop").disabled=false;
+ const lim=P.drills[S.drill].target*1000*(P.drills[S.drill].count||1);
+ S.timerId=setInterval(()=>{const d=Date.now()-S.t0,c=$("#clock");c.textContent=fmt(d);
+  c.className="clock"+(d>lim*1.25?" over":d>lim*.85?" warn":"")},200)}
+function stopRec(){if(S.recorder&&S.recorder.state!=="inactive")S.recorder.stop();
+ clearInterval(S.timerId);$("#stage").classList.remove("recording");
+ $("#btnRec").disabled=false;$("#btnStop").disabled=true;
+ if(S.stream)S.stream.getTracks().forEach(t=>t.stop())}
+function save(){const ms=Date.now()-S.t0,blob=new Blob(S.chunks,{type:(S.chunks[0]&&S.chunks[0].type)||"audio/webm"});
+ S.attempts++;S.totalMs+=ms;S.lastMs=ms;
+ S.takes.push({n:S.attempts,ms,blob,url:URL.createObjectURL(blob),drill:P.drills[S.drill].name,at:new Date()});
+ renderTakes()}
+$("#btnRec").onclick=startRec;$("#btnStop").onclick=stopRec;
+function renderTakes(){if(!S.takes.length){$("#takes").innerHTML='<p class="hint" style="margin:6px 0">No recordings yet.</p>';return}
+ $("#takes").innerHTML=S.takes.slice().reverse().map(t=>`<div class="take">
+  <span class="tno">Take ${t.n} · ${fmt(t.ms)} · ${esc(t.drill)}</span>
+  <audio controls src="${t.url}"></audio>
+  <a class="btn ghost" style="text-decoration:none;font-size:13px;padding:8px 13px" download="${S.sid}-take${t.n}.webm" href="${t.url}">Download</a></div>`).join("")}
+
+/* diagnostic */
+function renderDiag(){
+ $("#diagBody").innerHTML=P.check.map((c,i)=>{
+  const [tag,varname]=CRIT[c[0]];
+  return `<div class="chk" style="border-left-color:var(${varname})">
+   <input type="checkbox" id="c${i}" style="accent-color:var(${varname})"${S.checks[i]?" checked":""}>
+   <label for="c${i}"><span class="tag" style="background:var(${varname})">${tag}</span>${c[1]}</label></div>`}).join("");
+ $("#diagBody").onchange=e=>{S.checks[+e.target.id.slice(1)]=e.target.checked;tally()};
+ tally()}
+function tally(){
+ const agg={};P.check.forEach((c,i)=>{agg[c[0]]=agg[c[0]]||[0,0];agg[c[0]][1]++;if(S.checks[i])agg[c[0]][0]++});
+ $("#tally").innerHTML=Object.keys(agg).map(k=>
+  `<span style="background:var(${CRIT[k][1]})">${CRIT[k][0]} ${agg[k][0]}/${agg[k][1]}</span>`).join("")}
+renderDiag();
+
+function dl(b,n){const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=n;a.click()}
+$("#btnAudio").onclick=()=>{const t=S.takes[S.takes.length-1];if(!t){alert("No recording yet.");return}dl(t.blob,`${S.sid}-take${t.n}.webm`)};
+$("#btnLog").onclick=()=>{
+ const agg={};P.check.forEach((c,i)=>{agg[c[0]]=agg[c[0]]||[0,0];agg[c[0]][1]++;if(S.checks[i])agg[c[0]][0]++});
+ const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Practice log — ${esc($("#stName").value||"student")}</title>
+<style>body{font-family:Georgia,serif;max-width:760px;margin:36px auto;padding:0 24px;color:#2A1E0A;line-height:1.6}
+.eb{font-size:11px;letter-spacing:.24em;color:#B87200;font-family:Arial,sans-serif;font-weight:700;margin:0 0 6px}
+h1{font-size:24px;border-bottom:3px solid #F2A81D;padding-bottom:9px;margin:0 0 4px}
+h2{font-size:16px;margin-top:26px;border-bottom:1px solid #EADFC5;padding-bottom:5px}
+dl{display:grid;grid-template-columns:180px 1fr;gap:5px 15px;font-size:14.5px}dt{color:#8D7B58}dd{margin:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+td{padding:6px 8px;border-bottom:1px solid #F1EADA;vertical-align:top}
+td.y{color:#14735A;width:24px;font-weight:700}td.n{color:#CFC5AE;width:24px}
+td.lv{color:#8D7B58;width:84px;font-family:monospace;font-size:11px}
+.tl span{display:inline-block;font-family:monospace;font-size:12px;padding:4px 10px;border-radius:6px;margin:4px 6px 0 0;color:#fff}
+.nb{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;white-space:pre-wrap;font-family:Arial,sans-serif;font-size:14px}
+.dis{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;font-size:12.5px;color:#5C4B2E;margin-top:26px;font-family:Arial,sans-serif;line-height:1.55}
+@media print{body{margin:0}}</style>
+<p class="eb">HUONG STELLA PARADIGM</p><h1>Speaking Skills Lab — practice log</h1>
+<p style="color:#8D7B58;font-size:13px;margin:0 0 18px">${esc(P.name)} · ${esc(S.sid)}</p>
+<dl><dt>Student</dt><dd>${esc($("#stName").value||"(not supplied)")}</dd>
+<dt>Email</dt><dd>${esc($("#stEmail").value||"(not supplied)")}</dd>
+<dt>Date</dt><dd>${new Date().toLocaleString("en-GB",{dateStyle:"full",timeStyle:"short"})}</dd>
+<dt>Drill</dt><dd>${esc(P.drills[S.drill].name)}</dd>
+<dt>Takes recorded</dt><dd>${S.attempts}</dd>
+<dt>Total practice time</dt><dd>${fmt(S.totalMs)}</dd>
+<dt>Latest take</dt><dd>${fmt(S.lastMs)} · target ${fmt(P.drills[S.drill].target*1000)}</dd></dl>
+<h2>Take history</h2><table>${S.takes.map(t=>`<tr><td class="lv">Take ${t.n}</td><td>${fmt(t.ms)}</td><td>${esc(t.drill)}</td><td>${t.at.toLocaleTimeString("en-GB")}</td></tr>`).join("")||"<tr><td>No takes recorded.</td></tr>"}</table>
+<h2>Diagnostic</h2><div class="tl">${Object.keys(agg).map(k=>`<span style="background:${{fc:"#B87200",lr:"#14735A",gr:"#5140A6",pr:"#B4392A",x:"#2A1E0A"}[k]}">${CRIT[k][0]} ${agg[k][0]}/${agg[k][1]}</span>`).join("")}</div>
+<table>${P.check.map((c,i)=>`<tr><td class="${S.checks[i]?'y':'n'}">${S.checks[i]?'✓':'○'}</td><td class="lv">${CRIT[c[0]][0]}</td><td>${c[1].replace(/<[^>]+>/g,"")}</td></tr>`).join("")}</table>
+<h2>Notes</h2><div class="nb">${esc($("#notes").value||"(none)")}</div>
+<div class="dis">${DISC}</div></html>`;
+ dl(new Blob([html],{type:"text/html;charset=utf-8"}),`${S.sid}-practice-log.html`)};
+
+const DISC=`<b>About this lab.</b> The Speaking Skills Lab is produced and maintained by <b>Huong Stella AI Academic</b> as a structured rehearsal environment for enrolled learners. It sets out what happens in the examination room, the tactical choices that distinguish one band from the next, the functional language each part actually calls for, and the phonological features that carry meaning in that part.
+<br><br><b>On the diagnostic.</b> The counts recorded here indicate which assessment criterion is losing you marks in this part of the test. They are a teaching signal, not a score. They do not constitute, predict or substitute for a rating awarded by a qualified instructor, by Huong Stella AI Academic, or by a certified IELTS examiner, and must not be reported as an IELTS result.
+<br><br><b>Source of criteria.</b> All descriptor wording is adapted from the IELTS Speaking Band Descriptors published at ielts.org. Timing and format conventions follow the published test specification: Part 1 lasts four to five minutes; Part 2 allows one minute of preparation and one to two minutes of speaking; Part 3 lasts four to five minutes.`;
+$("#disc").innerHTML=DISC;
+$("#foot").innerHTML="Assessment criteria adapted from the IELTS Speaking Band Descriptors, ielts.org. Question material: IELTS Speaking Forecast, Quarter 3 2026. Produced by Huong Stella AI Academic. Nothing is stored on a server — download your log before closing this tab.";
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+tabs();renderTakes();
+</script>
+</body>
+</html>
