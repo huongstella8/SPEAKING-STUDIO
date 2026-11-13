@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 1 — Practice — Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FFFCF4;--surface:#fff;--sand:#FBF3DE;--ink:#2A1E0A;--ink-2:#5C4B2E;--muted:#8D7B58;--line:#EADFC5;
+ --gold:#F2A81D;--gold-deep:#B87200;--ember:#E2601C;
+ --fc:#B87200;--lr:#14735A;--gr:#5140A6;--pr:#B4392A;
+ --fc6:#FCE7B4;--fc7:#EFB53C;--fc8:#B87200;
+ --lr6:#CFE8DA;--gr6:#DED8F3;--pr6:#F8D8CF;
+ --display:"Fraunces",Georgia,serif;--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px 90px}
+header.mast{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;right:-90px;top:-100px;width:320px;height:320px;border-radius:50%;
+ background:radial-gradient(circle at 35% 35%,rgba(242,168,29,.55),rgba(242,168,29,0) 68%)}
+header.mast .wrap{padding:24px 20px 26px;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+.kicker{font-family:var(--mono);font-size:12.5px;color:#C9AE72;margin:0 0 4px}
+.mast h1{font-family:var(--display);font-size:clamp(29px,6vw,47px);line-height:1.03;margin:0;font-weight:700;
+ font-variation-settings:'SOFT' 60,'WONK' 1;color:var(--gold)}
+.mast .tag{margin:8px 0 0;color:#D9C79C;font-size:15px}
+.mast .blurb{margin:14px 0 0;color:#BFAE86;font-size:14px;max-width:70ch}
+.idbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.idbar input{background:#3B2B10;border:1px solid #55401A;color:#FFF8E7;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;min-width:0;flex:1 1 200px}
+.idbar input::placeholder{color:#9C8557}
+.flow{background:var(--sand);border-bottom:1px solid var(--line)}
+.flow .wrap{padding:11px 20px;font-size:13px;color:var(--ink-2)}
+.flow b{color:var(--gold-deep)}
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:1020px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto}
+nav.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:14px 13px 11px;
+ font-size:14px;font-family:inherit;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;gap:7px;align-items:baseline}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--gold-deep);opacity:.6}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+h2.sec{font-family:var(--display);font-size:26px;margin:28px 0 5px;font-weight:600}
+h2.sec:first-child{margin-top:26px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:74ch}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.hint{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td,th{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold-deep);background:var(--sand);font-weight:600}
+.btn{background:var(--ink);color:#FFF8E7;border:0;border-radius:10px;padding:11px 18px;font-size:14.5px;font-family:inherit;cursor:pointer}
+.btn.gold{background:var(--gold);color:var(--ink);font-weight:600}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+select,textarea{font-family:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+select{padding:11px 12px;font-size:14.5px;max-width:100%}
+textarea{width:100%;padding:12px;font-size:14.5px;min-height:110px;resize:vertical}
+
+/* question bank */
+.qgrp{margin-bottom:20px}
+.qgrp h3{font-family:var(--display);font-size:18px;margin:0 0 7px;font-weight:600}
+ol.q{margin:0;padding-left:22px}ol.q li{margin-bottom:5px;font-size:14.5px}
+.cue{background:var(--sand);border-left:4px solid var(--gold);border-radius:0 11px 11px 0;padding:13px 16px;margin-bottom:10px}
+.cue b{display:block;margin-bottom:5px}
+.cue ul{margin:0;padding-left:19px;font-size:14px;color:var(--ink-2)}
+.clbl{font-family:var(--mono);font-size:11px;color:var(--gold-deep);letter-spacing:.09em}
+
+/* vocab */
+.lset{margin-bottom:22px}
+.lset h3{font-family:var(--display);font-size:19px;margin:0 0 8px;font-weight:600}
+.ipa{font-family:var(--mono);font-size:12.5px;color:var(--gold-deep)}
+td.itm{font-weight:600;width:26%}
+td.wc{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+td.eg{font-style:italic;color:var(--ink-2)}
+@media(max-width:860px){
+ .lset table,.lset thead,.lset tbody,.lset tr,.lset td,.lset th{display:block}
+ .lset thead{display:none}
+ .lset tr{border:1px solid var(--line);border-radius:12px;margin-bottom:11px;padding:6px 0}
+ .lset td{border:0;padding:7px 14px}
+ .lset td::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:.1em;color:var(--gold-deep);font-weight:600;margin-bottom:2px}
+ .lset td.itm::before{display:none}}
+
+/* grammar */
+.gs{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gr);border-radius:0 13px 13px 0;padding:17px 20px;margin-bottom:12px}
+.gs h3{font-family:var(--display);font-size:18px;margin:0 0 4px;font-weight:600}
+.gs .use{font-size:13px;color:var(--muted);margin:0 0 9px}
+.gs .form{font-family:var(--mono);font-size:12.5px;background:var(--sand);padding:7px 12px;border-radius:8px;display:inline-block;margin-bottom:9px}
+.gs .ex{font-size:15.5px;margin:0 0 9px}
+.gs .nt{font-size:14px;color:var(--ink-2);margin:0}
+.er{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:17px 20px;margin-bottom:12px}
+.er h3{font-size:16px;margin:0 0 10px;font-weight:600}
+.er .bad,.er .good{border-radius:10px;padding:11px 14px;font-size:15px;margin-bottom:8px}
+.er .bad{background:#FBEDE8;border:1px solid #F0CFC2}
+.er .good{background:#E9F3EE;border:1px solid #C6E0D3}
+.er .bad::before{content:"✗ ";color:var(--pr);font-weight:700}
+.er .good::before{content:"✓ ";color:var(--lr);font-weight:700}
+.er s{color:var(--pr);text-decoration-thickness:2px}
+.er .why{font-size:14px;color:var(--ink-2);margin:10px 0 0}
+
+/* drill */
+.stage{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+.stage::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;
+ background:radial-gradient(circle at 50% 50%,rgba(226,96,28,.35),rgba(226,96,28,0) 70%)}
+.stage>*{position:relative;z-index:1}
+.counter{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.08em;margin:0 0 8px}
+.qtext{font-family:var(--display);font-size:clamp(19px,3.6vw,25px);line-height:1.28;margin:0 0 8px;font-weight:600}
+.qtext.veiled{color:#6B5A34;font-style:italic;font-family:var(--sans);font-size:17px;font-weight:400}
+.listen{font-size:13px;color:#A8945F;margin:6px 0 0}
+.listen b{color:var(--gold)}
+.bullets{margin:8px 0 0;padding-left:19px;font-size:14px;color:#CDB88C}
+.clock{font-family:var(--mono);font-size:46px;margin:16px 0 2px;font-variant-numeric:tabular-nums}
+.clock.warn{color:var(--gold)}.clock.over{color:#FF9E7A}
+.target{font-size:12.5px;color:#A8945F;font-family:var(--mono);margin:0 0 14px}
+.stage .btn.ghost{color:#FFF8E7;border-color:#55401A}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.recording .dot{animation:blip 1.05s infinite}
+.take{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.take audio{height:36px;flex:1 1 220px;min-width:0}
+.take .tno{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+
+/* models */
+.lock{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:26px;text-align:left}
+.lock h3{font-family:var(--display);font-size:24px;margin:0 0 10px;color:var(--gold);font-weight:700}
+.lock p{margin:0 0 12px;color:#D9C79C;font-size:15px;max-width:66ch}
+.lock .st{font-family:var(--mono);font-size:13px;color:#A8945F;margin-bottom:16px}
+.answer{font-size:16.5px;line-height:1.88}
+.answer p{margin:0 0 13px}
+mark{background:none;padding:1px 0}
+body.show-fc mark.fc{background:var(--fc6);box-shadow:0 1.5px 0 var(--fc8)}
+body.show-lr mark.lr{background:var(--lr6);box-shadow:0 1.5px 0 var(--lr)}
+body.show-gr mark.gr{background:var(--gr6);box-shadow:0 1.5px 0 var(--gr)}
+body.show-pr mark.pr{background:var(--pr6);box-shadow:0 1.5px 0 var(--pr)}
+.hlbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 18px}
+.hlbar button{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 12px;font-size:12.5px;font-family:inherit;cursor:pointer;font-weight:600}
+.hlbar button[aria-pressed="false"]{opacity:.42}
+.bandhead{display:flex;align-items:baseline;gap:11px;margin-bottom:12px;padding-bottom:9px;border-bottom:2px solid var(--line);flex-wrap:wrap}
+.bandhead .bn{font-family:var(--display);font-size:24px;font-weight:700}
+.notes{font-size:13.5px;color:var(--ink-2);background:var(--sand);border-radius:12px;padding:15px 17px;margin-top:14px}
+.notes p{margin:0 0 9px}
+.crit-tag{font-weight:700;font-size:11px;padding:2px 7px;border-radius:5px;margin-right:6px;color:#fff}
+.redo{background:var(--ember);color:#fff;border-radius:13px;padding:16px 19px;margin:18px 0;font-size:15px}
+.redo b{display:block;margin-bottom:5px}
+.disclaimer{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-2);margin-top:22px}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+</style>
+<script>window.__CFG={submitUrl:"https://script.google.com/macros/s/AKfycbw4Jh6R2yDx-8AtFBX4ELOUxrRak2qWkZz9kF6wSg0qVuEMSaZnOadixb9tVa7tsDJvvA/exec",version:"202611131717"};</script>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+ <p class="eyebrow">HUONG STELLA PARADIGM</p>
+ <p class="kicker">Practice · Part 1 · Forecast 2026 Quarter 3</p>
+ <h1>Part 1 — Practice</h1>
+ <p class="tag">The full Quarter 3 question bank, with the language to answer it</p>
+ <p class="blurb">Forty-four topic frames from the 2026 Quarter 3 forecast, the everyday vocabulary each one needs, the grammar that Part 1 answers actually run on, and three model answers to compare against — after you have recorded your own.</p>
+ <div class="idbar"><input id="stName" placeholder="Full name" autocomplete="name"><input id="stEmail" type="email" placeholder="Email address" autocomplete="email">
+ <input id="sheetUrl" placeholder="Class spreadsheet link from your teacher (optional)"></div>
+</div></header>
+
+<div class="flow"><div class="wrap">Intended order: <b>read the question bank</b> → <b>learn the language and grammar</b> → <b>record your own answer</b> → <b>only then open the band models</b> → <b>record again</b>.</div></div>
+
+<nav class="tabs"><div class="inner" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+ <section class="panel" id="p-bank" role="tabpanel"><h2 class="sec">Question bank</h2>
+  <p class="sub" id="bankSub"></p><div id="bankBody"></div></section>
+
+ <section class="panel" id="p-vocab" role="tabpanel"><h2 class="sec">Vocabulary by topic group</h2>
+  <p class="sub">Grouped to match the question bank rather than alphabetically. Take one group per session, rewrite each example so it is true of you, and use it in the drill bay the same day.</p>
+  <div id="vocabBody"></div></section>
+
+ <section class="panel" id="p-gram" role="tabpanel"><h2 class="sec">Grammar</h2>
+  <p class="sub" id="gramIntro"></p>
+  <div id="structBody"></div>
+  <h2 class="sec">Error patterns to eliminate</h2>
+  <p class="sub">Six patterns that recur in Vietnamese learners' speech. Each is marked under Grammatical Range and Accuracy as a basic error, and a basic error that recurs is treated as systematic rather than occasional.</p>
+  <div id="errBody"></div></section>
+
+ <section class="panel" id="p-drill" role="tabpanel"><h2 class="sec">Drill bay</h2>
+  <p class="sub" id="drillSub"></p>
+  <div class="row" style="margin-bottom:8px"><select id="setSel" style="flex:1 1 340px"></select></div>
+  <p class="hint" id="sendNote" hidden style="margin:4px 0 8px;color:var(--gold-2);font-weight:600"></p>
+  <div class="row" style="margin-bottom:14px">
+   <label class="hint" for="voiceSel" style="margin:0">Examiner's voice</label>
+   <select id="voiceSel" style="flex:1 1 280px"></select>
+   <button class="btn ghost" id="btnVoice" style="font-size:13px;padding:9px 14px">Hear it</button></div>
+  <p class="hint" id="voiceNote" style="margin:-6px 0 14px"></p>
+  <div class="stage" id="stage">
+   <p class="counter" id="counter">—</p>
+   <p class="qtext" id="qNow">Choose a set, then press Start.</p>
+   <ul class="bullets" id="qBul" hidden></ul>
+   <p class="listen" id="listenNote" hidden>The examiner is speaking. Answer when the question ends — press <b>Show</b> only if you could not catch it.</p>
+   <p class="clock" id="clock">00:00</p>
+   <p class="target" id="target"></p>
+   <div class="row">
+    <button class="btn gold" id="btnStart">Start</button>
+    <button class="btn ghost" id="btnAsk" hidden>Repeat question</button>
+    <button class="btn ghost" id="btnShow" hidden>Show</button>
+    <button class="btn ghost" id="btnNext" hidden>Next question</button>
+    <button class="btn ghost" id="btnPrep" hidden>Preparation timer (60s)</button>
+    <button class="btn ember" id="btnRec"><span class="dot"></span>Record</button>
+    <button class="btn gold" id="btnStop" disabled>Stop</button>
+   </div>
+  </div>
+  <div class="card"><h3 style="margin:0 0 8px;font-size:16px">Takes</h3><div id="takes"><p class="hint" style="margin:6px 0">No recordings yet.</p></div></div>
+  <div class="card"><h3 style="margin:0 0 6px;font-size:16px">Notes</h3>
+   <p class="hint" style="margin:0 0 9px">Write these before you open the models, then add to them afterwards. The gap between the two is the lesson.</p>
+   <textarea id="notes" placeholder="Before models: what I think went well / went badly…&#10;After models: what I would change…"></textarea></div>
+ </section>
+
+ <section class="panel" id="p-models" role="tabpanel"><h2 class="sec">Band models</h2>
+  <div id="modelWrap"></div></section>
+
+ <section class="panel" id="p-log" role="tabpanel"><h2 class="sec">Practice log</h2>
+  <p class="sub">A record of this session: takes, durations, whether you recorded before opening the models, and your own notes.</p>
+  <div class="card"><dl id="logPrev" style="display:grid;grid-template-columns:200px 1fr;gap:7px 15px;font-size:14.5px;margin:0"></dl></div>
+  <div class="row"><button class="btn gold" id="btnCsv">Download results (.csv for Excel)</button>
+   <button class="btn ghost" id="btnLog">Download practice log (.html)</button>
+   <button class="btn ghost" id="btnAudio">Download latest take</button>
+   <button class="btn" id="btnSend">Send to class spreadsheet</button></div>
+  <p class="hint" id="sendMsg" style="margin-top:10px"></p>
+  <div class="card" style="margin-top:16px"><h3 style="margin:0 0 7px;font-size:15.5px">Two ways to get this into a spreadsheet</h3>
+   <p style="margin:0 0 9px;font-size:14.5px"><b>On your own machine.</b> Press <i>Download results</i>. The file opens directly in Excel or Google Sheets with one row per take, and your name and email in every row, so several students' files can be stacked into one sheet without editing anything.</p>
+   <p style="margin:0;font-size:14.5px"><b>Straight to your teacher.</b> If your teacher has given you a class spreadsheet link, paste it into the third field at the top of this page and press <i>Send to class spreadsheet</i>. Your row is appended to their sheet immediately — no file, no email.</p></div>
+  <div class="disclaimer" id="disc"></div></section>
+
+ <footer id="foot"></footer>
+</main>
+
+<script>
+/* ===== gửi bài về hệ thống chấm — studio-audio.js + studio-submit.js ===== */
+/* ============================================================================
+ * Speaking Studio — chuẩn hoá âm thanh trước khi gửi đi chấm
+ * Huong Stella Learning Lab
+ *
+ * Nguyên tắc: KHÔNG chuyển đổi nếu không cần.
+ *   Firefox cho ra ogg/opus  → Gemini đọc được → gửi thẳng.
+ *   Safari  cho ra mp4/aac   → Gemini đọc được → gửi thẳng.
+ *   Chrome  cho ra webm/opus → chuyển sang mp3 16 kHz mono.
+ *
+ * Vì sao 16 kHz mono: Gemini hạ mọi file về 16 kHz trước khi nghe, và tính
+ * 32 token mỗi giây bất kể chất lượng. Giữ 48 kHz stereo chỉ tốn băng thông,
+ * không thêm một điểm nào cho học viên. Hai phút nói: webm 48 kHz ≈ 1,4 MB,
+ * mp3 16 kHz mono 32 kbps ≈ 240 KB.
+ *
+ * Dùng:
+ *   const out = await HSSAudio.prepare(blob);     // {blob, mime, ext, note}
+ * ========================================================================== */
+(function (w) {
+  "use strict";
+
+  /* Gemini đọc được các container này, khỏi phải đụng tới */
+  var NATIVE = /^audio\/(mpeg|mp3|mp4|aac|x-m4a|wav|wave|x-wav|ogg|flac|aiff)/i;
+
+  var LAME = "https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js";
+  var RATE = 16000, KBPS = 32;
+
+  /* ---------- chọn định dạng thu tốt nhất mà máy hỗ trợ ---------- */
+  function bestRecordingType() {
+    if (typeof MediaRecorder === "undefined" || !MediaRecorder.isTypeSupported) return "";
+    var want = ["audio/ogg;codecs=opus", "audio/mp4", "audio/mpeg", "audio/webm;codecs=opus", "audio/webm"];
+    for (var i = 0; i < want.length; i++) if (MediaRecorder.isTypeSupported(want[i])) return want[i];
+    return "";
+  }
+
+  /* ---------- giải mã + hạ về 16 kHz mono ---------- */
+  function toMono16k(buf) {
+    return new Promise(function (res, rej) {
+      var AC = w.AudioContext || w.webkitAudioContext;
+      var OC = w.OfflineAudioContext || w.webkitOfflineAudioContext;
+      if (!AC || !OC) return rej(new Error("Trình duyệt không có Web Audio"));
+      var ctx = new AC();
+      ctx.decodeAudioData(buf.slice(0), function (decoded) {
+        var frames = Math.max(1, Math.ceil(decoded.duration * RATE));
+        var off;
+        try { off = new OC(1, frames, RATE); }
+        catch (e) { ctx.close && ctx.close(); return rej(new Error("Máy không hạ được về 16 kHz")); }
+        var src = off.createBufferSource();
+        src.buffer = decoded;            // nhiều kênh → OfflineAudioContext 1 kênh tự trộn xuống mono
+        src.connect(off.destination);
+        src.start(0);
+        off.startRendering().then(function (r) {
+          ctx.close && ctx.close();
+          res({ pcm: r.getChannelData(0), rate: RATE, seconds: decoded.duration });
+        }, rej);
+      }, function () { ctx.close && ctx.close(); rej(new Error("Không giải mã được bản thu")); });
+    });
+  }
+
+  function toInt16(f32) {
+    var out = new Int16Array(f32.length);
+    for (var i = 0; i < f32.length; i++) {
+      var s = f32[i] < -1 ? -1 : f32[i] > 1 ? 1 : f32[i];
+      out[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+    }
+    return out;
+  }
+
+  /* ---------- WAV: không cần thư viện, luôn chạy được ---------- */
+  function wav(i16, rate) {
+    var b = new ArrayBuffer(44 + i16.length * 2), v = new DataView(b);
+    var put = function (o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    put(0, "RIFF"); v.setUint32(4, 36 + i16.length * 2, true); put(8, "WAVE");
+    put(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true);
+    v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    put(36, "data"); v.setUint32(40, i16.length * 2, true);
+    new Int16Array(b, 44).set(i16);
+    return new Blob([b], { type: "audio/wav" });
+  }
+
+  /* ---------- MP3 trong Worker, để giao diện không khựng ---------- */
+  var worker = null, jobId = 0, jobs = {};
+  function mp3Worker() {
+    if (worker !== null) return worker;
+    var code =
+      'importScripts(' + JSON.stringify(LAME) + ');' +
+      'self.onmessage=function(e){' +
+      ' var d=e.data,enc=new lamejs.Mp3Encoder(1,d.rate,d.kbps),p=[],B=1152;' +
+      ' for(var i=0;i<d.pcm.length;i+=B){' +
+      '  var c=enc.encodeBuffer(d.pcm.subarray(i,i+B));' +
+      '  if(c.length)p.push(new Int8Array(c));}' +
+      ' var f=enc.flush(); if(f.length)p.push(new Int8Array(f));' +
+      ' self.postMessage({id:d.id,parts:p});};';
+    try {
+      worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+      worker.onmessage = function (e) {
+        var j = jobs[e.data.id]; if (!j) return; delete jobs[e.data.id];
+        j.res(new Blob(e.data.parts, { type: "audio/mpeg" }));
+      };
+      worker.onerror = function () {                 // CDN chặn hoặc ngoại tuyến
+        Object.keys(jobs).forEach(function (k) { jobs[k].rej(new Error("lame")); delete jobs[k]; });
+        worker = false;
+      };
+    } catch (e) { worker = false; }
+    return worker;
+  }
+
+  function mp3(i16, rate) {
+    var wk = mp3Worker();
+    if (!wk) return Promise.reject(new Error("lame"));
+    return new Promise(function (res, rej) {
+      var id = ++jobId;
+      jobs[id] = { res: res, rej: rej };
+      setTimeout(function () { if (jobs[id]) { delete jobs[id]; rej(new Error("quá lâu")); } }, 90000);
+      wk.postMessage({ id: id, pcm: i16, rate: rate, kbps: KBPS }, [i16.buffer]);
+    });
+  }
+
+  var HSSAudio = {
+    bestRecordingType: bestRecordingType,
+
+    /** Trả về bản thu ở định dạng Gemini chắc chắn đọc được.
+     *  Không bao giờ ném lỗi: cùng lắm trả lại nguyên bản và ghi chú lý do. */
+    prepare: function (blob) {
+      var type = (blob.type || "").toLowerCase();
+      if (NATIVE.test(type)) {
+        var ext = /mpeg|mp3/.test(type) ? "mp3" : /mp4|aac|m4a/.test(type) ? "m4a"
+                : /ogg/.test(type) ? "ogg" : /flac/.test(type) ? "flac" : "wav";
+        return Promise.resolve({ blob: blob, mime: type.split(";")[0], ext: ext, note: "giữ nguyên" });
+      }
+      return blob.arrayBuffer().then(toMono16k).then(function (a) {
+        var i16 = toInt16(a.pcm);
+        return mp3(i16, a.rate).then(function (m) {
+          return { blob: m, mime: "audio/mpeg", ext: "mp3", seconds: a.seconds, note: "mp3 16 kHz mono" };
+        }).catch(function () {
+          return { blob: wav(toInt16(a.pcm), a.rate), mime: "audio/wav", ext: "wav",
+                   seconds: a.seconds, note: "wav 16 kHz mono (không nạp được bộ mã mp3)" };
+        });
+      }).catch(function (e) {
+        return { blob: blob, mime: (type || "audio/webm").split(";")[0], ext: "webm",
+                 note: "gửi nguyên bản — " + (e.message || e) };
+      });
+    },
+
+    /** Nạp trước bộ mã mp3 ngay khi mở trang, để lúc thu xong không phải chờ. */
+    warmUp: function () { try { mp3Worker(); } catch (e) {} }
+  };
+
+  w.HSSAudio = HSSAudio;
+})(window);
+
+/* ============================================================================
+ * Speaking Studio — gửi bản thu lên backend chấm AI dùng chung với Speaking Lab
+ * Huong Stella Learning Lab
+ *
+ * CÁCH DÙNG trong template.html / practice-template.html:
+ *   1. Dán cả file này vào một thẻ <script> trước đoạn mã phòng thu.
+ *   2. Đặt cấu hình (lấy endpoint từ config.json như hiện nay):
+ *        HSS.init({ endpoint: (window.__CFG||{}).submitUrl, unit: "S01" });
+ *   3. Ở chỗ bản thu vừa xong (hàm save / stopRec), gọi:
+ *        HSS.upload(blob, { code: "M01.P1.G1", part: 1,
+ *                           question: currentGroupName, seconds: secs,
+ *                           take: takeNo, final: isFinal });
+ *   4. Trước khi cho thu lần đầu:  await HSS.identify();
+ * ========================================================================== */
+(function (w) {
+  "use strict";
+
+  var CFG = { endpoint: "", unit: "", token: "hsp-speaking" };
+  var ME = null;                                   // {email, name, allowed}
+  var KEY = "hss.identity";
+
+  function post(body) {
+    // text/plain tránh preflight CORS với Apps Script
+    return fetch(CFG.endpoint, {
+      method: "POST", redirect: "follow",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json(); })
+      .catch(function () { return { ok: null }; });  // null = đã gửi, không đọc được trả lời
+  }
+
+  function get(params) {
+    var q = Object.keys(params).map(function (k) {
+      return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
+    }).join("&");
+    return fetch(CFG.endpoint + "?" + q, { redirect: "follow" })
+      .then(function (r) { return r.json(); })
+      .catch(function () { return { ok: false, error: "network" }; });
+  }
+
+  function b64(blob) {
+    return new Promise(function (res, rej) {
+      var fr = new FileReader();
+      fr.onload = function () { res(String(fr.result).split(",")[1]); };
+      fr.onerror = rej;
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  function saved() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; }
+  }
+  function remember(v) {
+    try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {}
+  }
+
+  /* hộp thoại nhập tên + email, chỉ hiện lần đầu trên mỗi máy */
+  function ask(prefill) {
+    return new Promise(function (res) {
+      var w1 = document.createElement("div");
+      w1.setAttribute("role", "dialog");
+      w1.setAttribute("aria-label", "Nhận diện học viên");
+      w1.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(42,30,10,.55);" +
+        "display:flex;align-items:center;justify-content:center;padding:20px";
+      w1.innerHTML =
+        '<form style="background:#fff;border-radius:14px;padding:24px;max-width:420px;width:100%;' +
+        'font-family:inherit;box-shadow:0 18px 50px rgba(0,0,0,.25)">' +
+        '<p style="font-size:11.5px;font-weight:600;letter-spacing:.2em;color:#B87200;margin:0 0 10px">' +
+        'HUONG STELLA PARADIGM</p>' +
+        '<h2 style="margin:0 0 6px;font-size:20px;color:#2A1E0A">Trước khi thu âm</h2>' +
+        '<p style="margin:0 0 16px;font-size:14px;color:#8D7B58;line-height:1.5">' +
+        'Nhập tên và email cô giáo đã đăng ký cho em. Bản thu sẽ được gửi về để chấm, ' +
+        'và kết quả quay lại đúng email này.</p>' +
+        '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">Họ và tên</label>' +
+        '<input name="n" required value="' + (prefill && prefill.name ? prefill.name : "") + '" ' +
+        'style="width:100%;padding:10px 12px;border:1px solid #EADFC5;border-radius:8px;font:inherit;margin-bottom:12px">' +
+        '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">Email</label>' +
+        '<input name="e" type="email" required value="' + (prefill && prefill.email ? prefill.email : "") + '" ' +
+        'style="width:100%;padding:10px 12px;border:1px solid #EADFC5;border-radius:8px;font:inherit;margin-bottom:6px">' +
+        '<p data-err style="color:#B4392A;font-size:13px;min-height:19px;margin:0 0 10px"></p>' +
+        '<button style="width:100%;padding:12px;border:0;border-radius:8px;background:#F2A81D;' +
+        'color:#2A1E0A;font:inherit;font-weight:700;cursor:pointer">Tiếp tục</button>' +
+        '</form>';
+      document.body.appendChild(w1);
+      var f = w1.querySelector("form"), err = w1.querySelector("[data-err]");
+      f.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var email = f.e.value.trim().toLowerCase(), name = f.n.value.trim();
+        err.textContent = "Đang kiểm tra…";
+        get({ action: "auth", token: CFG.token, unit: CFG.unit, email: email }).then(function (r) {
+          if (r && r.ok && r.allowed) {
+            var me = { email: email, name: r.name || name, allowed: true };
+            remember(me); w1.remove(); res(me);
+          } else {
+            err.textContent = r && r.ok
+              ? "Email này chưa được mở quyền cho phần " + CFG.unit + ". Nhắn cho cô giáo nhé."
+              : "Không kết nối được. Kiểm tra mạng rồi thử lại.";
+          }
+        });
+      });
+    });
+  }
+
+  var HSS = {
+    init: function (o) {
+      CFG.endpoint = o.endpoint || CFG.endpoint;
+      CFG.unit = o.unit || CFG.unit;
+      if (o.token) CFG.token = o.token;
+      ME = saved();
+      // bộ mã mp3 nạp lúc nhận diện, không nạp khi mở trang:
+      // trang nào học viên chỉ đọc thì không phải tải gì thêm
+      return HSS;
+    },
+
+    /** Định dạng nên truyền cho MediaRecorder: ogg trên Firefox, mp4 trên Safari,
+     *  webm trên Chrome (sẽ được chuyển sang mp3 lúc gửi). */
+    recordingType: function () { return w.HSSAudio ? w.HSSAudio.bestRecordingType() : ""; },
+
+    ready: function () { return !!(CFG.endpoint && CFG.unit); },
+    me: function () { return ME; },
+
+    /** Hỏi tên + email nếu chưa có, và xác thực với Roster. */
+    identify: function (force) {
+      if (!HSS.ready()) return Promise.resolve(null);
+      if (w.HSSAudio) w.HSSAudio.warmUp();
+      if (ME && ME.allowed && !force) return Promise.resolve(ME);
+      return ask(ME).then(function (m) { ME = m; return m; });
+    },
+
+    /** Gửi một bản thu lên Drive + ghi một dòng trong tab Speaking.
+     *  Bản thu được chuẩn hoá sang định dạng Gemini đọc được trước khi gửi
+     *  (xem studio-audio.js). Chrome: webm → mp3 16 kHz mono, nhỏ hơn ~5 lần. */
+    upload: function (blob, info) {
+      if (!HSS.ready()) return Promise.resolve({ ok: false, error: "chưa cấu hình" });
+      return HSS.identify().then(function (me) {
+        if (!me) return { ok: false, error: "chưa nhận diện" };
+        if (typeof info.onstage === "function") info.onstage("Đang chuẩn bị bản thu…");
+        var step = w.HSSAudio
+          ? w.HSSAudio.prepare(blob)
+          : Promise.resolve({ blob: blob, mime: (blob.type || "audio/webm").split(";")[0], ext: "webm", note: "" });
+        return step.then(function (a) {
+          if (typeof info.onstage === "function") info.onstage("Đang gửi về cho cô…");
+          return b64(a.blob).then(function (data) {
+            return post({
+              action: "audio", token: CFG.token, unit: CFG.unit,
+              email: me.email, name: me.name,
+              module: info.module || CFG.unit, code: info.code,
+              part: info.part, question: info.question || "",
+              take: info.take || 1, takes: info.takes || info.take || 1,
+              final: !!info.final, seconds: Math.round(info.seconds || a.seconds || 0),
+              recordedBeforeModels: info.recordedBeforeModels,
+              minutes: info.minutes || "",
+              mime: a.mime, ext: a.ext, audioNote: a.note || "",
+              bytes: a.blob.size || 0,
+              device: navigator.userAgent.slice(0, 120),
+              data: data
+            }).then(function (r) {
+              if (typeof info.onstage === "function") info.onstage(r && r.ok === false ? "Chưa gửi được" : "Đã gửi");
+              return r;
+            });
+          });
+        });
+      });
+    },
+
+    /** Đánh dấu bản thu mới nhất của một câu là bài nộp chính thức. */
+    markFinal: function (info) {
+      if (!ME) return Promise.resolve({ ok: false });
+      return post({
+        action: "final", token: CFG.token, unit: CFG.unit,
+        email: ME.email, name: ME.name, code: info.code,
+        finalTake: info.take || 1, minutes: info.minutes || "",
+        self: info.self || {}, overall: info.overall || "",
+        checks: info.checks || "", note: info.note || ""
+      });
+    },
+
+    /** Lấy phản hồi AI mà cô giáo đã duyệt, để hiện trong app. */
+    feedback: function () {
+      if (!ME) return Promise.resolve({ ok: false });
+      return get({ action: "feedback", token: CFG.token, unit: CFG.unit, email: ME.email });
+    },
+
+    /** Xoá danh tính trên máy này (dùng chung máy ở lớp). */
+    signOut: function () { try { localStorage.removeItem(KEY); } catch (e) {} ME = null; }
+  };
+
+  w.HSS = HSS;
+})(window);
+
+/* ===== hết phần gửi bài ===== */
+const D = {"name":"Part 1 — Practice","tagline":"The full Quarter 3 question bank, with the language to answer it","blurb":"Forty-four topic frames from the 2026 Quarter 3 forecast, the everyday vocabulary each one needs, the grammar that Part 1 answers actually run on, and three model answers to compare against — after you have recorded your own.","modelQ":"Are street markets common in your country?","modelType":"The <i>your country</i> type — hedged generalisation, split the population, place yourself.","vocab":[{"g":"Home, city and neighbourhood","items":[["a stone's throw from","phrase","/stəʊnz θrəʊ/","Very close by. Slightly informal, and much more vivid than <i>near</i>.","I'm lucky, really — the market is a stone's throw from my building, so I never plan my shopping."],["built up","adjective","/bɪlt ˈʌp/","Densely covered with buildings. Usually carries mild regret.","The whole area has got far more built up since I moved in — there was a field there five years ago."],["run-down","adjective","/rʌn ˈdaʊn/","In poor repair. Precise where <i>old</i> is vague.","It's a bit run-down, to be honest, but the rent is half what you'd pay two streets over."],["within walking distance","phrase","/ˈwɔːkɪŋ ˈdɪstəns/","Close enough to walk. The standard answer to any convenience question.","Almost everything I need is within walking distance, which is the main reason I've stayed."],["settle in","phrasal verb","/ˈsetl ɪn/","Become comfortable somewhere new. Takes time as an object.","It took me a good six months to settle in — I didn't know a single neighbour at first."],["put up with","phrasal verb","/pʊt ʌp wɪð/","Tolerate something unpleasant. Implies you had no choice.","The one thing I can't put up with is the construction noise; it starts at six every morning."]]},{"g":"Food, shopping and money","items":[["have a sweet tooth","idiom","/swiːt tuːθ/","Like sugary food. Almost always said about yourself, humorously.","I've got a terrible sweet tooth, so dessert is usually the part of the meal I'm there for."],["can't stand","phrase","/kɑːnt stænd/","Strongly dislike. Far more natural in speech than <i>I hate</i>.","I can't stand coriander — my whole family finds this hilarious because it's in everything here."],["a rip-off","noun","/ə ˈrɪp ɒf/","Something badly overpriced. Informal and a little indignant.","The coffee near my office is an absolute rip-off, so I make my own and feel smug about it."],["browse","verb","/braʊz/","Look without intending to buy.","Half the time I'm just browsing — I'll spend an hour in a bookshop and come out with nothing."],["worth every penny","idiom","/wɜːθ ˈevri ˈpeni/","Expensive but justified by use.","My headphones cost more than I'd like to admit, but they've been worth every penny."],["splash out on","phrasal verb","/splæʃ ˈaʊt/","Spend more than usual, willingly and occasionally.","Once or twice a year I'll splash out on a proper meal somewhere, and the rest of the time I cook."]]},{"g":"Media, devices and online","items":[["scroll through","phrasal verb","/skrəʊl θruː/","Move through content on a screen, usually without purpose.","I'll scroll through my phone for twenty minutes and genuinely not remember a single thing I saw."],["a time sink","noun","/taɪm sɪŋk/","Something that consumes far more time than it deserves.","Short videos are a complete time sink — you open one and lose an evening."],["keep up with","phrasal verb","/kiːp ˈʌp wɪð/","Stay informed about people or events.","I mostly use it to keep up with cousins abroad; otherwise we'd never speak at all."],["binge-watch","verb","/bɪndʒ wɒtʃ/","Watch many episodes in one sitting. Informal, recent.","I binge-watched an entire Korean series over one weekend and regretted it on Monday."],["glance at","verb","/ɡlɑːns æt/","Look at briefly. Precise where <i>check</i> is vague.","I only glance at the news in the morning — anything longer and I'd never leave the house."],["on the go","idiom","/ɒn ðə ˈɡəʊ/","While travelling or busy.","I do almost all my listening on the go, usually on the bus, rarely sitting down."]]},{"g":"Routines, sleep and feelings","items":[["a creature of habit","idiom","/ˈkriːtʃər əv ˈhæbɪt/","Someone who likes the same routine. Ideal for morning-routine questions.","I'm a complete creature of habit — same breakfast, same route, same seat on the bus."],["drag myself out of bed","phrase","/dræɡ maɪˈself/","Get up with great difficulty.","On winter mornings I have to drag myself out of bed, and the first hour is a write-off."],["run on empty","idiom","/rʌn ɒn ˈempti/","Keep going while exhausted.","By Friday afternoon I'm running on empty and I've stopped being useful to anyone."],["nod off","phrasal verb","/nɒd ˈɒf/","Fall asleep accidentally.","I nodded off on the bus last week and went four stops past my own."],["unwind","verb","/ʌnˈwaɪnd/","Relax after effort. More sophisticated than <i>relax</i>.","I need about half an hour to unwind before I can concentrate on anything in the evening."],["shattered","adjective","/ˈʃætəd/","Extremely tired. British, informal, stronger than <i>tired</i>.","I was absolutely shattered after the trip and slept eleven hours without moving."]]},{"g":"People, manners and company","items":[["get on well with","phrasal verb","/ɡet ɒn ˈwel/","Have a good relationship with someone.","I get on well with most of my neighbours, though I couldn't tell you half their names."],["easy-going","adjective","/ˈiːzi ˈɡəʊɪŋ/","Relaxed and tolerant. Warm, informal.","She's incredibly easy-going, which is probably why people tell her things they shouldn't."],["bring somebody up","phrasal verb","/brɪŋ ʌp/","Raise a child. Usually in the passive when about yourself.","I was brought up to greet people properly, and I still feel guilty if I forget."],["make small talk","collocation","/smɔːl tɔːk/","Chat about unimportant things. Central to politeness topics.","I'm hopeless at making small talk with strangers — I run out of things to say in about forty seconds."],["have a laugh","phrase","/hæv ə lɑːf/","Enjoy yourself with others. British and informal.","We don't do anything special, we just have a laugh and complain about work."],["look up to","phrasal verb","/lʊk ʌp tə/","Admire and respect, usually someone older.","I've always looked up to my aunt — she went back to university at forty-five."]]},{"g":"Study, work and memory","items":[["keep my brain ticking over","idiom","/ˈtɪkɪŋ ˈəʊvə/","Stay mentally active. Gently self-deprecating.","I do a crossword most evenings, mainly to keep my brain ticking over."],["it slipped my mind","idiom","/slɪpt maɪ ˈmaɪnd/","I forgot. Softer and more natural than <i>I forgot</i>.","I was supposed to call her back and it completely slipped my mind until the next day."],["a memory like a sieve","idiom","/sɪv/","Forget things constantly. Said about yourself, humorously.","I've got a memory like a sieve for names — faces I never forget, names I lose instantly."],["get to grips with","phrasal verb","/ɡet tə ˈɡrɪps/","Begin to understand something difficult.","It took me most of a term to get to grips with statistics, and I'm still not confident."],["hands-on","adjective","/hændz ˈɒn/","Practical rather than theoretical.","I learn best in a hands-on way — reading about something never sticks for me."],["fall behind","phrasal verb","/fɔːl bɪˈhaɪnd/","Fail to keep pace with others.","I fell behind badly in my first year and spent the summer catching up."]]}],"grammar":{"intro":"Part 1 answers are short, so the grammar is visible. These five structures cover almost every question type in the forecast, and the six error patterns below are the ones that recur most in Vietnamese learners' speech — each one costs marks under Grammatical Range and Accuracy even when the meaning is perfectly clear.","structures":[{"n":"Present simple with adverbs of frequency","use":"Habit questions: <i>How often…?</i> <i>Do you often…?</i>","form":"Subject + <b>adverb</b> + verb  ·  but Subject + <b>be</b> + adverb","ex":"I <b>hardly ever</b> go. / I'm <b>hardly ever</b> at home before eight.","note":"Frequency adverbs go before the main verb but after <i>be</i>. Getting this wrong is the single most audible Part 1 grammar slip."},{"n":"<i>used to</i> and <i>would</i> for past habit","use":"Childhood questions.","form":"used to + bare infinitive  ·  would + bare infinitive (repeated actions only)","ex":"I <b>used to</b> live nearer the park, and we <b>would</b> walk there every Sunday.","note":"<i>Used to</i> works for states and actions; <i>would</i> only for repeated actions. <i>I would live there</i> is wrong for a past state."},{"n":"Second conditional","use":"Hypothetical questions: <i>Would you like to…?</i> <i>Would you ever…?</i>","form":"If + past simple, would + bare infinitive","ex":"<b>If it were</b> a shorter trip, I <b>might</b> reconsider.","note":"Free marks. The question hands you the modal; matching it is the easiest range you will earn all test."},{"n":"Comparatives with qualifiers","use":"Preference and comparison questions.","form":"far / a good deal / nothing like as … as","ex":"It's <b>nothing like as crowded as</b> it used to be. / Online is <b>far</b> quicker.","note":"A bare comparative is Band 6. A qualified comparative is Band 7 and takes one extra word."},{"n":"Present perfect for unfinished time","use":"<i>How long have you…?</i> and any change-over-time question.","form":"have/has + past participle, often with for / since / lately","ex":"The area <b>has got</b> much busier <b>over the last few years</b>.","note":"Vietnamese has no direct equivalent, so this is systematically under-used. Deploying it once per Part 1 is worth doing deliberately."}],"errors":[{"n":"Articles with general nouns","bad":"I like <s>the</s> street markets because they sell <s>a</s> fresh food.","good":"I like street markets because they sell fresh food.","why":"Plural and uncountable nouns used in a general sense take no article. This is the highest-frequency error in the whole test and examiners register it as a persistent basic error, which caps Grammatical Range at Band 7."},{"n":"Uncountable nouns given a plural","bad":"He gave me many useful <s>advices</s> and <s>informations</s>.","good":"He gave me a lot of useful advice and information.","why":"<i>Advice, information, furniture, equipment, homework, news, research</i> are uncountable in English. Add <i>a piece of</i> if you need to count them."},{"n":"Third-person -s under pressure","bad":"My brother <s>go</s> to the gym every day and he never <s>miss</s> a session.","good":"My brother goes to the gym every day and he never misses a session.","why":"Almost every candidate knows this rule and a great many drop it while speaking. It is not a knowledge gap; it is an automaticity gap, and only speaking practice closes it."},{"n":"Adverb placement with <i>very</i> and <i>much</i>","bad":"I <s>very like</s> it. / I like it <s>very</s>.","good":"I like it very much. / I really like it.","why":"<i>Very</i> modifies adjectives and adverbs, not verbs. With a verb, use <i>very much</i> after the object, or <i>really</i> before the verb."},{"n":"Prepositions after common verbs","bad":"It <s>depends of</s> the weather. / I'm <s>interested about</s> history. / We <s>discussed about</s> it.","good":"It depends on the weather. / I'm interested in history. / We discussed it.","why":"These three are the most frequent preposition errors in Vietnamese learners' English. <i>Discuss</i> takes no preposition at all."},{"n":"<i>Although</i> together with <i>but</i>","bad":"<s>Although</s> I live near the park, <s>but</s> I hardly ever go.","good":"Although I live near the park, I hardly ever go.","why":"English uses one conjunction per relationship. The doubling comes directly from Vietnamese sentence structure and is instantly recognisable to an examiner."}]},"models":[{"band":"6","html":"<p><mark class=\"fc\">Yes, street markets are very common in my country.</mark> <mark class=\"gr\">In Vietnam, almost every area has a market</mark> and <mark class=\"lr\">people go there every morning to buy food.</mark> <mark class=\"lr\">It is cheaper than supermarket</mark> <mark class=\"fc\">and also</mark> the vegetables are more fresh. <mark class=\"gr\">My mother always goes to the market near my house.</mark></p>","len":"about 22 seconds","notes":{"fc":"The answer is clear and on topic, with simple connectives (<i>and</i>, <i>also</i>). There is no hesitation, but there is also no shaping — the ideas arrive in the order they occurred.","lr":"Entirely high-frequency: <i>very common, cheaper, fresh</i>. Meaning is never in doubt, which is exactly what Band 6 describes: enough resource to discuss the topic, with limited flexibility.","gr":"Two errors visible. <i>Than supermarket</i> is missing an article; <i>more fresh</i> should be <i>fresher</i>. Neither obscures meaning, which is the Band 6 condition, but both are basic and both recur.","pr":"Intelligible, with content-word stress present but not sustained. Rhythm is even across the whole answer."}},{"band":"7","html":"<p><mark class=\"fc\">Very much so, though it rather depends where you are.</mark> <mark class=\"lr\">In smaller towns they're still where most people do their food shopping</mark> — <mark class=\"gr\">my grandmother has been going to the same one for about thirty years.</mark> <mark class=\"fc\">In the cities, though,</mark> <mark class=\"lr\">the younger crowd has drifted towards supermarkets</mark>, <mark class=\"gr\">mainly because you can get everything under one roof and nobody expects you to haggle.</mark> <mark class=\"pr\">I'm somewhere in between, honestly</mark> — <mark class=\"lr\">market for vegetables, supermarket for everything else.</mark></p>","len":"about 32 seconds","notes":{"fc":"The answer has a visible shape: hedged generalisation, then a split by place, then the speaker's own position. Markers vary in function (<i>though</i>, <i>mainly because</i>, <i>honestly</i>) rather than repeating, which is the Band 7 requirement.","lr":"<i>Drifted towards, the younger crowd, under one roof, haggle</i>. Less common items appear naturally and the register stays conversational. There is an awareness of style that Band 6 lacks.","gr":"Present perfect continuous (<i>has been going</i>), present perfect (<i>has drifted</i>), a causal subordinate clause and an elliptical final clause. Error-free throughout, though the range is not yet fully free.","pr":"Contrastive stress on <i>smaller towns</i> against <i>the cities</i> makes the structure audible before the words do. The final clause drops into a lower, faster register, which is a genuine phonological choice."}},{"band":"8+","html":"<p><mark class=\"fc\">Still very common, though I'd say they're quietly changing function.</mark> <mark class=\"lr\">Twenty years ago a street market was simply where food came from;</mark> <mark class=\"gr\">now, in Hanoi at least, it's increasingly something you go to <i>instead of</i> a supermarket for reasons that aren't really about price.</mark> <mark class=\"pr\">Freshness, partly. Knowing the person who sold you the fish, mostly.</mark></p><p><mark class=\"lr\">My grandmother has bought from the same stall since before I was born</mark> <mark class=\"gr\">and would sooner go hungry than buy fish from a chiller cabinet</mark> — <mark class=\"fc\">which tells you it was never a transaction to begin with.</mark> <mark class=\"lr\">So yes, common — but I suspect what's keeping them alive now isn't economics.</mark></p>","len":"about 40 seconds","notes":{"fc":"The answer reframes the question — from <i>are they common</i> to <i>why are they still common</i> — and resolves on that reframing. The two paragraphs are structurally distinct and the closing clause answers the original question and the reframed one simultaneously. No hesitation to find language.","lr":"<i>Quietly changing function, chiller cabinet, a transaction to begin with, keeping them alive</i>. Idiomatic, precise, and capable of understatement. The two-word sentences carry as much lexical weight as the long ones.","gr":"<i>Would sooner … than</i>, a non-defining relative clause commenting on the whole preceding clause, <i>since</i> with present perfect, and a fronted concessive. Structures change with rhetorical purpose and the majority are error-free.","pr":"<i>Freshness, partly. Knowing the person who sold you the fish, mostly.</i> — two fragments delivered at different speeds, with the second slower. The falling contour on <i>mostly</i> does the argumentative work. This is stress and intonation conveying precise meaning, which is the Band 8 descriptor verbatim."}}],"diffs":[["Length","22 seconds — under-developed for Part 1","32 seconds — the target range","40 seconds — long for Part 1, justified by content"],["Structure","Statement plus supporting facts","Generalisation → split → personal position","Reframe → historical contrast → evidence → verdict on the reframing"],["Hedging","None — speaks for the whole country","<i>though it rather depends</i>, <i>in smaller towns</i>","<i>I'd say</i>, <i>in Hanoi at least</i>, <i>I suspect</i>"],["Lexical reach","<i>very common, cheaper, fresh</i>","<i>drifted towards, under one roof, haggle</i>","<i>quietly changing function, chiller cabinet</i>"],["Grammar","Present simple; two basic errors","Perfect aspect, causal clause, ellipsis","<i>would sooner … than</i>, sentential relative, fronting"],["Pronunciation","Even rhythm throughout","Contrastive stress marks the structure","Fragments at varied pace; intonation carries irony"]],"part":"p1","bank":[{"mod":"01 Technology & Media","groups":[{"g":"Computers and tablets","items":["In what conditions would you use a computer?","When was the first time you used a computer?","In what conditions would it be difficult for you to use a computer?"]},{"g":"Websites","items":["What kinds of websites do you usually use?","What has changed compared to the past?"]},{"g":"Social media","items":["Do you like to use social media?","Do you think you or your friends use too much social media?","Do you want to work in social media? Why?","What is the most popular social media platform in Vietnam? Why?"]},{"g":"Headphones","items":["Is wearing headphones comfortable?","Do you use headphones?","What type of headphones do you use?","When would you use headphones?","In what conditions would you not use headphones?"]},{"g":"Films","items":["What is your favourite kind of movie?","Did you go to the cinema a lot when you were a child?","Which is more popular in your country, going to the cinema or watching movies at home?"]},{"g":"Paper and writing letters","items":["Do you often write things?","Do you prefer to write by hand or on a computer?","Do you think computers might one day replace handwriting?","When do children begin to write in your country?"]}],"items":[{"g":"Computers and tablets","items":["In what conditions would you use a computer?","When was the first time you used a computer?","In what conditions would it be difficult for you to use a computer?"]},{"g":"Websites","items":["What kinds of websites do you usually use?","What has changed compared to the past?"]},{"g":"Social media","items":["Do you like to use social media?","Do you think you or your friends use too much social media?","Do you want to work in social media? Why?","What is the most popular social media platform in Vietnam? Why?"]},{"g":"Headphones","items":["Is wearing headphones comfortable?","Do you use headphones?","What type of headphones do you use?","When would you use headphones?","In what conditions would you not use headphones?"]},{"g":"Films","items":["What is your favourite kind of movie?","Did you go to the cinema a lot when you were a child?","Which is more popular in your country, going to the cinema or watching movies at home?"]},{"g":"Paper and writing letters","items":["Do you often write things?","Do you prefer to write by hand or on a computer?","Do you think computers might one day replace handwriting?","When do children begin to write in your country?"]}]},{"mod":"02 Decision-Making & Change","groups":[{"g":"Study and subject choice","items":["Describe your education.","What is your area of specialisation?","Why did you choose to study that major?","What was your favourite subject as a child?","Have you always wanted to study this subject?"]},{"g":"Keeping things tidy","items":["Are you a tidy person?","Are all of your family members tidy?","Are you tidier at home or at school or work?"]},{"g":"Morning routine","items":["Do you like to get up early in the morning?","What is your morning routine?","Is breakfast important?"]}],"items":[{"g":"Study and subject choice","items":["Describe your education.","What is your area of specialisation?","Why did you choose to study that major?","What was your favourite subject as a child?","Have you always wanted to study this subject?"]},{"g":"Keeping things tidy","items":["Are you a tidy person?","Are all of your family members tidy?","Are you tidier at home or at school or work?"]},{"g":"Morning routine","items":["Do you like to get up early in the morning?","What is your morning routine?","Is breakfast important?"]}]},{"mod":"03 Work & Career","groups":[{"g":"Work","items":["What kind of work do you do?","What do you find most interesting about your work?","Which is more important to you — the people you work with or the work you do?","Do you work best in the morning or the afternoon?"]},{"g":"Study","items":["What do you study?","What do you find most interesting about your studies?","Which is more important to you — the teachers or the other students?","How much time do you spend studying every week?","Are you looking forward to working?"]},{"g":"Secondary school","items":["Where did you go to school?","Do you think your school is good for every student?","What changes do you want to make in your school?"]}],"items":[{"g":"Work","items":["What kind of work do you do?","What do you find most interesting about your work?","Which is more important to you — the people you work with or the work you do?","Do you work best in the morning or the afternoon?"]},{"g":"Study","items":["What do you study?","What do you find most interesting about your studies?","Which is more important to you — the teachers or the other students?","How much time do you spend studying every week?","Are you looking forward to working?"]},{"g":"Secondary school","items":["Where did you go to school?","Do you think your school is good for every student?","What changes do you want to make in your school?"]}]},{"mod":"04 Education & Learning","groups":[{"g":"Teachers","items":["Do you like any teacher of yours?","Do you still keep in touch with your teachers?","Do you think it is important to like your teacher?","Do you want to be a teacher?","What qualities should a good teacher have?"]},{"g":"Science","items":["Do you like science?","What science have you studied?","How do you study science?","What is the most difficult part of studying science?","How has the science you have studied helped you?"]},{"g":"History","items":["Do you like learning history?","What historical event do you find most interesting?","Do you think history is important?","Do you like to watch programmes about history?","Is the internet a good place to learn about history?"]},{"g":"Remembering names","items":["Is it easy for you to remember names?","Will you forget other people's names if they forget yours?","How can you strengthen your memory?"]}],"items":[{"g":"Teachers","items":["Do you like any teacher of yours?","Do you still keep in touch with your teachers?","Do you think it is important to like your teacher?","Do you want to be a teacher?","What qualities should a good teacher have?"]},{"g":"Science","items":["Do you like science?","What science have you studied?","How do you study science?","What is the most difficult part of studying science?","How has the science you have studied helped you?"]},{"g":"History","items":["Do you like learning history?","What historical event do you find most interesting?","Do you think history is important?","Do you like to watch programmes about history?","Is the internet a good place to learn about history?"]},{"g":"Remembering names","items":["Is it easy for you to remember names?","Will you forget other people's names if they forget yours?","How can you strengthen your memory?"]}]},{"mod":"05 Places, Cities & Housing","groups":[{"g":"Where you live now","items":["Which town or city do you live in now?","Are there any things you don't like about your area?","Do you think you will continue to live there for a long time?","What are some recent changes in the area?","What things make your home pleasant to live in?"]},{"g":"Hometown","items":["Do you like living there?","Please describe your hometown a little.","What is your hometown famous for?","Are there many young people in your hometown?","Is your hometown a good place for young people to pursue careers?"]},{"g":"Home and accommodation","items":["What kind of accommodation do you live in?","Who do you live with?","What is the difference between where you live now and where you lived before?","Which room does your family spend most time in?","Do you prefer living in a house or a flat?"]},{"g":"City","items":["Would you recommend your city to others?","What is the weather like where you live?","Is the city friendly to children and old people?","Are there big changes in this city?"]},{"g":"Old buildings","items":["Have you ever seen old buildings in the city?","Do you think we should keep old buildings in cities?","Do you prefer living in an old building or a modern house?"]},{"g":"Parks","items":["Did you like going to parks as a child?","Would you like to see more parks in your city?","How are parks today different from those you visited as a child?","What do you like to do when visiting a park?"]},{"g":"Travelling","items":["Do you like to travel?","Do you often travel by air?","How long was the longest trip you took?","Which country would you like to travel to in the future?"]}],"items":[{"g":"Where you live now","items":["Which town or city do you live in now?","Are there any things you don't like about your area?","Do you think you will continue to live there for a long time?","What are some recent changes in the area?","What things make your home pleasant to live in?"]},{"g":"Hometown","items":["Do you like living there?","Please describe your hometown a little.","What is your hometown famous for?","Are there many young people in your hometown?","Is your hometown a good place for young people to pursue careers?"]},{"g":"Home and accommodation","items":["What kind of accommodation do you live in?","Who do you live with?","What is the difference between where you live now and where you lived before?","Which room does your family spend most time in?","Do you prefer living in a house or a flat?"]},{"g":"City","items":["Would you recommend your city to others?","What is the weather like where you live?","Is the city friendly to children and old people?","Are there big changes in this city?"]},{"g":"Old buildings","items":["Have you ever seen old buildings in the city?","Do you think we should keep old buildings in cities?","Do you prefer living in an old building or a modern house?"]},{"g":"Parks","items":["Did you like going to parks as a child?","Would you like to see more parks in your city?","How are parks today different from those you visited as a child?","What do you like to do when visiting a park?"]},{"g":"Travelling","items":["Do you like to travel?","Do you often travel by air?","How long was the longest trip you took?","Which country would you like to travel to in the future?"]}]},{"mod":"06 Environment & Nature","groups":[{"g":"Rubbish and recycling","items":["Do you recycle now? Why?","Did you recycle when you were a child?","Will you recycle in the future?","What kinds of things do you recycle?"]},{"g":"Parks and gardens","items":["Do you still like going to parks now?","Would you prefer to play in a private garden or a public garden?","Are there any parks you want to go to in the future?"]},{"g":"Outer space","items":["Have you ever learnt about outer space and the stars?","Would you like to travel to space?"]}],"items":[{"g":"Rubbish and recycling","items":["Do you recycle now? Why?","Did you recycle when you were a child?","Will you recycle in the future?","What kinds of things do you recycle?"]},{"g":"Parks and gardens","items":["Do you still like going to parks now?","Would you prefer to play in a private garden or a public garden?","Are there any parks you want to go to in the future?"]},{"g":"Outer space","items":["Have you ever learnt about outer space and the stars?","Would you like to travel to space?"]}]},{"mod":"07 Food, Shopping & Money","groups":[{"g":"Food","items":["What kinds of meals do you like?","Do you often have dinner with your family or friends?","When do you usually eat dinner?","Are there any fruits or vegetables you don't like? Why?","What is your favourite cuisine?"]},{"g":"Shopping","items":["Do you like going shopping?","Do you shop online?","Does shopping take you a lot of time?","What is the best part about shopping?"]},{"g":"Street markets","items":["Are street markets common in your country?","What is usually sold there?","Do you think people like street markets? Why?"]},{"g":"Advertisements","items":["Are there many advertisements in your country?","Why do you think there are so many advertisements now?","Where do we see advertisements?","How do you feel about advertisements?"]},{"g":"Clothes and shoes","items":["What is your favourite colour of clothes?","What kind of clothes do you never wear?","Do you wear the same style on weekdays and weekends?","What is your favourite type of shoes?","Have you ever bought shoes online?"]},{"g":"Cars and driving","items":["Will you buy an expensive car in the future?","Do you think car colours are important?","Do you prefer to be the driver or the passenger?","What do you usually do when there is a traffic jam?"]}],"items":[{"g":"Food","items":["What kinds of meals do you like?","Do you often have dinner with your family or friends?","When do you usually eat dinner?","Are there any fruits or vegetables you don't like? Why?","What is your favourite cuisine?"]},{"g":"Shopping","items":["Do you like going shopping?","Do you shop online?","Does shopping take you a lot of time?","What is the best part about shopping?"]},{"g":"Street markets","items":["Are street markets common in your country?","What is usually sold there?","Do you think people like street markets? Why?"]},{"g":"Advertisements","items":["Are there many advertisements in your country?","Why do you think there are so many advertisements now?","Where do we see advertisements?","How do you feel about advertisements?"]},{"g":"Clothes and shoes","items":["What is your favourite colour of clothes?","What kind of clothes do you never wear?","Do you wear the same style on weekdays and weekends?","What is your favourite type of shoes?","Have you ever bought shoes online?"]},{"g":"Cars and driving","items":["Will you buy an expensive car in the future?","Do you think car colours are important?","Do you prefer to be the driver or the passenger?","What do you usually do when there is a traffic jam?"]}]},{"mod":"08 People & Relationships","groups":[{"g":"Being polite","items":["How did you learn to be polite as a child?","Do you think being polite is very important?","Who taught you to be polite when you were young?"]},{"g":"Neighbours","items":["Do you know your neighbours?","What do you think of your neighbours?","How do you get along with your neighbours?","Do you often see your neighbours?"]},{"g":"Comedy and jokes","items":["Do you like watching movies that make you laugh?","Do you find it easy to make others laugh?","Do you think it is a good thing if you always make others laugh?"]},{"g":"Teachers","items":["Do you have a favourite teacher?","Do you still keep in touch with your teachers?","What qualities should a good teacher have?"]}],"items":[{"g":"Being polite","items":["How did you learn to be polite as a child?","Do you think being polite is very important?","Who taught you to be polite when you were young?"]},{"g":"Neighbours","items":["Do you know your neighbours?","What do you think of your neighbours?","How do you get along with your neighbours?","Do you often see your neighbours?"]},{"g":"Comedy and jokes","items":["Do you like watching movies that make you laugh?","Do you find it easy to make others laugh?","Do you think it is a good thing if you always make others laugh?"]},{"g":"Teachers","items":["Do you have a favourite teacher?","Do you still keep in touch with your teachers?","What qualities should a good teacher have?"]}]},{"mod":"09 Experiences & Emotions","groups":[{"g":"Dreams","items":["How long can you remember your dream after you wake up?","Do you like hearing about other people's dreams?","Do you think dreams affect life?","Have you had a bad dream before?","What do you usually dream about?"]},{"g":"Tiredness","items":["Do you often feel tired?","When would you feel tired?","What do you do when you feel tired?","Do you think you get enough rest?"]},{"g":"Music and singing","items":["When do you listen to music?","Did you learn any instruments?","How do you feel when you are listening to music?","Do you often sing?","Is it difficult to sing well?"]},{"g":"Sports","items":["Did you do any sport when you were younger?","Have you ever supported a sports team?","Do you enjoy watching sports?","Is there too much sport on television in your country?"]},{"g":"Evening and routine","items":["What do you usually do in the evening?","What did you do in the evening when you were little?","Are there differences between your evenings now and in the past?"]},{"g":"Everyday habits","items":["Do you collect things?","Are there any things you keep from childhood?","Have you ever lost your keys?","Do you like looking at yourself in the mirror?","Do you like art?","Have you ever visited an art gallery?"]}],"items":[{"g":"Dreams","items":["How long can you remember your dream after you wake up?","Do you like hearing about other people's dreams?","Do you think dreams affect life?","Have you had a bad dream before?","What do you usually dream about?"]},{"g":"Tiredness","items":["Do you often feel tired?","When would you feel tired?","What do you do when you feel tired?","Do you think you get enough rest?"]},{"g":"Music and singing","items":["When do you listen to music?","Did you learn any instruments?","How do you feel when you are listening to music?","Do you often sing?","Is it difficult to sing well?"]},{"g":"Sports","items":["Did you do any sport when you were younger?","Have you ever supported a sports team?","Do you enjoy watching sports?","Is there too much sport on television in your country?"]},{"g":"Evening and routine","items":["What do you usually do in the evening?","What did you do in the evening when you were little?","Are there differences between your evenings now and in the past?"]},{"g":"Everyday habits","items":["Do you collect things?","Are there any things you keep from childhood?","Have you ever lost your keys?","Do you like looking at yourself in the mirror?","Do you like art?","Have you ever visited an art gallery?"]}]},{"mod":"10 Culture & Tradition","groups":[{"g":"Traditional music and art","items":["What do you think of Vietnamese traditional music?","Do you think it is necessary for children to have music classes?","Do you like art?","Is there any artwork on the wall in your room?"]},{"g":"Food culture","items":["What is your favourite cuisine?","What kinds of meals do you like?","Do you often have dinner with your family?"]},{"g":"History and heritage","items":["Do you like learning history?","Do you think we should keep old buildings in cities?","Did you learn about the history of your hometown at school?"]}],"items":[{"g":"Traditional music and art","items":["What do you think of Vietnamese traditional music?","Do you think it is necessary for children to have music classes?","Do you like art?","Is there any artwork on the wall in your room?"]},{"g":"Food culture","items":["What is your favourite cuisine?","What kinds of meals do you like?","Do you often have dinner with your family?"]},{"g":"History and heritage","items":["Do you like learning history?","Do you think we should keep old buildings in cities?","Did you learn about the history of your hometown at school?"]}]}]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const PER={p1:35,p2:120,p3:45}[D.part];
+const CTAG={fc:["FLUENCY","--fc"],lr:["LEXIS","--lr"],gr:["GRAMMAR","--gr"],pr:["PRONUN.","--pr"]};
+const S={voiceName:null, tab:"bank",set:0,queue:[],qi:0,setLabel:"",started:false,revealed:false,takes:[],attempts:0,totalMs:0,lastMs:0,
+ recordedBeforeModels:null,modelsOpened:false,
+ recorder:null,chunks:[],stream:null,t0:0,timerId:null,prepId:null,
+ sid:"HSP-"+D.part.toUpperCase()+"-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase()};
+
+const TABS=[["bank","Question bank"],["vocab","Vocabulary"],["gram","Grammar"],["drill","Drill bay"],["models","Band models"],["log","Practice log"]];
+function tabs(){$("#tabs").innerHTML=TABS.map(([k,l],i)=>`<button role="tab" data-t="${k}" aria-selected="${k===S.tab}"><span class="n">${i+1}</span>${l}</button>`).join("");
+ $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tab=b.dataset.t;tabs();
+  if(S.tab==="models")renderModels(); if(S.tab==="log")renderLog()};
+ TABS.forEach(([k])=>$("#p-"+k).classList.toggle("on",k===S.tab))}
+
+/* question bank */
+(function(){
+ const B=D.bank;
+ $("#bankSub").textContent=D.part==="p2"
+  ? `${B.reduce((a,s)=>a+s.items.length,0)} cue cards from the Quarter 3 2026 forecast, grouped by topic module.`
+  : `${B.reduce((a,s)=>a+s.items.length,0)} questions from the Quarter 3 2026 forecast, grouped by topic module.`;
+ $("#bankBody").innerHTML=B.map(s=>`<div class="card"><p class="clbl">MODULE ${esc(s.mod)}</p>
+  ${s.groups.map(g=>D.part==="p2"
+   ? `<div class="cue"><b>${esc(g.t)}</b><ul>${g.b.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`
+   : `<div class="qgrp"><h3>${esc(g.g)}</h3><ol class="q">${g.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`).join("")}
+  </div>`).join("");
+})();
+
+/* vocabulary */
+$("#vocabBody").innerHTML=D.vocab.map(s=>`<div class="lset"><h3>${esc(s.g)}</h3><div class="card" style="padding:4px 14px">
+ <table><thead><tr><th style="width:23%">Item</th><th style="width:13%">Class</th><th style="width:30%">Register &amp; usage</th><th>In a natural sentence</th></tr></thead>
+ <tbody>${s.items.map(i=>`<tr><td class="itm" data-l="ITEM">${esc(i[0])}<br><span class="ipa">${esc(i[2])}</span></td>
+ <td class="wc" data-l="CLASS">${esc(i[1])}</td><td data-l="REGISTER &amp; USAGE">${i[3]}</td>
+ <td class="eg" data-l="IN A NATURAL SENTENCE">${esc(i[4])}</td></tr>`).join("")}</tbody></table></div></div>`).join("");
+
+/* grammar */
+$("#gramIntro").innerHTML=D.grammar.intro;
+$("#structBody").innerHTML=D.grammar.structures.map(s=>`<div class="gs">
+ <h3>${s.n}</h3><p class="use">${s.use}</p>
+ <div class="form">${s.form}</div>
+ <p class="ex">${s.ex}</p><p class="nt"><b>Note.</b> ${s.note}</p></div>`).join("");
+$("#errBody").innerHTML=D.grammar.errors.map(e=>`<div class="er">
+ <h3>${e.n}</h3><div class="bad">${e.bad}</div><div class="good">${e.good}</div>
+ <p class="why">${e.why}</p></div>`).join("");
+
+/* drill bay */
+const FLAT=[];
+D.bank.forEach(s=>{const no=String(s.mod).slice(0,2);
+ s.groups.forEach((g,gi)=>{
+  const code="M"+no+"."+(D.part==="p1"?"P1.G":D.part==="p2"?"P2.C":"P3.G")+(gi+1);
+  if(D.part==="p2") FLAT.push({label:g.t,mod:s.mod,code:code,items:[{text:g.t,bullets:g.b}]});
+  else FLAT.push({label:g.g,mod:s.mod,code:code,items:g.items.map(t=>({text:t,bullets:null}))});
+});});
+$("#setSel").innerHTML=FLAT.map((f,i)=>`<option value="${i}">${esc(f.mod)} — ${esc(f.label)}${f.items.length>1?" ("+f.items.length+")":""}</option>`).join("");
+function loadSet(){const f=FLAT[S.set];S.queue=f.items;S.setLabel=f.label;S.qi=0;
+ S.started=false;S.revealed=false;
+ $("#btnPrep").hidden=D.part!=="p2";$("#clock").textContent="00:00";$("#clock").className="clock";paintQ()}
+function paintQ(){const it=S.queue[S.qi];if(!it)return;
+ const q=$("#qNow"),ul=$("#qBul");
+ /* Part 2: the candidate holds the cue card in the real test, so it is always visible. */
+ if(D.part==="p2"){
+  S.started=true;S.revealed=true;
+  $("#counter").textContent="CUE CARD · 1 MINUTE TO PREPARE · 1 TO 2 MINUTES TO SPEAK";
+  q.className="qtext";q.textContent=it.text;
+  ul.hidden=false;ul.innerHTML=(it.bullets||[]).map(b=>`<li>${esc(b)}</li>`).join("");
+  $("#listenNote").hidden=true;
+  $("#btnStart").hidden=true;$("#btnShow").hidden=true;$("#btnNext").hidden=true;
+  $("#btnAsk").hidden=false;$("#btnAsk").textContent="Read the task aloud";
+  $("#target").textContent="Target: 1 minute 30 to 2 minutes. Stopping before 1:30 caps Fluency and Coherence.";
+  return;
+ }
+ $("#btnAsk").textContent="Repeat question";
+ $("#counter").textContent=S.started
+  ? `${S.setLabel.toUpperCase()} · QUESTION ${S.qi+1} OF ${S.queue.length}`
+  : `${S.setLabel.toUpperCase()} · ${S.queue.length} QUESTION${S.queue.length>1?"S":""} · NOT STARTED`;
+ if(!S.started){
+  q.className="qtext veiled";
+  q.textContent="Question hidden. Press Start and the examiner will read it to you — exactly as in the test, where nothing is written down.";
+  ul.hidden=true;$("#listenNote").hidden=true;
+  $("#btnStart").hidden=false;$("#btnAsk").hidden=true;$("#btnShow").hidden=true;$("#btnNext").hidden=true;
+ } else {
+  $("#btnStart").hidden=true;$("#btnAsk").hidden=false;$("#btnShow").hidden=false;$("#btnNext").hidden=false;
+  $("#listenNote").hidden=S.revealed;
+  $("#btnShow").textContent=S.revealed?"Hide":"Show";
+  if(S.revealed){
+   q.className="qtext";q.textContent=it.text;
+   if(it.bullets){ul.hidden=false;ul.innerHTML=it.bullets.map(b=>`<li>${esc(b)}</li>`).join("")}else{ul.hidden=true}
+  } else {
+   q.className="qtext veiled";
+   q.textContent=`Question ${S.qi+1} of ${S.queue.length} — listening only.`;
+   ul.hidden=true;
+  }
+ }
+ $("#target").textContent=`Target: about ${fmt(S.queue.length*PER*1000)} in total · ${PER}s per question`;
+ $("#btnNext").disabled=S.qi>=S.queue.length-1}
+$("#drillSub").innerHTML = D.part==="p2"
+ ? "The cue card stays on screen throughout, exactly as the real card stays in your hand. Use the preparation timer for your minute of notes, then record. Do not look at the models tab until you have."
+ : "The examiner reads each question aloud and nothing is written down, as in the real interview. Press Start, answer, then press Next question. Record before you look at anything in the models tab.";
+if(window.HSS)HSS.init({endpoint:(window.__CFG||{}).submitUrl,unit:"P"+D.part.slice(1)});
+$("#setSel").onchange=e=>{S.set=+e.target.value;loadSet()};loadSet();
+
+/* ---------- examiner and recorder ----------
+   (restored: this block was lost to a bad regex patch) */
+function say(){const it=S.queue[S.qi];if(!it)return;
+ speak(it.text+(it.bullets?". You should say: "+it.bullets.join(", ")+".":""))}
+$("#btnStart").onclick=()=>{S.started=true;S.revealed=false;paintQ();say()};
+$("#btnAsk").onclick=say;
+$("#btnShow").onclick=()=>{S.revealed=!S.revealed;paintQ()};
+$("#btnNext").onclick=()=>{if(S.qi>=S.queue.length-1)return;S.qi++;S.revealed=false;paintQ();say()};
+$("#btnPrep").onclick=()=>{clearInterval(S.prepId);let l=60;const c=$("#clock");
+ c.className="clock warn";c.textContent="01:00";
+ S.prepId=setInterval(()=>{l--;c.textContent=fmt(l*1000);
+  if(l<=0){clearInterval(S.prepId);c.className="clock";c.textContent="00:00";
+   speak("You have one to two minutes. You may begin.")}},1000)};
+
+async function startRec(){
+ if(window.HSS&&HSS.ready()){const me=await HSS.identify(); if(!me)return;
+  if(me.name&&!$("#stName").value)$("#stName").value=me.name;
+  if(me.email&&!$("#stEmail").value)$("#stEmail").value=me.email;}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+  alert("This browser cannot record audio. Use a recent Chrome, Edge or Safari.");return}
+ try{S.stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+ catch(e){alert("Microphone access was refused. Recording also requires the page to be served over HTTPS.");return}
+ clearInterval(S.prepId);S.chunks=[];S.recorder=new MediaRecorder(S.stream);
+ S.recorder.ondataavailable=e=>{if(e.data.size)S.chunks.push(e.data)};
+ S.recorder.onstop=save;S.recorder.start();S.t0=Date.now();
+ $("#stage").classList.add("recording");$("#btnRec").disabled=true;$("#btnStop").disabled=false;
+ const lim=(D.part==="p2"?120:S.queue.length*PER)*1000;
+ S.timerId=setInterval(()=>{const d=Date.now()-S.t0,c=$("#clock");c.textContent=fmt(d);
+  c.className="clock"+(d>lim*1.25?" over":d>lim*.85?" warn":"")},200);
+}
+function stopRec(){if(S.recorder&&S.recorder.state!=="inactive")S.recorder.stop();
+ clearInterval(S.timerId);$("#stage").classList.remove("recording");
+ $("#btnRec").disabled=false;$("#btnStop").disabled=true;
+ if(S.stream)S.stream.getTracks().forEach(t=>t.stop());
+ try{S.recog&&S.recog.stop()}catch(e){}}
+function save(){const ms=Date.now()-S.t0,
+ blob=new Blob(S.chunks,{type:(S.chunks[0]&&S.chunks[0].type)||"audio/webm"});
+ S.attempts++;S.totalMs+=ms;S.lastMs=ms;
+ if(S.recordedBeforeModels===null)S.recordedBeforeModels=!S.modelsOpened;
+ S.takes.push({n:S.attempts,ms,blob,url:URL.createObjectURL(blob),set:S.setLabel,
+  afterModels:S.modelsOpened,at:new Date()});
+ renderTakes();
+ if(window.HSS&&HSS.ready()){
+  const note=$("#sendNote"),show=t=>{if(note){note.hidden=false;note.textContent=t}};
+  HSS.upload(blob,{code:(FLAT[S.set]||{}).code||"",part:+D.part.slice(1),question:S.setLabel,
+   seconds:Math.round(ms/1000),take:S.attempts,takes:S.attempts,
+   module:(FLAT[S.set]||{}).mod||D.name,minutes:Math.round(S.totalMs/60000),
+   recordedBeforeModels:!S.modelsOpened,onstage:show})
+   .then(r=>show(r&&r.ok===false?("Not sent: "+(r.error||"unknown error")):"Sent to your teacher."))
+   .catch(()=>show("Not sent — check your connection."));
+ }}
+$("#btnRec").onclick=startRec;$("#btnStop").onclick=stopRec;
+function renderTakes(){
+ if(!S.takes.length){$("#takes").innerHTML='<p class="hint" style="margin:6px 0">No recordings yet.</p>';return}
+ $("#takes").innerHTML=S.takes.slice().reverse().map(t=>`<div class="take">
+  <span class="tno">Take ${t.n} · ${fmt(t.ms)} · ${esc(t.set)}${t.afterModels?" · after models":""}</span>
+  <audio controls src="${t.url}"></audio>
+  <a class="btn ghost" style="text-decoration:none;font-size:13px;padding:8px 13px" download="${S.sid}-take${t.n}.webm" href="${t.url}">Download</a></div>`).join("")}
+/* ---------- British female voice selection ---------- */
+const V_PREF=["libby","sonia","serena","kate","stephanie","martha","google uk english female",
+ "hazel","abbi","bella","hollie","olivia","amy","maisie","female"];
+const V_MALE=/daniel|oliver|ryan|thomas|arthur|george|alfie|elliot|\bmale\b|uk english male/i;
+const V_OFF=/fiona|moira|scottish|irish|welsh|karen|tessa|veena|rishi/i;
+function vRank(v){
+ const n=(v.name||"").toLowerCase(), lang=(v.lang||"").replace("_","-");
+ if(!/^en/i.test(lang)) return -1;
+ let s=/^en-GB/i.test(lang)?100:15;
+ if(V_OFF.test(n)) s-=45;
+ if(V_MALE.test(n)) s-=70;
+ const i=V_PREF.findIndex(x=>n.includes(x));
+ if(i>=0) s+=60-i*3;
+ if(/natural|online|premium|enhanced|neural/.test(n)) s+=18;
+ return s;
+}
+function vList(){
+ if(!("speechSynthesis" in window)) return [];
+ return speechSynthesis.getVoices().map(v=>({v,s:vRank(v)}))
+  .filter(o=>o.s>=0).sort((a,b)=>b.s-a.s).map(o=>o.v);
+}
+function vChosen(){
+ const all=vList(); if(!all.length) return null;
+ if(S.voiceName){const m=all.find(v=>v.name===S.voiceName); if(m) return m;}
+ return all[0];
+}
+function speak(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ const v=vChosen();
+ if(v){u.voice=v;u.lang=v.lang} else {u.lang="en-GB"}
+ u.rate=0.94; u.pitch=1.0;
+ speechSynthesis.speak(u);
+}
+["fc","lr","gr","pr"].forEach(c=>document.body.classList.add("show-"+c));
+
+/* log */
+function renderLog(){
+ $("#logPrev").innerHTML=[
+  ["Student",esc($("#stName").value||"<span style='color:var(--pr)'>not supplied — fill this in before exporting</span>")],
+  ["Email",esc($("#stEmail").value||"(not supplied)")],
+  ["Session ID",esc(S.sid)],
+  ["Part",D.name],["Question set",esc(S.setLabel)],
+  ["Takes recorded",S.attempts],["Total practice time",fmt(S.totalMs)],
+  ["Latest take",fmt(S.lastMs)],
+  ["Recorded before models",S.recordedBeforeModels===null?"no take yet":S.recordedBeforeModels?"yes":"no"],
+  ["Takes after models",S.takes.filter(t=>t.afterModels).length]
+ ].map(([k,v])=>`<dt style="color:var(--muted)">${k}</dt><dd style="margin:0">${v}</dd>`).join("").replace(/&lt;span style=&#039;color:var\(--pr\)&#039;&gt;(.*?)&lt;\/span&gt;/,"<span style=\"color:var(--pr)\">$1</span>")}
+function dl(b,n){const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=n;a.click()}
+$("#btnAudio").onclick=()=>{const t=S.takes[S.takes.length-1];if(!t){alert("No recording yet.");return}dl(t.blob,`${S.sid}-take${t.n}.webm`)};
+$("#btnLog").onclick=()=>{
+ const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Practice log — ${esc($("#stName").value||"student")}</title>
+<style>body{font-family:Georgia,serif;max-width:760px;margin:36px auto;padding:0 24px;color:#2A1E0A;line-height:1.6}
+.eb{font-size:11px;letter-spacing:.24em;color:#B87200;font-family:Arial,sans-serif;font-weight:700;margin:0 0 6px}
+h1{font-size:24px;border-bottom:3px solid #F2A81D;padding-bottom:9px;margin:0 0 4px}
+h2{font-size:16px;margin-top:26px;border-bottom:1px solid #EADFC5;padding-bottom:5px}
+dl{display:grid;grid-template-columns:210px 1fr;gap:5px 15px;font-size:14.5px}dt{color:#8D7B58}dd{margin:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+td{padding:6px 8px;border-bottom:1px solid #F1EADA}td.lv{font-family:monospace;font-size:11px;color:#8D7B58;width:76px}
+.nb{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;white-space:pre-wrap;font-family:Arial,sans-serif;font-size:14px}
+.dis{background:#FBF3DE;border:1px solid #EADFC5;border-radius:10px;padding:14px 17px;font-size:12.5px;color:#5C4B2E;margin-top:26px;font-family:Arial,sans-serif;line-height:1.55}
+@media print{body{margin:0}}</style>
+<p class="eb">HUONG STELLA PARADIGM</p><h1>Practice log — ${esc(D.name)}</h1>
+<p style="color:#8D7B58;font-size:13px;margin:0 0 18px">${esc(S.sid)}</p>
+<dl><dt>Student</dt><dd>${esc($("#stName").value||"(not supplied)")}</dd>
+<dt>Email</dt><dd>${esc($("#stEmail").value||"(not supplied)")}</dd>
+<dt>Date</dt><dd>${new Date().toLocaleString("en-GB",{dateStyle:"full",timeStyle:"short"})}</dd>
+<dt>Question set</dt><dd>${esc(S.setLabel)}</dd>
+<dt>Takes recorded</dt><dd>${S.attempts}</dd>
+<dt>Total practice time</dt><dd>${fmt(S.totalMs)}</dd>
+<dt>Recorded before opening models</dt><dd>${S.recordedBeforeModels===null?"no take recorded":S.recordedBeforeModels?"yes":"no"}</dd>
+<dt>Takes after models</dt><dd>${S.takes.filter(t=>t.afterModels).length}</dd></dl>
+<h2>Take history</h2><table>${S.takes.map(t=>`<tr><td class="lv">Take ${t.n}</td><td>${fmt(t.ms)}</td><td>${esc(t.set)}</td><td>${t.afterModels?"after models":"before models"}</td></tr>`).join("")||"<tr><td>No takes recorded.</td></tr>"}</table>
+<h2>Notes</h2><div class="nb">${esc($("#notes").value||"(none)")}</div>
+<div class="dis">${DISC}</div></html>`;
+ dl(new Blob([html],{type:"text/html;charset=utf-8"}),`${S.sid}-practice-log.html`)};
+
+/* ---- results export ---- */
+function resultRows(){
+ const now=new Date();
+ const base={
+  session_id:S.sid,
+  student_name:$("#stName").value.trim(),
+  student_email:$("#stEmail").value.trim(),
+  part:D.name,
+  module_set:S.setLabel,
+  date_iso:now.toISOString(),
+  date_local:now.toLocaleString("en-GB",{dateStyle:"short",timeStyle:"short"}),
+  total_takes:S.attempts,
+  total_practice_seconds:Math.round(S.totalMs/1000),
+  recorded_before_models:S.recordedBeforeModels===null?"":(S.recordedBeforeModels?"yes":"no"),
+  models_opened:S.modelsOpened?"yes":"no",
+  notes:$("#notes").value.trim()
+ };
+ if(!S.takes.length) return [Object.assign({},base,{take_number:"",take_seconds:"",take_time:"",take_after_models:"",audio_file:""})];
+ return S.takes.map(t=>Object.assign({},base,{
+  take_number:t.n,
+  take_seconds:Math.round(t.ms/1000),
+  take_time:t.at.toLocaleTimeString("en-GB"),
+  take_after_models:t.afterModels?"yes":"no",
+  audio_file:`${S.sid}-take${t.n}.webm`
+ }));
+}
+function toCsv(rows){
+ const cols=Object.keys(rows[0]);
+ const cell=v=>{const s=String(v==null?"":v);return /[",\n;]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+ return "\uFEFF"+[cols.join(","),...rows.map(r=>cols.map(c=>cell(r[c])).join(","))].join("\r\n");
+}
+$("#btnCsv").onclick=()=>{
+ if(!$("#stName").value.trim()){alert("Enter your name at the top of the page first — the spreadsheet is useless without it.");return}
+ dl(new Blob([toCsv(resultRows())],{type:"text/csv;charset=utf-8"}),`${S.sid}-results.csv`)};
+$("#btnSend").onclick=async()=>{
+ const url=$("#sheetUrl").value.trim(), msg=$("#sendMsg");
+ if(!$("#stName").value.trim()){alert("Enter your name at the top of the page first.");return}
+ if(!url){alert("Paste the class spreadsheet link your teacher gave you into the third field at the top of the page.");return}
+ if(!/^https:\/\//.test(url)){alert("That link does not look right — it should begin with https://");return}
+ msg.textContent="Sending…";
+ try{
+  await fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
+   body:JSON.stringify({source:"hsp-practice",part:D.part,rows:resultRows()})});
+  msg.textContent="Sent. Ask your teacher to confirm your row appeared — this page cannot verify it.";
+ }catch(e){
+  msg.textContent="Could not reach that link. Download the CSV instead and send it to your teacher.";
+ }};
+
+const DISC=`<b>About this file.</b> This practice file is produced and maintained by <b>Huong Stella AI Academic</b> for enrolled learners. It contains the Quarter 3 2026 speaking forecast, topic vocabulary, the grammar those question types call for, and calibrated band models.
+<br><br><b>On the band models.</b> The Band 6, 7 and 8 answers are teaching illustrations written against the publicly available IELTS Speaking Band Descriptors. They show what each band typically looks like; they are not scripts, and reproducing one in an examination will not produce the band it illustrates. Record your own answer first, then use the models as a comparison.
+<br><br><b>On assessment.</b> Nothing recorded here constitutes, predicts or substitutes for a rating awarded by a qualified instructor, by Huong Stella AI Academic, or by a certified IELTS examiner, and no figure from this file may be reported as an IELTS result.
+<br><br><b>On your recordings.</b> Audio you record here is stored in the system's Drive folder and submitted for review by the AI Academic system.
+<br><br><b>Sources.</b> Descriptor wording adapted from the IELTS Speaking Band Descriptors published at ielts.org. Question material: IELTS Speaking Forecast, Quarter 3 2026 (September to December).`;
+/* submission endpoint comes from config.json, so changing it is a one-file edit */
+(function(){const c=(window.__CFG||{});const f=$("#sheetUrl");if(!f)return;
+ if(c.submitUrl){f.value=c.submitUrl;f.placeholder="Class spreadsheet (set by your teacher)";
+  f.readOnly=true;f.style.opacity=".72"}
+ else{f.placeholder="Class spreadsheet link from your teacher (optional)"}})();
+$("#disc").innerHTML=DISC;
+$("#foot").innerHTML="Assessment criteria adapted from the IELTS Speaking Band Descriptors, ielts.org. Produced by Huong Stella AI Academic. Nothing is stored on a server — download your log before closing this tab.";
+
+function fillVoices(){
+ const sel=$("#voiceSel"); if(!sel) return;
+ const all=vList();
+ if(!all.length){sel.innerHTML='<option>No voices available in this browser</option>';
+  $("#voiceNote").textContent="This browser has no speech voices installed. The drill bay still records; read the questions yourself using the Show button.";return}
+ const best=vChosen();
+ sel.innerHTML=all.map(v=>`<option value="${esc(v.name)}"${v.name===(best&&best.name)?" selected":""}>${esc(v.name)} — ${esc(v.lang)}</option>`).join("");
+ const gb=all.filter(v=>/^en-GB/i.test(v.lang||""));
+ $("#voiceNote").innerHTML = gb.length
+  ? `Preselected: the most natural British female voice on this device. ${gb.length} British voice${gb.length>1?"s":""} found.`
+  : `No British voice is installed on this device, so a general English voice has been selected. For a natural British female examiner, open this page in <b>Microsoft Edge</b> (Libby or Sonia) or <b>Chrome</b> (Google UK English Female).`;
+}
+$("#voiceSel") && ($("#voiceSel").onchange=e=>{S.voiceName=e.target.value});
+$("#btnVoice") && ($("#btnVoice").onclick=()=>speak("Let's talk about where you live now. Which town or city do you live in?"));
+fillVoices();
+if("speechSynthesis" in window) speechSynthesis.onvoiceschanged=fillVoices;
+
+tabs();renderTakes();
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+</script>
+</body>
+</html>
