@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kiểm tra hệ thống — Speaking Studio</title>
+<style>
+:root{--paper:#FFFCF4;--ink:#2A1E0A;--muted:#8D7B58;--line:#EADFC5;--sand:#FBF3DE;--gold:#F2A81D;--gold2:#B87200;
+ --ok:#14735A;--bad:#B4392A;--warn:#B87200}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);line-height:1.6;
+ font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px 70px}
+header{background:var(--ink);color:#FFF8E7}
+header .wrap{padding:24px 20px 26px}
+.eb{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 10px}
+h1{font-family:Georgia,serif;font-size:30px;margin:0;color:var(--gold);line-height:1.1}
+header p{color:#D9C79C;margin:8px 0 0;font-size:14.5px}
+h2{font-family:Georgia,serif;font-size:20px;margin:30px 0 10px}
+.t{width:100%;border-collapse:collapse;font-size:14px}
+.t td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.t td:first-child{width:28px;font-size:17px}
+.t td:nth-child(2){width:188px;font-weight:600}
+.s-ok{color:var(--ok)}.s-bad{color:var(--bad)}.s-warn{color:var(--warn)}
+code{background:var(--sand);padding:1px 5px;border-radius:4px;font-size:12.5px;word-break:break-all}
+.box{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:20px;font-size:14px}
+.box b{display:block;margin-bottom:6px}
+.box ol{margin:8px 0 0;padding-left:20px}.box li{margin-bottom:7px}
+button{padding:11px 20px;border:0;border-radius:8px;background:var(--gold);color:var(--ink);
+ font:inherit;font-weight:700;cursor:pointer;margin-top:16px}
+button[disabled]{opacity:.5;cursor:default}
+input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;margin:4px 0 12px}
+label{font-size:13px;font-weight:600}
+#raw{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted);
+ margin-top:12px;max-height:220px;overflow:auto}
+</style><script>window.__CFG={submitUrl:"https://script.google.com/macros/s/AKfycbw4Jh6R2yDx-8AtFBX4ELOUxrRak2qWkZz9kF6wSg0qVuEMSaZnOadixb9tVa7tsDJvvA/exec",version:"202611191609"};</script>
+</head><body>
+<header><div class="wrap"><p class="eb">HUONG STELLA PARADIGM</p>
+<h1>Kiểm tra hệ thống</h1>
+<p>Trang này chạy đúng những bước mà trang học sẽ chạy, rồi nói thẳng hỏng ở đâu.</p></div></header>
+<main class="wrap">
+
+<h2>Kết quả</h2>
+<table class="t"><tbody id="out"></tbody></table>
+
+<div id="verdict"></div>
+
+<h2>Thử một email cụ thể</h2>
+<p style="color:var(--muted);font-size:14px;margin:0 0 10px">
+Nhập email một học viên đã có trong tab Roster để xem hệ thống có nhận không.</p>
+<label>Email</label><input id="em" type="email" placeholder="hocvien@gmail.com">
+<label>Mã phần muốn thử</label><input id="un" value="M01">
+<button id="go">Kiểm tra email này</button>
+<div id="raw"></div>
+</main>
+
+<script>
+/* ============================================================================
+ * Speaking Studio — chuẩn hoá âm thanh trước khi gửi đi chấm
+ * Huong Stella Learning Lab
+ *
+ * Nguyên tắc: KHÔNG chuyển đổi nếu không cần.
+ *   Firefox cho ra ogg/opus  → Gemini đọc được → gửi thẳng.
+ *   Safari  cho ra mp4/aac   → Gemini đọc được → gửi thẳng.
+ *   Chrome  cho ra webm/opus → chuyển sang mp3 16 kHz mono.
+ *
+ * Vì sao 16 kHz mono: Gemini hạ mọi file về 16 kHz trước khi nghe, và tính
+ * 32 token mỗi giây bất kể chất lượng. Giữ 48 kHz stereo chỉ tốn băng thông,
+ * không thêm một điểm nào cho học viên. Hai phút nói: webm 48 kHz ≈ 1,4 MB,
+ * mp3 16 kHz mono 32 kbps ≈ 240 KB.
+ *
+ * Dùng:
+ *   const out = await HSSAudio.prepare(blob);     // {blob, mime, ext, note}
+ * ========================================================================== */
+(function (w) {
+  "use strict";
+
+  /* Gemini đọc được các container này, khỏi phải đụng tới */
+  var NATIVE = /^audio\/(mpeg|mp3|mp4|aac|x-m4a|wav|wave|x-wav|ogg|flac|aiff)/i;
+
+  var LAME = "https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js";
+  var RATE = 16000, KBPS = 32;
+
+  /* ---------- chọn định dạng thu tốt nhất mà máy hỗ trợ ---------- */
+  function bestRecordingType() {
+    if (typeof MediaRecorder === "undefined" || !MediaRecorder.isTypeSupported) return "";
+    var want = ["audio/ogg;codecs=opus", "audio/mp4", "audio/mpeg", "audio/webm;codecs=opus", "audio/webm"];
+    for (var i = 0; i < want.length; i++) if (MediaRecorder.isTypeSupported(want[i])) return want[i];
+    return "";
+  }
+
+  /* ---------- giải mã + hạ về 16 kHz mono ---------- */
+  function toMono16k(buf) {
+    return new Promise(function (res, rej) {
+      var AC = w.AudioContext || w.webkitAudioContext;
+      var OC = w.OfflineAudioContext || w.webkitOfflineAudioContext;
+      if (!AC || !OC) return rej(new Error("Trình duyệt không có Web Audio"));
+      var ctx = new AC();
+      ctx.decodeAudioData(buf.slice(0), function (decoded) {
+        var frames = Math.max(1, Math.ceil(decoded.duration * RATE));
+        var off;
+        try { off = new OC(1, frames, RATE); }
+        catch (e) { ctx.close && ctx.close(); return rej(new Error("Máy không hạ được về 16 kHz")); }
+        var src = off.createBufferSource();
+        src.buffer = decoded;            // nhiều kênh → OfflineAudioContext 1 kênh tự trộn xuống mono
+        src.connect(off.destination);
+        src.start(0);
+        off.startRendering().then(function (r) {
+          ctx.close && ctx.close();
+          res({ pcm: r.getChannelData(0), rate: RATE, seconds: decoded.duration });
+        }, rej);
+      }, function () { ctx.close && ctx.close(); rej(new Error("Không giải mã được bản thu")); });
+    });
+  }
+
+  function toInt16(f32) {
+    var out = new Int16Array(f32.length);
+    for (var i = 0; i < f32.length; i++) {
+      var s = f32[i] < -1 ? -1 : f32[i] > 1 ? 1 : f32[i];
+      out[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+    }
+    return out;
+  }
+
+  /* ---------- WAV: không cần thư viện, luôn chạy được ---------- */
+  function wav(i16, rate) {
+    var b = new ArrayBuffer(44 + i16.length * 2), v = new DataView(b);
+    var put = function (o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    put(0, "RIFF"); v.setUint32(4, 36 + i16.length * 2, true); put(8, "WAVE");
+    put(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true);
+    v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    put(36, "data"); v.setUint32(40, i16.length * 2, true);
+    new Int16Array(b, 44).set(i16);
+    return new Blob([b], { type: "audio/wav" });
+  }
+
+  /* ---------- MP3 trong Worker, để giao diện không khựng ---------- */
+  var worker = null, jobId = 0, jobs = {};
+  function mp3Worker() {
+    if (worker !== null) return worker;
+    var code =
+      'importScripts(' + JSON.stringify(LAME) + ');' +
+      'self.onmessage=function(e){' +
+      ' var d=e.data,enc=new lamejs.Mp3Encoder(1,d.rate,d.kbps),p=[],B=1152;' +
+      ' for(var i=0;i<d.pcm.length;i+=B){' +
+      '  var c=enc.encodeBuffer(d.pcm.subarray(i,i+B));' +
+      '  if(c.length)p.push(new Int8Array(c));}' +
+      ' var f=enc.flush(); if(f.length)p.push(new Int8Array(f));' +
+      ' self.postMessage({id:d.id,parts:p});};';
+    try {
+      worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+      worker.onmessage = function (e) {
+        var j = jobs[e.data.id]; if (!j) return; delete jobs[e.data.id];
+        j.res(new Blob(e.data.parts, { type: "audio/mpeg" }));
+      };
+      worker.onerror = function () {                 // CDN chặn hoặc ngoại tuyến
+        Object.keys(jobs).forEach(function (k) { jobs[k].rej(new Error("lame")); delete jobs[k]; });
+        worker = false;
+      };
+    } catch (e) { worker = false; }
+    return worker;
+  }
+
+  function mp3(i16, rate) {
+    var wk = mp3Worker();
+    if (!wk) return Promise.reject(new Error("lame"));
+    return new Promise(function (res, rej) {
+      var id = ++jobId;
+      jobs[id] = { res: res, rej: rej };
+      setTimeout(function () { if (jobs[id]) { delete jobs[id]; rej(new Error("quá lâu")); } }, 90000);
+      wk.postMessage({ id: id, pcm: i16, rate: rate, kbps: KBPS }, [i16.buffer]);
+    });
+  }
+
+  var HSSAudio = {
+    bestRecordingType: bestRecordingType,
+
+    /** Trả về bản thu ở định dạng Gemini chắc chắn đọc được.
+     *  Không bao giờ ném lỗi: cùng lắm trả lại nguyên bản và ghi chú lý do. */
+    prepare: function (blob) {
+      var type = (blob.type || "").toLowerCase();
+      if (NATIVE.test(type)) {
+        var ext = /mpeg|mp3/.test(type) ? "mp3" : /mp4|aac|m4a/.test(type) ? "m4a"
+                : /ogg/.test(type) ? "ogg" : /flac/.test(type) ? "flac" : "wav";
+        return Promise.resolve({ blob: blob, mime: type.split(";")[0], ext: ext, note: "giữ nguyên" });
+      }
+      return blob.arrayBuffer().then(toMono16k).then(function (a) {
+        var i16 = toInt16(a.pcm);
+        return mp3(i16, a.rate).then(function (m) {
+          return { blob: m, mime: "audio/mpeg", ext: "mp3", seconds: a.seconds, note: "mp3 16 kHz mono" };
+        }).catch(function () {
+          return { blob: wav(toInt16(a.pcm), a.rate), mime: "audio/wav", ext: "wav",
+                   seconds: a.seconds, note: "wav 16 kHz mono (không nạp được bộ mã mp3)" };
+        });
+      }).catch(function (e) {
+        return { blob: blob, mime: (type || "audio/webm").split(";")[0], ext: "webm",
+                 note: "gửi nguyên bản — " + (e.message || e) };
+      });
+    },
+
+    /** Nạp trước bộ mã mp3 ngay khi mở trang, để lúc thu xong không phải chờ. */
+    warmUp: function () { try { mp3Worker(); } catch (e) {} }
+  };
+
+  w.HSSAudio = HSSAudio;
+})(window);
+
+var CFG = window.__CFG || {};
+var rows = document.getElementById('out');
+function add(state, name, detail){
+  var icon = state === 'ok' ? '✓' : state === 'bad' ? '✗' : '!';
+  var tr = document.createElement('tr');
+  tr.innerHTML = '<td class="s-' + state + '">' + icon + '</td><td>' + name + '</td><td>' + detail + '</td>';
+  rows.appendChild(tr);
+  return state;
+}
+function say(html){ document.getElementById('verdict').innerHTML = html; }
+
+(function run(){
+  var fails = [];
+
+  /* 1 — trang được phục vụ kiểu gì */
+  var proto = location.protocol;
+  if (proto === 'https:') add('ok','Giao thức','https — micro dùng được');
+  else if (proto === 'file:') { add('warn','Giao thức','file:// — mở trực tiếp từ máy. Chrome và Edge vẫn thu được, Safari thì không.'); }
+  else { add('bad','Giao thức', proto + ' — micro bị chặn. Phải mở qua https.'); fails.push('proto'); }
+
+  /* 2 — trình duyệt có thu âm được không */
+  var canRec = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) && typeof MediaRecorder !== 'undefined';
+  if (canRec) add('ok','Thu âm','Trình duyệt hỗ trợ. Định dạng: ' +
+    (window.HSSAudio ? (window.HSSAudio.bestRecordingType() || 'mặc định') : 'chưa nạp bộ âm thanh'));
+  else { add('bad','Thu âm','Trình duyệt này không thu âm được. Dùng Chrome, Edge hoặc Safari bản mới.'); fails.push('rec'); }
+
+  /* 3 — địa chỉ hệ thống đã được nhúng vào trang chưa */
+  if (CFG.submitUrl) add('ok','Địa chỉ hệ thống','<code>' + CFG.submitUrl.slice(0, 64) + '…</code>');
+  else { add('bad','Địa chỉ hệ thống',
+    'TRỐNG. Trang này là bản ngoại tuyến, hoặc dựng thiếu địa chỉ. Thu âm vẫn chạy nhưng không nộp bài được.');
+    fails.push('url'); }
+
+  /* 4 — gọi thử hệ thống */
+  if (!CFG.submitUrl) { finish(fails); return; }
+  var t0 = Date.now();
+  fetch(CFG.submitUrl + '?action=ping&token=hss-studio', { redirect:'follow' })
+    .then(function(r){ return r.text().then(function(t){ return {status:r.status, text:t, type:r.type}; }); })
+    .then(function(r){
+      var ms = Date.now() - t0;
+      document.getElementById('raw').textContent = 'Hệ thống trả về (' + ms + ' ms, HTTP ' + r.status + '):\n' + r.text.slice(0, 1200);
+      var j = null; try { j = JSON.parse(r.text); } catch(e) {}
+      if (j && j.ok) { add('ok','Kết nối hệ thống','Trả lời đúng — ' + (j.service || 'ok') + (j.version ? ' · ' + j.version : '')); }
+      else if (/accounts\.google\.com|Sign in|ServiceLogin/i.test(r.text)) {
+        add('bad','Kết nối hệ thống','Hệ thống đòi đăng nhập Google. Bản triển khai đang để <b>Who has access</b> khác <b>Anyone</b>.');
+        fails.push('auth-wall');
+      } else if (/Script function not found|doGet/i.test(r.text)) {
+        add('bad','Kết nối hệ thống','Bản triển khai không có hàm doGet — dán nhầm mã, hoặc chưa New version.');
+        fails.push('nodoget');
+      } else {
+        add('bad','Kết nối hệ thống','Trả về thứ không đọc được (HTTP ' + r.status + '). Xem khối chữ nhỏ cuối trang.');
+        fails.push('weird');
+      }
+      finish(fails);
+    })
+    .catch(function(e){
+      add('bad','Kết nối hệ thống','Không gọi được: ' + (e.message || e) +
+        '. Thường là địa chỉ sai, bản triển khai đã xoá, hoặc trình duyệt chặn vì hệ thống không cho gọi từ trang khác.');
+      fails.push('net');
+      finish(fails);
+    });
+
+  function finish(f){
+    if (!f.length) { say('<div class="box" style="border-color:#A8DCC4;background:#E8F6F0">' +
+      '<b style="color:var(--ok)">Mọi thứ thông suốt.</b>' +
+      'Trang học sẽ thu âm và nộp bài được. Nếu một em cụ thể vẫn bị từ chối thì là chuyện quyền trong tab Roster — dùng ô thử email bên dưới.</div>'); return; }
+    var fix = {
+      'proto':'Mở trang qua địa chỉ https của GitHub Pages, đừng mở file từ máy.',
+      'rec':'Đổi sang Chrome hoặc Edge bản mới.',
+      'url':'Trang đang dùng là bản ngoại tuyến. Tải lên bộ <code>speaking-pages.zip</code> bản --online.',
+      'auth-wall':'Apps Script → Deploy → Manage deployments → bút chì → <b>Who has access: Anyone</b> → New version → Deploy.',
+      'nodoget':'Dán lại <code>StudioBackend.gs</code>, rồi Manage deployments → New version → Deploy.',
+      'weird':'Xem khối chữ nhỏ cuối trang rồi gửi cho thầy/cô kỹ thuật.',
+      'net':'Kiểm tra địa chỉ trong trang có đúng bản triển khai đang sống không.'
+    };
+    say('<div class="box" style="border-color:#F3CBB4;background:#FDECE2">' +
+      '<b style="color:var(--bad)">Tìm thấy ' + f.length + ' chỗ cần sửa.</b><ol>' +
+      f.map(function(k){ return '<li>' + (fix[k] || k) + '</li>'; }).join('') + '</ol></div>');
+  }
+})();
+
+document.getElementById('go').onclick = function(){
+  var em = document.getElementById('em').value.trim().toLowerCase();
+  var un = document.getElementById('un').value.trim().toUpperCase();
+  if (!em || !CFG.submitUrl) return;
+  this.disabled = true; this.textContent = 'Đang hỏi…';
+  var btn = this;
+  fetch(CFG.submitUrl + '?action=auth&token=hss-studio&unit=' + encodeURIComponent(un) + '&email=' + encodeURIComponent(em),
+        { redirect:'follow' })
+    .then(function(r){ return r.text(); })
+    .then(function(t){
+      btn.disabled = false; btn.textContent = 'Kiểm tra email này';
+      document.getElementById('raw').textContent = 'Trả lời cho ' + em + ' ở phần ' + un + ':\n' + t.slice(0, 1200);
+      var j = null; try { j = JSON.parse(t); } catch(e) {}
+      if (j && j.ok && j.allowed) add('ok','Email ' + em, 'Được nộp bài ở phần ' + un + ' (tên: ' + (j.name || '—') + ')');
+      else if (j && j.ok) add('bad','Email ' + em, 'Bị từ chối — lý do: ' + (j.reason || 'không rõ') +
+        '. Mở tab Roster, thêm email và tick cột Access; kiểm cả ô Active của phần ' + un + ' trong tab Units.');
+      else add('bad','Email ' + em, 'Hệ thống không trả lời đúng định dạng — xem khối chữ nhỏ.');
+    })
+    .catch(function(e){ btn.disabled = false; btn.textContent = 'Kiểm tra email này';
+      add('bad','Email ' + em, 'Không gọi được: ' + (e.message || e)); });
+};
+</script></body></html>

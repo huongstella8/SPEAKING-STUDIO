@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Education & Learning — IELTS Speaking Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCF4; --surface:#FFFFFF; --sand:#FBF3DE;
+  --ink:#2A1E0A; --ink-2:#5C4B2E; --muted:#8D7B58; --line:#EADFC5;
+  --gold:#F2A81D; --gold-deep:#B87200; --ember:#E2601C;
+  --fc6:#FCE7B4; --fc7:#EFB53C; --fc8:#B87200; --fc:#B87200;
+  --lr6:#CFE8DA; --lr7:#5CAD86; --lr8:#14735A; --lr:#14735A;
+  --gr6:#DED8F3; --gr7:#8B7FD4; --gr8:#5140A6; --gr:#5140A6;
+  --pr6:#F8D8CF; --pr7:#DF8B75; --pr8:#B4392A; --pr:#B4392A;
+  --display:"Fraunces",Georgia,"Iowan Old Style",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-text-size-adjust:100%}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 90px}
+a{color:var(--gold-deep)}
+
+/* masthead */
+header.mast{background:var(--ink);color:#FFF8E7;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, rgba(242,168,29,.55), rgba(242,168,29,0) 68%)}
+header.mast .wrap{padding-top:24px;padding-bottom:26px;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:0 0 14px}
+.modno{font-family:var(--mono);font-size:12.5px;color:#C9AE72;margin:0 0 4px}
+.mast h1{font-family:var(--display);font-size:clamp(30px,6.4vw,50px);line-height:1.02;margin:0;font-weight:700;
+  font-variation-settings:'SOFT' 60,'WONK' 1; color:var(--gold)}
+.mast .tag{margin:8px 0 0;color:#D9C79C;font-size:15px}
+.mast .blurb{margin:14px 0 0;color:#BFAE86;font-size:14px;max-width:66ch}
+.idbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.idbar input{background:#3B2B10;border:1px solid #55401A;color:#FFF8E7;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;min-width:0;flex:1 1 190px}
+.idbar input::placeholder{color:#9C8557}
+.idbar input:focus{outline:2px solid var(--gold);outline-offset:1px}
+
+/* flow strip */
+.flow{background:var(--sand);border-bottom:1px solid var(--line)}
+.flow .wrap{padding:11px 20px;font-size:13px;color:var(--ink-2)}
+.flow b{color:var(--gold-deep)}
+
+/* tabs */
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.tabs .inner{max-width:1060px;margin:0 auto;padding:0 20px;display:flex;gap:0;overflow-x:auto}
+nav.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;
+  font-size:14px;font-family:inherit;color:var(--muted);cursor:pointer;white-space:nowrap;display:flex;align-items:baseline;gap:7px}
+nav.tabs button .n{font-family:var(--mono);font-size:11px;color:var(--gold-deep);opacity:.65}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+nav.tabs button[aria-selected="true"] .n{opacity:1}
+nav.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+
+/* generic */
+h2.sec{font-family:var(--display);font-size:26px;margin:34px 0 5px;font-weight:600;font-variation-settings:'SOFT' 40}
+h2.sec:first-child{margin-top:26px}
+.sub{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:72ch}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.btn{background:var(--ink);color:#FFF8E7;border:0;border-radius:10px;padding:11px 18px;font-size:14.5px;font-family:inherit;font-weight:500;cursor:pointer}
+.btn:disabled{opacity:.32;cursor:not-allowed}
+.btn.gold{background:var(--gold);color:var(--ink);font-weight:600}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+select{padding:11px 12px;border-radius:10px;border:1px solid var(--line);font-family:inherit;font-size:14.5px;background:var(--surface);color:var(--ink);max-width:100%}
+.pill{display:inline-block;font-size:11.5px;padding:3px 10px;border-radius:999px;font-weight:600}
+.hint{font-size:13px;color:var(--muted)}
+.scroll{overflow-x:auto}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;font-size:12.5px;color:var(--muted)}
+.disclaimer{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-2);margin-top:20px}
+.disclaimer b{color:var(--ink)}
+
+/* vocab */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--gold-deep);font-weight:600;background:var(--sand)}
+.vfilter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.vfilter button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:13px;font-family:inherit;cursor:pointer;color:var(--ink-2)}
+.vfilter button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:600}
+td.term{font-weight:600;min-width:140px}
+.wc{font-size:11.5px;color:var(--muted);font-family:var(--mono);display:block;font-weight:400}
+.ipa{font-family:var(--mono);font-size:12.5px;color:var(--gold-deep)}
+.vi{color:var(--muted);font-style:italic}
+td.eg{font-style:italic;color:var(--ink-2)}
+@media(max-width:860px){
+  table,thead,tbody,tr,td,th{display:block}
+  thead{display:none}
+  tr{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:11px;padding:6px 2px}
+  td{border:0;padding:7px 14px}
+  td::before{content:attr(data-l);display:block;font-size:10.5px;letter-spacing:.1em;color:var(--gold-deep);font-weight:600;margin-bottom:2px}
+  td.term::before{display:none}
+}
+
+/* reasoning */
+.ladder{border-left:4px solid var(--line);padding-left:16px;margin-bottom:22px}
+.ladder.l6{border-color:var(--fc6)}.ladder.l7{border-color:var(--fc7)}.ladder.l8{border-color:var(--fc8)}
+.ladder h4{margin:0 0 6px;font-size:16.5px}
+.ladder ul{margin:8px 0 0;padding-left:19px;font-size:14.5px}
+.ladder li{margin-bottom:6px}
+.formula{font-family:var(--mono);font-size:12.5px;background:var(--sand);padding:7px 11px;border-radius:8px;display:inline-block;margin:4px 0}
+.argmap{display:grid;grid-template-columns:1fr;gap:13px;margin-top:12px}
+@media(min-width:780px){.argmap{grid-template-columns:1fr 1fr}}
+.argbox{border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--surface)}
+.argbox.for{border-top:4px solid var(--lr8)}
+.argbox.against{border-top:4px solid var(--ember)}
+.argbox h5{margin:0 0 8px;font-size:15px}
+.argbox li{font-size:14px;margin-bottom:7px}
+.verdict{background:var(--ink);color:#FFF8E7;border-radius:13px;padding:16px 19px;font-size:14.5px;margin-top:15px}
+.verdict b{color:var(--gold)}
+details{border-top:1px solid var(--line);padding:13px 0}
+details summary{cursor:pointer;font-weight:600;font-size:15px}
+.qgroup{margin:14px 0}
+.qgroup h3{font-family:var(--display);font-size:17px;margin:0 0 6px;font-weight:600}
+ol.q{margin:0;padding-left:22px}ol.q li{margin-bottom:5px;font-size:14.5px}
+.cue{background:var(--sand);border-left:4px solid var(--gold);border-radius:0 11px 11px 0;padding:14px 17px;margin-bottom:11px}
+.cue b{display:block;margin-bottom:6px}
+.cue ul{margin:0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+
+/* studio */
+.stage{background:var(--ink);color:#FFF8E7;border-radius:16px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden}
+.stage::after{content:"";position:absolute;left:-70px;bottom:-110px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(226,96,28,.35), rgba(226,96,28,0) 70%)}
+.stage>*{position:relative;z-index:1}
+.counter{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.08em;margin:0 0 8px}
+.qtext{font-family:var(--display);font-size:clamp(19px,3.6vw,25px);line-height:1.28;margin:0 0 8px;font-weight:600}
+.qtext.veiled{color:#6B5A34;font-style:italic;font-family:var(--sans);font-size:17px;font-weight:400}
+.listen{font-size:13px;color:#A8945F;margin:6px 0 0}
+.listen b{color:var(--gold)}
+.bullets{margin:8px 0 0;padding-left:19px;font-size:14px;color:#CDB88C}
+.clock{font-family:var(--mono);font-size:46px;letter-spacing:-.02em;margin:16px 0 2px;font-variant-numeric:tabular-nums}
+.clock.warn{color:var(--gold)}.clock.over{color:#FF9E7A}
+.stage .btn.ghost{color:#FFF8E7;border-color:#55401A}
+.target{font-size:12.5px;color:#A8945F;font-family:var(--mono);margin:0 0 14px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;margin-right:8px;vertical-align:1px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}
+.recording .dot{animation:blip 1.05s infinite}
+.take{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
+.take audio{height:36px;flex:1 1 220px;min-width:0}
+.take .tno{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;font-family:inherit;font-size:14.5px;line-height:1.65;min-height:140px;resize:vertical;background:var(--surface);color:var(--ink)}
+textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+
+/* models */
+.hlbar{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 18px}
+.hlbar button{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 12px;font-size:12.5px;font-family:inherit;cursor:pointer;font-weight:600}
+.hlbar button[aria-pressed="false"]{opacity:.42}
+.answer{font-size:16.5px;line-height:1.9}
+.answer p{margin:0 0 14px}
+mark{background:none;padding:1px 0}
+body.show-fc mark.fc{background:var(--fc6);box-shadow:0 1.5px 0 var(--fc8)}
+body.show-lr mark.lr{background:var(--lr6);box-shadow:0 1.5px 0 var(--lr8)}
+body.show-gr mark.gr{background:var(--gr6);box-shadow:0 1.5px 0 var(--gr8)}
+body.show-pr mark.pr{background:var(--pr6);box-shadow:0 1.5px 0 var(--pr8)}
+.notes{font-size:13.5px;color:var(--ink-2);background:var(--sand);border-radius:12px;padding:15px 17px;margin-top:14px}
+.notes p{margin:0 0 9px}
+.crit-tag{font-weight:700;font-size:11px;padding:2px 7px;border-radius:5px;margin-right:6px;color:#fff}
+.prosody{font-family:var(--mono);font-size:13px;line-height:2;color:var(--ink-2)}
+.prosody .st{font-weight:700;color:var(--ember)}
+.bandhead{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.bandhead .bn{font-family:var(--display);font-size:24px;font-weight:700}
+
+/* self-assessment */
+.crit{margin-bottom:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.crit>h4{margin:0;font-size:15.5px;padding:13px 17px;color:#fff}
+.crit .items{padding:4px 17px 14px}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:10px 0 10px 11px;border-bottom:1px solid #F1EADA;font-size:14.5px;border-left:4px solid transparent}
+.chk:last-child{border-bottom:0}
+.chk input{margin:4px 0 0;width:18px;height:18px;flex:0 0 auto}
+.chk label{cursor:pointer}
+.chk .lvl{font-family:var(--mono);font-size:10.5px;padding:1px 7px;border-radius:5px;margin-right:7px;font-weight:700}
+.score{background:var(--ink);color:#FFF8E7;border-radius:15px;padding:20px;margin-top:6px}
+.score .big{font-family:var(--display);font-size:40px;margin:4px 0;color:var(--gold);font-weight:700}
+.score .brk{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.score .brk span{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:7px;color:#fff}
+.warnbox{background:#FDECE2;border:1px solid #F3CBB4;border-radius:11px;padding:13px 15px;font-size:14px;margin-bottom:16px;color:#8A3A12}
+
+/* report */
+.kv{display:grid;grid-template-columns:170px 1fr;gap:7px 15px;font-size:14.5px}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+.sid{font-family:var(--mono);font-size:13px;background:var(--sand);padding:2px 8px;border-radius:6px}
+</style>
+<script>window.__CFG={submitUrl:"https://script.google.com/macros/s/AKfycbw4Jh6R2yDx-8AtFBX4ELOUxrRak2qWkZz9kF6wSg0qVuEMSaZnOadixb9tVa7tsDJvvA/exec",version:"202611191609"};</script>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">HUONG STELLA PARADIGM</p>
+    <p class="modno">IELTS Speaking Forecast 2026 · Quarter 3 · Module 04 of 10</p>
+    <h1>Education & Learning</h1>
+    <p class="tag">Teaching, self-study, language and intelligence</p>
+    <p class="blurb">Six cue cards in the Quarter 3 forecast and four Part 1 frames, all drawing on one lexical set and one stock of arguments about how people learn, who learns well, and why.</p>
+    <div class="idbar">
+      <input id="stName" placeholder="Full name" autocomplete="name">
+      <input id="stEmail" type="email" placeholder="Email address" autocomplete="email">
+      <input id="subLink" placeholder="Submission link from your teacher">
+    </div>
+  </div>
+</header>
+
+<div class="flow"><div class="wrap">
+  Work through the tabs in order: <b>learn the language</b> → <b>study the reasoning</b> → <b>record with the AI examiner</b> → <b>compare against the band models</b> → <b>return to the studio and record again</b> → <b>rate yourself against the descriptors</b> → <b>download and submit your report</b>.
+</div></div>
+
+<nav class="tabs"><div class="inner" id="tabs" role="tablist"></div></nav>
+
+<main class="wrap">
+
+<!-- 1 VOCABULARY -->
+<section class="panel" id="p-vocab" role="tabpanel">
+  <h2 class="sec">Vocabulary</h2>
+  <p class="sub" id="vocabSub"></p>
+  <div class="vfilter" id="vfilter"></div>
+  <div class="card scroll" id="vocabCard">
+    <table>
+      <thead><tr><th style="width:19%">Item</th><th style="width:11%">Pronunciation</th><th style="width:24%">Meaning</th><th style="width:24%">Register &amp; usage</th><th>Example in use</th></tr></thead>
+      <tbody id="vocabBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 2 REASONING -->
+<section class="panel" id="p-reason" role="tabpanel">
+  <h2 class="sec">Reasoning &amp; structure</h2>
+  <p class="sub">The same question, answered three ways. What separates the bands is not length but the reasoning operations performed: stating and illustrating at Band 6, conceding and categorising at Band 7, redefining and weighing trade-offs at Band 8.</p>
+  <div id="reasonBody"></div>
+</section>
+
+<!-- 3 STUDIO -->
+<section class="panel" id="p-studio" role="tabpanel">
+  <h2 class="sec">Recording studio</h2>
+  <p class="sub">For Part 1 and Part 3 the examiner reads each question aloud and nothing is written down, as in the real interview: press <b>Start</b>, answer, then press <b>Next question</b>. For Part 2 the cue card stays on screen throughout, exactly as the real card stays in your hand. The recorder runs continuously across a whole set.</p>
+
+  <div class="row" style="margin-bottom:14px">
+    <select id="partSel"><option value="p1">Part 1</option><option value="p2">Part 2</option><option value="p3">Part 3</option></select>
+    <select id="setSel" style="flex:1 1 260px"></select>
+  </div>
+  <div class="row" style="margin-bottom:14px">
+    <label class="hint" for="voiceSel" style="margin:0">Examiner's voice</label>
+    <select id="voiceSel" style="flex:1 1 260px;font-size:14px"></select>
+    <button class="btn ghost" id="btnVoice" style="font-size:13px;padding:9px 14px">Hear it</button>
+  </div>
+  <p class="hint" id="voiceNote" style="margin:-8px 0 14px"></p>
+
+  <div class="stage" id="stage">
+    <p class="counter" id="counter">—</p>
+    <p class="qtext" id="qNow">Select a question set, then press Start.</p>
+    <ul class="bullets" id="qBullets" hidden></ul>
+    <p class="listen" id="listenNote" hidden>The examiner is speaking. Answer when the question ends — press <b>Show</b> only if you could not catch it.</p>
+    <p class="clock" id="clock">00:00</p>
+    <p class="target" id="target"></p>
+    <div class="row">
+      <button class="btn gold" id="btnStart">Start</button>
+      <button class="btn ghost" id="btnAsk" hidden>Repeat question</button>
+      <button class="btn ghost" id="btnShow" hidden>Show</button>
+      <button class="btn ghost" id="btnNext" hidden>Next question</button>
+      <button class="btn ghost" id="btnPrep" hidden>Start 1-minute preparation</button>
+      <button class="btn ember" id="btnRec"><span class="dot"></span>Record set</button>
+      <button class="btn gold" id="btnStop" disabled>Stop &amp; save</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 8px;font-size:16px">Recorded takes</h3>
+    <div id="takes"><p class="hint" style="margin:6px 0">No recordings yet.</p></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin:0 0 6px;font-size:16px">Transcript</h3>
+    <p class="hint" style="margin:0 0 10px">Chrome and Edge will transcribe automatically as you speak. In other browsers, play the recording back and type it out — transcribing your own speech is the single most effective error-correction exercise available to you.</p>
+    <textarea id="transcript" placeholder="Your transcript will appear here…"></textarea>
+    <p class="hint" id="wcount">0 words</p>
+  </div>
+</section>
+
+<!-- 4 MODELS -->
+<section class="panel" id="p-models" role="tabpanel">
+  <h2 class="sec">Band model answers</h2>
+  <p class="sub">Three responses to one question. Toggle the highlighting to see which features are credited under each assessment criterion, then return to the studio and record the same question again.</p>
+  <div class="hlbar" id="hlbar">
+    <button data-c="fc" aria-pressed="true" style="color:var(--fc8)">Fluency &amp; Coherence</button>
+    <button data-c="lr" aria-pressed="true" style="color:var(--lr8)">Lexical Resource</button>
+    <button data-c="gr" aria-pressed="true" style="color:var(--gr8)">Grammatical Range</button>
+    <button data-c="pr" aria-pressed="true" style="color:var(--pr8)">Pronunciation</button>
+  </div>
+  <div id="modelBody"></div>
+</section>
+
+<!-- 5 SELF-ASSESSMENT -->
+<section class="panel" id="p-check" role="tabpanel">
+  <h2 class="sec">Self-assessment</h2>
+  <p class="sub">Tick only what your recording demonstrably does, not what you intended it to do. The statements below translate the four public IELTS Speaking assessment criteria into observable behaviour. Each criterion has its own colour; within a criterion, the shade darkens as the band rises.</p>
+  <div class="warnbox" id="fmtWarn" hidden></div>
+  <div id="chkBody"></div>
+  <div class="score">
+    <div style="font-size:13px;color:#C9AE72">Self-rated band — mean of the four criteria, rounded to the nearest half band</div>
+    <div class="big" id="scoreVal">—</div>
+    <div class="brk" id="scoreBrk"></div>
+    <p class="hint" id="scoreNote" style="color:#A8945F;margin:12px 0 0"></p>
+  </div>
+</section>
+
+<!-- 6 REPORT -->
+<section class="panel" id="p-report" role="tabpanel">
+  <h2 class="sec">Submission report</h2>
+  <p class="sub">Download the formatted report together with your audio file, then upload both to the link your teacher has given you. The two files share a submission ID so they can be matched after upload.</p>
+  <div class="card"><dl class="kv" id="repPreview"></dl></div>
+  <div class="row">
+    <button class="btn gold" id="btnReport">Download report (.html)</button>
+    <button class="btn ghost" id="btnAudio">Download latest recording</button>
+    <button class="btn ghost" id="btnJson">Download data (.json)</button>
+    <button class="btn" id="btnOpen">Open submission link</button>
+  </div>
+  <p class="hint" style="margin-top:10px">The report records your name, email, submission time, module, question set, number of takes, total practice time, the duration of your final take, your full transcript, and every self-assessment statement with its result. Open it and print to PDF if a PDF is required.</p>
+  <p class="hint" id="sendNote" hidden style="margin:6px 0;color:var(--gold-2);font-weight:600"></p>
+  <div class="disclaimer" id="disclaimerBox"></div>
+</section>
+
+<footer id="foot"></footer>
+</main>
+
+<script>
+/* ===== gửi bài về hệ thống chấm — studio-audio.js + studio-submit.js ===== */
+/* ============================================================================
+ * Speaking Studio — chuẩn hoá âm thanh trước khi gửi đi chấm
+ * Huong Stella Learning Lab
+ *
+ * Nguyên tắc: KHÔNG chuyển đổi nếu không cần.
+ *   Firefox cho ra ogg/opus  → Gemini đọc được → gửi thẳng.
+ *   Safari  cho ra mp4/aac   → Gemini đọc được → gửi thẳng.
+ *   Chrome  cho ra webm/opus → chuyển sang mp3 16 kHz mono.
+ *
+ * Vì sao 16 kHz mono: Gemini hạ mọi file về 16 kHz trước khi nghe, và tính
+ * 32 token mỗi giây bất kể chất lượng. Giữ 48 kHz stereo chỉ tốn băng thông,
+ * không thêm một điểm nào cho học viên. Hai phút nói: webm 48 kHz ≈ 1,4 MB,
+ * mp3 16 kHz mono 32 kbps ≈ 240 KB.
+ *
+ * Dùng:
+ *   const out = await HSSAudio.prepare(blob);     // {blob, mime, ext, note}
+ * ========================================================================== */
+(function (w) {
+  "use strict";
+
+  /* Gemini đọc được các container này, khỏi phải đụng tới */
+  var NATIVE = /^audio\/(mpeg|mp3|mp4|aac|x-m4a|wav|wave|x-wav|ogg|flac|aiff)/i;
+
+  var LAME = "https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js";
+  var RATE = 16000, KBPS = 32;
+
+  /* ---------- chọn định dạng thu tốt nhất mà máy hỗ trợ ---------- */
+  function bestRecordingType() {
+    if (typeof MediaRecorder === "undefined" || !MediaRecorder.isTypeSupported) return "";
+    var want = ["audio/ogg;codecs=opus", "audio/mp4", "audio/mpeg", "audio/webm;codecs=opus", "audio/webm"];
+    for (var i = 0; i < want.length; i++) if (MediaRecorder.isTypeSupported(want[i])) return want[i];
+    return "";
+  }
+
+  /* ---------- giải mã + hạ về 16 kHz mono ---------- */
+  function toMono16k(buf) {
+    return new Promise(function (res, rej) {
+      var AC = w.AudioContext || w.webkitAudioContext;
+      var OC = w.OfflineAudioContext || w.webkitOfflineAudioContext;
+      if (!AC || !OC) return rej(new Error("Trình duyệt không có Web Audio"));
+      var ctx = new AC();
+      ctx.decodeAudioData(buf.slice(0), function (decoded) {
+        var frames = Math.max(1, Math.ceil(decoded.duration * RATE));
+        var off;
+        try { off = new OC(1, frames, RATE); }
+        catch (e) { ctx.close && ctx.close(); return rej(new Error("Máy không hạ được về 16 kHz")); }
+        var src = off.createBufferSource();
+        src.buffer = decoded;            // nhiều kênh → OfflineAudioContext 1 kênh tự trộn xuống mono
+        src.connect(off.destination);
+        src.start(0);
+        off.startRendering().then(function (r) {
+          ctx.close && ctx.close();
+          res({ pcm: r.getChannelData(0), rate: RATE, seconds: decoded.duration });
+        }, rej);
+      }, function () { ctx.close && ctx.close(); rej(new Error("Không giải mã được bản thu")); });
+    });
+  }
+
+  function toInt16(f32) {
+    var out = new Int16Array(f32.length);
+    for (var i = 0; i < f32.length; i++) {
+      var s = f32[i] < -1 ? -1 : f32[i] > 1 ? 1 : f32[i];
+      out[i] = s < 0 ? s * 0x8000 : s * 0x7fff;
+    }
+    return out;
+  }
+
+  /* ---------- WAV: không cần thư viện, luôn chạy được ---------- */
+  function wav(i16, rate) {
+    var b = new ArrayBuffer(44 + i16.length * 2), v = new DataView(b);
+    var put = function (o, s) { for (var i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+    put(0, "RIFF"); v.setUint32(4, 36 + i16.length * 2, true); put(8, "WAVE");
+    put(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true);
+    v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+    put(36, "data"); v.setUint32(40, i16.length * 2, true);
+    new Int16Array(b, 44).set(i16);
+    return new Blob([b], { type: "audio/wav" });
+  }
+
+  /* ---------- MP3 trong Worker, để giao diện không khựng ---------- */
+  var worker = null, jobId = 0, jobs = {};
+  function mp3Worker() {
+    if (worker !== null) return worker;
+    var code =
+      'importScripts(' + JSON.stringify(LAME) + ');' +
+      'self.onmessage=function(e){' +
+      ' var d=e.data,enc=new lamejs.Mp3Encoder(1,d.rate,d.kbps),p=[],B=1152;' +
+      ' for(var i=0;i<d.pcm.length;i+=B){' +
+      '  var c=enc.encodeBuffer(d.pcm.subarray(i,i+B));' +
+      '  if(c.length)p.push(new Int8Array(c));}' +
+      ' var f=enc.flush(); if(f.length)p.push(new Int8Array(f));' +
+      ' self.postMessage({id:d.id,parts:p});};';
+    try {
+      worker = new Worker(URL.createObjectURL(new Blob([code], { type: "text/javascript" })));
+      worker.onmessage = function (e) {
+        var j = jobs[e.data.id]; if (!j) return; delete jobs[e.data.id];
+        j.res(new Blob(e.data.parts, { type: "audio/mpeg" }));
+      };
+      worker.onerror = function () {                 // CDN chặn hoặc ngoại tuyến
+        Object.keys(jobs).forEach(function (k) { jobs[k].rej(new Error("lame")); delete jobs[k]; });
+        worker = false;
+      };
+    } catch (e) { worker = false; }
+    return worker;
+  }
+
+  function mp3(i16, rate) {
+    var wk = mp3Worker();
+    if (!wk) return Promise.reject(new Error("lame"));
+    return new Promise(function (res, rej) {
+      var id = ++jobId;
+      jobs[id] = { res: res, rej: rej };
+      setTimeout(function () { if (jobs[id]) { delete jobs[id]; rej(new Error("quá lâu")); } }, 90000);
+      wk.postMessage({ id: id, pcm: i16, rate: rate, kbps: KBPS }, [i16.buffer]);
+    });
+  }
+
+  var HSSAudio = {
+    bestRecordingType: bestRecordingType,
+
+    /** Trả về bản thu ở định dạng Gemini chắc chắn đọc được.
+     *  Không bao giờ ném lỗi: cùng lắm trả lại nguyên bản và ghi chú lý do. */
+    prepare: function (blob) {
+      var type = (blob.type || "").toLowerCase();
+      if (NATIVE.test(type)) {
+        var ext = /mpeg|mp3/.test(type) ? "mp3" : /mp4|aac|m4a/.test(type) ? "m4a"
+                : /ogg/.test(type) ? "ogg" : /flac/.test(type) ? "flac" : "wav";
+        return Promise.resolve({ blob: blob, mime: type.split(";")[0], ext: ext, note: "giữ nguyên" });
+      }
+      return blob.arrayBuffer().then(toMono16k).then(function (a) {
+        var i16 = toInt16(a.pcm);
+        return mp3(i16, a.rate).then(function (m) {
+          return { blob: m, mime: "audio/mpeg", ext: "mp3", seconds: a.seconds, note: "mp3 16 kHz mono" };
+        }).catch(function () {
+          return { blob: wav(toInt16(a.pcm), a.rate), mime: "audio/wav", ext: "wav",
+                   seconds: a.seconds, note: "wav 16 kHz mono (không nạp được bộ mã mp3)" };
+        });
+      }).catch(function (e) {
+        return { blob: blob, mime: (type || "audio/webm").split(";")[0], ext: "webm",
+                 note: "gửi nguyên bản — " + (e.message || e) };
+      });
+    },
+
+    /** Nạp trước bộ mã mp3 ngay khi mở trang, để lúc thu xong không phải chờ. */
+    warmUp: function () { try { mp3Worker(); } catch (e) {} }
+  };
+
+  w.HSSAudio = HSSAudio;
+})(window);
+
+/* ============================================================================
+ * Speaking Studio — gửi bản thu lên backend chấm AI dùng chung với Speaking Lab
+ * Huong Stella Learning Lab
+ *
+ * CÁCH DÙNG trong template.html / practice-template.html:
+ *   1. Dán cả file này vào một thẻ <script> trước đoạn mã phòng thu.
+ *   2. Đặt cấu hình (lấy endpoint từ config.json như hiện nay):
+ *        HSS.init({ endpoint: (window.__CFG||{}).submitUrl, unit: "S01" });
+ *   3. Ở chỗ bản thu vừa xong (hàm save / stopRec), gọi:
+ *        HSS.upload(blob, { code: "M01.P1.G1", part: 1,
+ *                           question: currentGroupName, seconds: secs,
+ *                           take: takeNo, final: isFinal });
+ *   4. Trước khi cho thu lần đầu:  await HSS.identify();
+ * ========================================================================== */
+(function (w) {
+  "use strict";
+
+  var CFG = { endpoint: "", unit: "", token: "hss-studio" };   // khớp COURSE_TOKEN trong StudioBackend.gs
+  var ME = null;                                   // {email, name, allowed}
+  var SKIPPED = false;                             // em đã chọn luyện tập không nộp bài
+  var KEY = "hss.identity";
+
+  function post(body) {
+    // text/plain tránh preflight CORS với Apps Script
+    return fetch(CFG.endpoint, {
+      method: "POST", redirect: "follow",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json(); })
+      .catch(function () { return { ok: null }; });  // null = đã gửi, không đọc được trả lời
+  }
+
+  function get(params) {
+    var q = Object.keys(params).map(function (k) {
+      return encodeURIComponent(k) + "=" + encodeURIComponent(params[k]);
+    }).join("&");
+    return fetch(CFG.endpoint + "?" + q, { redirect: "follow" })
+      .then(function (r) { return r.json(); })
+      .catch(function () { return { ok: false, error: "network" }; });
+  }
+
+  function b64(blob) {
+    return new Promise(function (res, rej) {
+      var fr = new FileReader();
+      fr.onload = function () { res(String(fr.result).split(",")[1]); };
+      fr.onerror = rej;
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  function saved() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; }
+  }
+  function remember(v) {
+    try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {}
+  }
+
+  /* hộp thoại nhập tên + email, chỉ hiện lần đầu trên mỗi máy */
+  function ask(prefill) {
+    return new Promise(function (res) {
+      var w1 = document.createElement("div");
+      w1.setAttribute("role", "dialog");
+      w1.setAttribute("aria-label", "Nhận diện học viên");
+      w1.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(42,30,10,.55);" +
+        "display:flex;align-items:center;justify-content:center;padding:20px";
+      w1.innerHTML =
+        '<form style="background:#fff;border-radius:14px;padding:24px;max-width:420px;width:100%;' +
+        'font-family:inherit;box-shadow:0 18px 50px rgba(0,0,0,.25)">' +
+        '<p style="font-size:11.5px;font-weight:600;letter-spacing:.2em;color:#B87200;margin:0 0 10px">' +
+        'HUONG STELLA PARADIGM</p>' +
+        '<h2 style="margin:0 0 6px;font-size:20px;color:#2A1E0A">Trước khi thu âm</h2>' +
+        '<p style="margin:0 0 16px;font-size:14px;color:#8D7B58;line-height:1.5">' +
+        'Nhập tên và email cô giáo đã đăng ký cho em. Bản thu sẽ được gửi về để chấm, ' +
+        'và kết quả quay lại đúng email này.</p>' +
+        '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">Họ và tên</label>' +
+        '<input name="n" required value="' + (prefill && prefill.name ? prefill.name : "") + '" ' +
+        'style="width:100%;padding:10px 12px;border:1px solid #EADFC5;border-radius:8px;font:inherit;margin-bottom:12px">' +
+        '<label style="display:block;font-size:13px;font-weight:600;margin-bottom:4px">Email</label>' +
+        '<input name="e" type="email" required value="' + (prefill && prefill.email ? prefill.email : "") + '" ' +
+        'style="width:100%;padding:10px 12px;border:1px solid #EADFC5;border-radius:8px;font:inherit;margin-bottom:6px">' +
+        '<p data-err style="color:#B4392A;font-size:13px;min-height:19px;margin:0 0 10px"></p>' +
+        '<button data-go style="width:100%;padding:12px;border:0;border-radius:8px;background:#F2A81D;' +
+        'color:#2A1E0A;font:inherit;font-weight:700;cursor:pointer">Tiếp tục</button>' +
+        '<button data-skip type="button" style="width:100%;margin-top:8px;padding:10px;border:1px solid #EADFC5;' +
+        'border-radius:8px;background:#fff;color:#8D7B58;font:inherit;cursor:pointer">' +
+        'Luyện tập, không nộp bài</button>' +
+        '</form>';
+      document.body.appendChild(w1);
+      var f = w1.querySelector("form"), err = w1.querySelector("[data-err]");
+      var go = w1.querySelector("[data-go]"), skip = w1.querySelector("[data-skip]");
+      var done = false;
+      /* QUAN TRỌNG: mọi lối ra đều phải gọi finish().
+         Trước đây khi xác thực hỏng thì promise không bao giờ resolve,
+         nên nút thu âm treo luôn và học viên không thoát ra được. */
+      function finish(me) { if (done) return; done = true; w1.remove(); res(me || null); }
+      skip.addEventListener("click", function () { finish(null); });
+      w1.addEventListener("click", function (e) { if (e.target === w1) finish(null); });
+      document.addEventListener("keydown", function esc(e) {
+        if (e.key === "Escape" && !done) { document.removeEventListener("keydown", esc); finish(null); }
+      });
+      f.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var email = f.e.value.trim().toLowerCase(), name = f.n.value.trim();
+        err.style.color = "#B4392A"; err.textContent = "Đang kiểm tra…";
+        go.disabled = true;
+        get({ action: "auth", token: CFG.token, unit: CFG.unit, email: email }).then(function (r) {
+          go.disabled = false;
+          if (r && r.ok && r.allowed) {
+            var me = { email: email, name: r.name || name, allowed: true };
+            remember(me); finish(me); return;
+          }
+          if (r && r.ok) {
+            err.textContent = "Email này chưa được mở quyền cho phần " + CFG.unit +
+              (r.reason ? " (" + r.reason + ")" : "") + ". Nhắn cho cô giáo nhé.";
+          } else {
+            err.textContent = "Chưa kết nối được tới hệ thống của lớp.";
+          }
+          skip.textContent = "Vẫn thu âm, nộp bài sau";
+          skip.style.borderColor = "#F2A81D"; skip.style.color = "#2A1E0A"; skip.style.fontWeight = "600";
+        });
+      });
+    });
+  }
+
+  var HSS = {
+    init: function (o) {
+      CFG.endpoint = o.endpoint || CFG.endpoint;
+      CFG.unit = o.unit || CFG.unit;
+      if (o.token) CFG.token = o.token;
+      ME = saved();
+      // bộ mã mp3 nạp lúc nhận diện, không nạp khi mở trang:
+      // trang nào học viên chỉ đọc thì không phải tải gì thêm
+      return HSS;
+    },
+
+    /** Định dạng nên truyền cho MediaRecorder: ogg trên Firefox, mp4 trên Safari,
+     *  webm trên Chrome (sẽ được chuyển sang mp3 lúc gửi). */
+    recordingType: function () { return w.HSSAudio ? w.HSSAudio.bestRecordingType() : ""; },
+
+    ready: function () { return !!(CFG.endpoint && CFG.unit); },
+    me: function () { return ME; },
+
+    /** Hỏi tên + email nếu chưa có, và xác thực với Roster.
+     *  LUÔN resolve — có thể trả về null, nghĩa là "cứ thu, chưa nộp được".
+     *  Hỏi một lần cho mỗi lần mở trang; em đã bỏ qua thì không hỏi lại. */
+    identify: function (force) {
+      if (!HSS.ready()) return Promise.resolve(null);
+      if (w.HSSAudio) w.HSSAudio.warmUp();
+      if (ME && ME.allowed && !force) return Promise.resolve(ME);
+      if (SKIPPED && !force) return Promise.resolve(null);
+      return ask(ME).then(function (m) { ME = m; if (!m) SKIPPED = true; return m; });
+    },
+
+    /** Gửi một bản thu lên Drive + ghi một dòng trong tab Speaking.
+     *  Bản thu được chuẩn hoá sang định dạng Gemini đọc được trước khi gửi
+     *  (xem studio-audio.js). Chrome: webm → mp3 16 kHz mono, nhỏ hơn ~5 lần. */
+    upload: function (blob, info) {
+      if (!HSS.ready()) return Promise.resolve({ ok: false, error: "chưa cấu hình" });
+      return HSS.identify().then(function (me) {
+        if (!me) return { ok: false, error: "not signed in — download this take and send it to your teacher" };
+        if (typeof info.onstage === "function") info.onstage("Đang chuẩn bị bản thu…");
+        var step = w.HSSAudio
+          ? w.HSSAudio.prepare(blob)
+          : Promise.resolve({ blob: blob, mime: (blob.type || "audio/webm").split(";")[0], ext: "webm", note: "" });
+        return step.then(function (a) {
+          if (typeof info.onstage === "function") info.onstage("Đang gửi về cho cô…");
+          return b64(a.blob).then(function (data) {
+            return post({
+              action: "audio", token: CFG.token, unit: CFG.unit,
+              email: me.email, name: me.name,
+              module: info.module || CFG.unit, code: info.code,
+              part: info.part, question: info.question || "",
+              take: info.take || 1, takes: info.takes || info.take || 1,
+              final: !!info.final, seconds: Math.round(info.seconds || a.seconds || 0),
+              recordedBeforeModels: info.recordedBeforeModels,
+              minutes: info.minutes || "",
+              mime: a.mime, ext: a.ext, audioNote: a.note || "",
+              bytes: a.blob.size || 0,
+              device: navigator.userAgent.slice(0, 120),
+              data: data
+            }).then(function (r) {
+              if (typeof info.onstage === "function") info.onstage(r && r.ok === false ? "Chưa gửi được" : "Đã gửi");
+              return r;
+            });
+          });
+        });
+      });
+    },
+
+    /** Đánh dấu bản thu mới nhất của một câu là bài nộp chính thức. */
+    markFinal: function (info) {
+      if (!ME) return Promise.resolve({ ok: false });
+      return post({
+        action: "final", token: CFG.token, unit: CFG.unit,
+        email: ME.email, name: ME.name, code: info.code,
+        finalTake: info.take || 1, minutes: info.minutes || "",
+        self: info.self || {}, overall: info.overall || "",
+        checks: info.checks || "", note: info.note || ""
+      });
+    },
+
+    /** Gửi bảng tự chấm lên tab Self-check. */
+    selfcheck: function (info) {
+      if (!ME) return Promise.resolve({ ok: false });
+      return post({
+        action: "selfcheck", token: CFG.token, unit: CFG.unit,
+        email: ME.email, name: ME.name, part: info.part,
+        ticked: info.ticked, total: info.total,
+        FC: (info.self || {}).FC || "", LR: (info.self || {}).LR || "",
+        GRA: (info.self || {}).GRA || "", P: (info.self || {}).P || "",
+        overall: info.overall || "",
+        missedList: info.missed || "", note: info.note || ""
+      });
+    },
+
+    /** Lấy phản hồi AI mà cô giáo đã duyệt, để hiện trong app. */
+    feedback: function () {
+      if (!ME) return Promise.resolve({ ok: false });
+      return get({ action: "feedback", token: CFG.token, unit: CFG.unit, email: ME.email });
+    },
+
+    /** Xoá danh tính trên máy này (dùng chung máy ở lớp). */
+    signOut: function () { try { localStorage.removeItem(KEY); } catch (e) {} ME = null; }
+  };
+
+  w.HSS = HSS;
+})(window);
+
+/* ===== hết phần gửi bài ===== */
+const TOPIC = {"id":"education-and-learning","no":"04","name":"Education & Learning","tagline":"Teaching, self-study, language and intelligence","blurb":"Six cue cards in the Quarter 3 forecast and four Part 1 frames, all drawing on one lexical set and one stock of arguments about how people learn, who learns well, and why.","vocab":[{"t":"pick something up","wc":"phrasal verb","g":"pv","ipa":"/pɪk ʌp/","def":"to learn a skill informally, without being taught","vi":"học lỏm, tự nhặt được","n":"Implies the learning was incidental rather than deliberate, which is exactly what the <i>learned without a teacher</i> cue card is about. Separable: <i>pick it up</i>, not <i>pick up it</i>.","eg":"I never had a lesson — I picked it up watching my father in the workshop."},{"t":"get to grips with","wc":"phrasal verb","g":"pv","ipa":"/ɡet tə ˈɡrɪps/","def":"to begin to understand and handle something difficult","vi":"bắt đầu nắm được","n":"British and slightly informal. Implies initial struggle, so it is stronger evidence of effort than <i>learn</i>.","eg":"It took me most of a term to get to grips with statistics, and I still read the formulas twice."},{"t":"rote learning","wc":"noun phrase","g":"noun","ipa":"/rəʊt ˈlɜːnɪŋ/","def":"memorisation by repetition, without understanding","vi":"học vẹt","n":"Neutral in form, negative in use. The natural partner in Part 3 is <i>rote learning versus critical thinking</i>, and it names a feature of Vietnamese schooling that examiners hear discussed well.","eg":"Rote learning gets you through the exam and then abandons you the following week."},{"t":"a steep learning curve","wc":"noun phrase","g":"noun","ipa":"/stiːp ˈlɜːnɪŋ kɜːv/","def":"a period in which a great deal must be learned quickly","vi":"giai đoạn phải học rất nhanh","n":"Note the logic: <i>steep</i> means hard, not fast. Many candidates use it backwards, which an examiner will register as an imprecise collocation.","eg":"The first month was a steep learning curve — I understood perhaps half of what was said."},{"t":"bring a subject to life","wc":"collocation","g":"coll","ipa":"/brɪŋ tə ˈlaɪf/","def":"to make a subject vivid and interesting to learners","vi":"thổi hồn vào môn học","n":"The single most useful phrase for any question about good teaching. Reserve it for a teacher who genuinely did this, and give the evidence immediately after.","eg":"He brought the subject to life by playing us recordings instead of reading us dates."},{"t":"sink in","wc":"phrasal verb","g":"pv","ipa":"/sɪŋk ˈɪn/","def":"(of information) to become fully understood after a delay","vi":"ngấm dần","n":"Intransitive and always about the material, never the learner. <i>The idea sank in</i>, not <i>I sank in the idea</i>.","eg":"The explanation made no sense in the lecture; it only sank in when I tried to use it."},{"t":"a head start","wc":"noun phrase","g":"noun","ipa":"/hed ˈstɑːt/","def":"an advantage gained by beginning earlier than others","vi":"lợi thế xuất phát sớm","n":"Central to the <i>at what age should children start</i> questions. Collocates with <i>give</i> and <i>have</i>.","eg":"Starting a language at five gives a child a head start that is very hard to close later."},{"t":"well-rounded","wc":"adjective","g":"adj","ipa":"/wel ˈraʊndɪd/","def":"competent and knowledgeable across many areas","vi":"toàn diện","n":"Positive, slightly institutional. Useful precisely because it exposes a contradiction worth naming: systems that claim to want it rank students on two subjects.","eg":"Schools say they want well-rounded students and then measure them on maths and literature alone."},{"t":"play to your strengths","wc":"idiom","g":"idiom","ipa":"/pleɪ tə jɔː ˈstreŋθs/","def":"to concentrate on what you are already good at","vi":"phát huy sở trường","n":"The counter-argument to <i>well-rounded</i>, and pairing the two makes a complete Part 3 answer on its own.","eg":"There is a real case for letting children play to their strengths rather than repairing every weakness."},{"t":"hands-on","wc":"adjective","g":"adj","ipa":"/hændz ˈɒn/","def":"involving practical activity rather than theory","vi":"thực hành trực tiếp","n":"Always before the noun, hyphenated. Its opposite in educational discussion is <i>theoretical</i>, not <i>hands-off</i>.","eg":"I learn best in a hands-on way — reading about a technique never sticks for me."},{"t":"trial and error","wc":"fixed phrase","g":"coll","ipa":"/ˌtraɪəl ənd ˈerə/","def":"learning by attempting repeatedly and correcting mistakes","vi":"thử và sai","n":"Fixed in that order with no articles. Ideal for the <i>learned without a teacher</i> and <i>made things by hand</i> cards.","eg":"There was no manual, so the whole thing was trial and error for about six months."},{"t":"have a flair for","wc":"idiom","g":"idiom","ipa":"/fleə/","def":"to have a natural talent for something","vi":"có năng khiếu về","n":"Warmer and less clinical than <i>be talented at</i>. Followed by a noun or -ing form.","eg":"She has a flair for languages that the rest of the family watches with mild resentment."},{"t":"an eye for detail","wc":"idiom","g":"idiom","ipa":"/aɪ fə ˈdiːteɪl/","def":"the ability to notice small but important things","vi":"con mắt tinh về chi tiết","n":"The natural phrase for the <i>person good at making things by hand</i> card. Note <i>an eye for</i>, never <i>an eye to</i>.","eg":"What makes her work different is an eye for detail that nobody would notice until it was missing."},{"t":"take something in","wc":"phrasal verb","g":"pv","ipa":"/teɪk ˈɪn/","def":"to absorb and understand information","vi":"tiếp thu","n":"Usually negative or limited in practice: <i>I couldn't take it all in</i>. Separable.","eg":"There was so much in the first lecture that I took almost none of it in."},{"t":"second nature","wc":"idiom","g":"idiom","ipa":"/ˈsekənd ˈneɪtʃə/","def":"a skill so practised it requires no conscious thought","vi":"thành bản năng thứ hai","n":"No article before it: <i>it became second nature</i>. Marks the end point of a learning story, so it belongs in the final thirty seconds of a Part 2.","eg":"After three years of it the whole process has become second nature."},{"t":"spoon-feed","wc":"verb","g":"pv","ipa":"/ˈspuːn fiːd/","def":"to give learners information so completely that they never think for themselves","vi":"học kiểu mớm sẵn","n":"Strongly critical. A precise and economical way to attack an education system in Part 3, and far better than <i>the teaching is bad</i>.","eg":"We were spoon-fed everything, so nobody arrived at university knowing how to read a source."},{"t":"nature versus nurture","wc":"fixed phrase","g":"coll","ipa":"/ˈneɪtʃə ˈvɜːsəs ˈnɜːtʃə/","def":"the debate over whether ability is inborn or produced by environment","vi":"bẩm sinh hay do nuôi dạy","n":"Naming the debate rather than stumbling through it is itself a Band 8 move, because it shows you recognise the question's shape.","eg":"It is the old nature-versus-nurture question, and my sense is that environment does far more of the work."},{"t":"leave a mark on","wc":"idiom","g":"idiom","ipa":"/liːv ə ˈmɑːk/","def":"to have a lasting influence on someone","vi":"để lại dấu ấn","n":"Emotionally weighted, so reserve it for a genuine closing line about a teacher or mentor.","eg":"Two teachers left a mark on me, and neither of them taught the subject I ended up studying."}],"strategy":{"p1":{"q":"Do you like learning history?","b6":{"h":"A clear position with one reason and an example","f":"Verdict → Reason → One remembered thing","pts":["Answer in the first clause, then justify. Two to four sentences is the band-appropriate length.","Name an actual period, war or figure. A specific noun does more work here than any adjective.","Keep the present simple for your current attitude and the past simple for school memories; do not drift between them."]},"b7":{"h":"Distinguish the subject from the way it was taught","f":"Qualified answer → Separate the two → Concrete evidence","pts":["Most people do not dislike history; they disliked how it was delivered. Saying that is visible reasoning in one clause.","Add one less common item — <i>brought the subject to life</i>, <i>rote learning</i> — and only one.","Close on a detail that could not have been memorised: a teacher's name, a specific lesson, something you still remember wrongly."]},"b8":{"h":"Take a position on what the subject is for","f":"Reframe → Personal stance → Vivid specific → Short landing","pts":["Say what you think history is actually for — explaining the present, or merely recording the past — and answer from there.","Admit a complication in yourself: enjoying it now and loathing it at fifteen is more credible than lifelong enthusiasm.","End on a short clause after the longer ones. Rhythm is assessed, not only content."]}},"p2":{"q":"Describe a course that impressed you a lot","b6":{"h":"Cover the prompts and reach the time","f":"What it was → Where → What you did → Why it impressed you","pts":["Choose a course you actually took. Invented content runs dry at ninety seconds because there are no details to reach for.","Two or three sentences per prompt. The final prompt carries the most development, so leave time for it.","Aim for at least ninety seconds. Stopping at sixty caps Fluency and Coherence whatever the accuracy."]},"b7":{"h":"Narrate the change in you, not the syllabus","f":"Why you took it → What you expected → The moment it shifted → What it left you with","pts":["Open on why you signed up, not on what the course covered. A course description is not a story.","Locate one moment where your understanding changed, and narrate that moment in detail.","Use past perfect for what you had assumed beforehand: <i>I'd always thought statistics was arithmetic.</i>"]},"b8":{"h":"Make the course a turning point with a cost","f":"In medias res → Expectation → Reversal → What it cost → Broader reflection","pts":["Begin inside the experience — a specific session, a specific sentence somebody said.","Admit what the course cost you: time, a grade elsewhere, a belief you had to abandon.","Close on something the course taught you that was not its subject. That is the reflection that outlives the anecdote."]}},"p3":{"q":"Do you think children are born smart, or do they learn to become smart?","b6":{"h":"Choose a side and support it","f":"Position → Reason 1 + example → Reason 2 + example","pts":["Commit in the first clause rather than saying both matter.","Two supported reasons is sufficient structure at this level.","Use an example from your own family or school; it is more specific than a general claim about children."]},"b7":{"h":"Concede, then separate the cases","f":"Concede → Rebut → Categorise → Conditional conclusion","pts":["Grant that some children clearly start ahead, then explain why that is less decisive than it appears.","Divide by what kind of ability is meant: memory, reasoning and persistence behave quite differently.","Close on a condition — <i>provided the environment is there</i> — rather than a flat verdict."]},"b8":{"h":"Attack the word <i>smart</i> before answering","f":"Reframe the term → Distinguish → Counter-example → Trade-off → Conditional forecast","pts":["<i>Smart</i> is doing all the work in this question and means at least three different things. Separating them is the Band 8 move.","Supply a counter-example you constructed: two children with the same apparent ability and different outcomes.","Talk about what is gained and lost by believing each answer, since the belief itself changes how children are taught.","End on what would have to be true for you to change your mind."]}},"critical":{"q":"Do you think children are born smart, or do they learn to become smart?","for":{"h":"The case for innate ability","main":"Differences in capacity appear far too early, and far too consistently, to be explained by teaching alone.","sup":["<b>Early divergence.</b> Differences in memory and pattern recognition are measurable well before formal schooling begins, which leaves very little teaching to credit.","<b>Siblings.</b> Children raised in one household, by one set of parents, with one set of expectations, still diverge sharply. The environment was held constant and the outcome was not.","<b>Ceilings are real.</b> Effort moves people a long way and not infinitely far. Pretending otherwise is kind in the short term and cruel over a decade."]},"against":{"h":"The case for environment and practice","main":"What looks innate is usually an early advantage that compounded, and the compounding is what we are actually observing.","sup":["<b>The advantage is self-reinforcing.</b> A child who reads slightly earlier is read to more, praised more and given harder books, so a small initial gap becomes a large one without any additional talent.","<b>We measure the wrong thing.</b> Tests reward speed and recall, which are the most trainable abilities we have. Judgement and persistence, which matter more, barely appear.","<b>The belief is self-fulfilling.</b> A child told they are naturally gifted avoids difficulty in order to protect the label; a child told effort decides things attempts harder problems. The theory you hold produces the evidence for itself."]},"verdict":"The Band 8 resolution: the question is less interesting than what follows from it. Innate differences almost certainly exist, but they are smaller than the gaps we observe, because advantage compounds and belief shapes behaviour. The practical answer is to teach as though effort decides, precisely because that assumption produces better outcomes whether or not it is strictly true."}},"models":[{"band":"6","part":"Part 3","q":"Do you think children are born smart, or do they learn to become smart?","html":"<p><mark class=\"fc\">I think both are important,</mark> <mark class=\"gr\">but learning is more important.</mark> <mark class=\"lr\">Some children are born with good memory</mark> <mark class=\"gr\">and they can learn faster than others.</mark> <mark class=\"fc\">For example,</mark> my cousin could read when he was four years old.</p><p><mark class=\"fc\">However,</mark> <mark class=\"gr\">if a child doesn't study hard, he will not be successful.</mark> <mark class=\"lr\">Environment is also very important.</mark> <mark class=\"gr\">If parents read books with their children, the children will like reading too.</mark> <mark class=\"fc\">So</mark> <mark class=\"lr\">I think both are important but practice is more important than talent.</mark></p>","notes":{"fc":"A position is stated and supported, and the markers (<i>For example, However, So</i>) are used correctly. But the answer opens by refusing to choose, then chooses, then repeats the opening — the shape circles rather than advances.","lr":"Entirely high-frequency: <i>important</i> appears four times, <i>good memory</i>, <i>study hard</i>, <i>successful</i>. The meaning is never unclear, which is the Band 6 condition, but nothing is less common.","gr":"Two first conditionals and a comparative, all accurate. <i>If a child doesn't study hard, he will not be successful</i> is correct but generic, and there is no relative clause, no concessive, no modal of speculation.","pr":"Clear and easy to follow, with stress falling on content words. The two halves of the answer are delivered with identical intonation, so the contrast between talent and practice is not audible."},"prosody":"I <span class=\"st\">THINK</span> both‿are‿im<span class=\"st\">POR</span>tant ↗ / but <span class=\"st\">LEARN</span>ing‿is more‿im<span class=\"st\">POR</span>tant ↘","tip":"The ceiling here is 6.0, and one change lifts it. Cut the opening <i>both are important</i> and start with the position: <i>Mostly learned, I'd say.</i> The same content then reads as an argument rather than as fence-sitting."},{"band":"7","part":"Part 3","q":"Do you think children are born smart, or do they learn to become smart?","html":"<p><mark class=\"fc\">Mostly learned, I'd say, though I don't think the two can be separated as cleanly as the question suggests.</mark> <mark class=\"lr\">Some children clearly start with an advantage</mark> — <mark class=\"gr\">my cousin was reading fluently at four, and nobody in that house was doing anything unusual.</mark></p><p><mark class=\"fc\">But what interests me</mark> <mark class=\"lr\">is what happens to that advantage afterwards.</mark> <mark class=\"gr\">Because he read early, he was read to more, given harder books and told constantly that he was clever</mark>, <mark class=\"lr\">so a small head start turned into a very large gap</mark> <mark class=\"pr\">without any further talent being involved.</mark></p><p><mark class=\"fc\">So I'd put it this way:</mark> <mark class=\"gr\">children may well be born with different starting points</mark>, <mark class=\"lr\">but almost everything we actually measure is the result of what happened to those starting points.</mark></p>","notes":{"fc":"The answer takes a position immediately, qualifies it, and then develops a single idea across three paragraphs instead of listing. The markers vary in function — qualifying, redirecting, concluding — which is what the Band 7 descriptor means by flexibility.","lr":"<i>Start with an advantage, a head start, turned into a very large gap, starting points</i>. Less common items appear naturally, and the register stays conversational throughout.","gr":"A causal clause with fronted <i>because</i>, a passive sequence (<i>was read to, given, told</i>), and <i>may well</i> as a modal of concession. Error-free, with real variety, though a few sentences remain plainly built.","pr":"Contrastive stress on <i>small</i> against <i>very large</i> makes the compounding argument audible. The final clause of the second paragraph drops in pitch, which marks it as the point rather than as more evidence."},"prosody":"<span class=\"st\">MOST</span>ly learned, I'd say ↘ / though I don't think the two can be <span class=\"st\">SEP</span>arated / as <span class=\"st\">CLEAN</span>ly‿as the question su<span class=\"st\">GGESTS</span> ↘ // Some children <span class=\"st\">CLEAR</span>ly start with‿an‿ad<span class=\"st\">VAN</span>tage ↗","tip":"Three links to rehearse: <i>start with‿an‿advantage</i>, <i>read to‿a lot more</i>, and <i>without‿any further talent</i>. Each joins a consonant to a following vowel, and getting them right is most of what makes this sound like connected speech rather than a list of words."},{"band":"8+","part":"Part 3","q":"Do you think children are born smart, or do they learn to become smart?","html":"<p><mark class=\"fc\">It depends entirely on what <i>smart</i> is standing in for</mark> — <mark class=\"lr\">because it covers at least three abilities that behave quite differently.</mark> <mark class=\"gr\">Processing speed looks substantially innate; vocabulary is almost purely environmental; persistence seems to be taught, mostly by accident.</mark> <mark class=\"pr\">Lumping those together is what makes the question feel unanswerable.</mark></p><p><mark class=\"fc\">That said,</mark> <mark class=\"lr\">I'd argue the innate differences are real and much smaller than the gaps we end up observing.</mark> <mark class=\"gr\">A child who reads a few months early is read to more, handed harder books and told repeatedly that she is clever</mark> — <mark class=\"lr\">and within four years you are no longer looking at a talent, you are looking at four years of compound interest.</mark></p><p><mark class=\"pr\">There's a sharper problem underneath, though.</mark> <mark class=\"lr\">Whichever answer a society believes, it manufactures its own evidence.</mark> <mark class=\"gr\">Tell a child she is naturally gifted and she will avoid hard problems to protect the label; tell her effort decides, and she will attempt them.</mark> <mark class=\"fc\">The belief isn't a description of children. It's an intervention.</mark></p><p><mark class=\"fc\">So my answer is partly strategic.</mark> <mark class=\"gr\">Even if ability were entirely innate — which I doubt — I'd still teach as though it weren't</mark>, <mark class=\"lr\">because that assumption produces better outcomes regardless of whether it happens to be true.</mark></p>","notes":{"fc":"The structure is unmistakable and never announced: dissolve the term, give the substantive view, identify a deeper problem, then land on a position that acknowledges its own reasoning. Pauses fall between ideas, not inside phrases, which is the distinction the Band 8 descriptor draws.","lr":"<i>Standing in for, lumping those together, compound interest, manufactures its own evidence, an intervention</i>. The borrowed financial metaphor does conceptual work rather than decorating, and <i>mostly by accident</i> carries dry humour without breaking register.","gr":"Three parallel clauses with semicolons, an imperative functioning as a conditional (<i>Tell a child she is gifted and she will…</i>), and a mixed conditional with a parenthetical (<i>Even if ability were entirely innate — which I doubt — I'd still teach…</i>). Structures change with rhetorical function and errors are absent.","pr":"<i>The belief isn't a description of children. It's an intervention.</i> — two short sentences after a run of long ones, with the weight on <i>intervention</i>. The semicolon list in the first paragraph needs three level tone groups and a fall only on the third. This is phonology carrying the argument."},"prosody":"It de<span class=\"st\">PENDS</span> entirely‿on what '<span class=\"st\">SMART</span>' is standing‿in for ↗ // <span class=\"st\">PRO</span>cessing speed looks substantially‿in<span class=\"st\">NATE</span> → / vo<span class=\"st\">CAB</span>ulary‿is‿almost purely‿environ<span class=\"st\">MEN</span>tal → / per<span class=\"st\">SIS</span>tence seems to be <span class=\"st\">TAUGHT</span> ↘ / mostly by <span class=\"st\">AC</span>cident ↘↘","tip":"The three-item list is the hard part. Items one and two must end level, not falling — if all three fall, the listener hears three separate claims instead of one classification. Record just that sentence five times and check that only the third item drops."}],"q":{"p1":[{"g":"Teachers","items":["Do you like any teacher of yours?","Do you still keep in touch with your teachers?","Do you think it is important to like your teacher?","Do you want to be a teacher?","What qualities should a good teacher have?"]},{"g":"Science","items":["Do you like science?","What science have you studied?","How do you study science?","What is the most difficult part of studying science?","How has the science you have studied helped you?"]},{"g":"History","items":["Do you like learning history?","What historical event do you find most interesting?","Do you think history is important?","Do you like to watch programmes about history?","Is the internet a good place to learn about history?"]},{"g":"Remembering names","items":["Is it easy for you to remember names?","Will you forget other people's names if they forget yours?","How can you strengthen your memory?"]}],"p2":[{"t":"Describe a course that impressed you a lot","b":["What the course was","Where you took it","What you learned","And explain why it impressed you"]},{"t":"Describe a new skill you learned when you were a child","b":["What the skill was","How you learned it","Who taught you","And explain how you felt about learning it"]},{"t":"Describe a person who learns history and loves history","b":["Who this person is","How he or she learns history","Why he or she loves history","And explain how you feel about him or her"]},{"t":"Describe a person who is good at making things by hand","b":["Who this person is","What he or she makes","What materials or technologies he or she uses","And explain why you think this person is good at it"]},{"t":"Describe a person who is good at learning and speaking new languages","b":["How you got to know him or her","How he or she learns a new language","What languages he or she can speak","And explain how you feel about him or her"]},{"t":"Describe a thing you did to learn another language","b":["What language you learned","What you did","How it helped you learn the language","And explain how you feel about it"]}],"p3":[{"g":"Learning history","items":["Should children begin learning history from an early age?","At what age should people begin to learn history?","How do children learn history before they attend school?","Is it important to learn how people in the past lived?","Should people learn ancient history before modern history?","Besides historical events, what else matters when learning history?"]},{"g":"Language learning","items":["At what age should children start learning a foreign language?","Which skill is more important, speaking or writing?","Does a person still need other languages if they are good at English?","Do you think minority languages will disappear?","What difficulties do people face when learning a language?","Why is language learning important?"]},{"g":"Ability and talent","items":["Do you think children are born smart or they learn to become smart?","How do children become smarter at school?","Why are some people well-rounded and others only good at one thing?","Why does modern society need talents of all kinds?"]},{"g":"Craft and making","items":["Do you think handmade is a good thing?","Do children like making things by hand?","Is traditional craftsmanship important to a country's industry?","What can handmade products bring to tourist attractions?"]}]},"quarter":"Quarter 3 2026 (September – December)"};
+
+/* ---------- assessment criteria ---------- */
+const CRITERIA = [
+ {k:"fc", name:"Fluency and Coherence", items:[
+  {b:6,t:"I kept going and produced extended turns rather than one-clause replies."},
+  {b:6,t:"I used connectives and discourse markers, although not always the most fitting ones."},
+  {b:6,t:"Coherence broke down occasionally because of hesitation, repetition or self-correction."},
+  {b:7,t:"I sustained long turns without noticeable effort."},
+  {b:7,t:"Hesitation and self-correction occurred mid-sentence but did not disrupt the argument."},
+  {b:7,t:"My discourse markers varied in function — conceding, contrasting, attributing — rather than repeating two or three."},
+  {b:8,t:"Hesitation was rare, and most pauses were spent preparing content rather than retrieving language."},
+  {b:8,t:"The topic was developed coherently and relevantly, with no drift away from the question."},
+  {b:0,t:"Part 2: I spoke for at least one minute thirty (the specified range is one to two minutes).",fmt:1},
+  {b:0,t:"Part 1: I gave two to four sentences per question rather than a bare answer.",fmt:1},
+  {b:0,t:"Part 3: I spoke for roughly thirty to forty-five seconds per question, with development.",fmt:1}
+ ]},
+ {k:"lr", name:"Lexical Resource", items:[
+  {b:6,t:"My vocabulary was sufficient to discuss the topic at length and my meaning was always clear."},
+  {b:6,t:"Some word choices were inappropriate, but the listener could still follow."},
+  {b:6,t:"I paraphrased successfully when a word escaped me."},
+  {b:7,t:"I used some less common and idiomatic items, with evident awareness of collocation."},
+  {b:7,t:"I used my vocabulary flexibly across several topics, not only familiar ones."},
+  {b:7,t:"A few items were stylistically inappropriate for the register."},
+  {b:8,t:"My resource was wide and used readily and flexibly to convey precise meaning."},
+  {b:8,t:"I used less common and idiomatic items skilfully, with only occasional inaccuracy."},
+  {b:8,t:"I paraphrased effectively when required, without stalling."}
+ ]},
+ {k:"gr", name:"Grammatical Range and Accuracy", items:[
+  {b:6,t:"I produced a mix of simple and complex sentence forms, with limited flexibility."},
+  {b:6,t:"Errors occurred frequently in complex structures but rarely impeded communication."},
+  {b:7,t:"I used a range of structures flexibly according to what I wanted to say."},
+  {b:7,t:"Error-free sentences were frequent."},
+  {b:7,t:"A few basic errors persisted — articles, plurals, subject-verb agreement or tense."},
+  {b:8,t:"The majority of my sentences were error free."},
+  {b:8,t:"Errors were non-systematic and occasional rather than patterned."},
+  {b:8,t:"I used advanced structures accurately where they served a purpose — inversion, reduced clauses, mixed conditionals."}
+ ]},
+ {k:"pr", name:"Pronunciation", items:[
+  {b:6,t:"My chunking was generally appropriate."},
+  {b:6,t:"I used stress and intonation to some effect, but did not sustain it."},
+  {b:6,t:"Individual words or sounds were mispronounced, causing only occasional loss of clarity."},
+  {b:7,t:"I showed all the positive features of Band 6 together with some, though not all, of Band 8."},
+  {b:8,t:"I sustained an appropriate rhythm across long utterances."},
+  {b:8,t:"I used stress and intonation flexibly to convey precise or subtle meaning — contrast, irony, doubt."},
+  {b:8,t:"I could be easily understood throughout, with accent having minimal effect on intelligibility."},
+  {b:0,t:"Connected speech was audible: linking such as used‿to, depends‿on, goes‿down.",fmt:1},
+  {b:0,t:"I stressed content words rather than giving every word equal weight.",fmt:1}
+ ]}
+];
+
+const DISCLAIMER = `<b>About this studio.</b> The IELTS Speaking Studio is produced and maintained by <b>Huong Stella AI Academic</b>, and is provided to enrolled learners as a structured rehearsal environment: a curated lexical set, explicit reasoning frames, calibrated band models, an automated examiner for timed practice, and a self-rating instrument derived from the publicly published IELTS Speaking assessment criteria.
+<br><br><b>On the self-assessment.</b> The band figure generated here is an indicative training signal only. It reflects your own judgement of your own performance and has no official standing. It does not constitute, predict or substitute for a rating awarded by a qualified instructor, by Huong Stella AI Academic, or by a certified IELTS examiner, and it must not be reported as an IELTS score. Learners should treat any divergence between their self-rating and their teacher's rating as the most informative part of the exercise, and bring it to their next tutorial.
+<br><br><b>On your recordings.</b> Audio you record here is stored in the system's Drive folder and submitted for review by the AI Academic system.
+<br><br><b>Source of criteria.</b> Descriptor wording is adapted from the IELTS Speaking Band Descriptors published at ielts.org. Timing conventions follow the published test format: Part 1 lasts four to five minutes; Part 2 allows one minute of preparation and one to two minutes of speaking; Part 3 lasts four to five minutes.`;
+
+/* ---------- state ---------- */
+const S={voiceName:null, started:false, revealed:false, modelsOpened:false, setIdx:0, tab:"vocab", vfilter:"all", part:"p1", queue:[], qi:0, setLabel:"",
+  takes:[], attempts:0, totalMs:0, lastMs:0, checks:{}, scores:null,
+  recorder:null, chunks:[], stream:null, t0:0, timerId:null, prepId:null, recog:null, sid:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+
+S.sid = "HSP-"+TOPIC.no+"-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+
+const TABS=[["vocab","Vocabulary"],["reason","Reasoning"],["studio","Studio"],["models","Band models"],["check","Self-assessment"],["report","Report"]];
+function buildTabs(){
+  $("#tabs").innerHTML=TABS.map(([k,l],i)=>`<button role="tab" data-t="${k}" aria-selected="${k===S.tab}"><span class="n">${i+1}</span>${l}</button>`).join("");
+  $("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.tab=b.dataset.t;
+  if(S.tab==="models")S.modelsOpened=true;
+  buildTabs();show();};
+  show();
+}
+function show(){ TABS.forEach(([k])=>$("#p-"+k).classList.toggle("on",k===S.tab)); if(S.tab==="report") renderReport(); }
+
+/* ---------- 1 vocabulary ---------- */
+const GROUPS=[["all","All"],["coll","Collocations"],["pv","Phrasal verbs"],["idiom","Idioms"],["noun","Nouns"],["adj","Adjectives"]];
+function renderVocab(){
+  if(!TOPIC.vocab.length){
+    $("#vocabSub").textContent="The lexical set for this module is in preparation. The question bank, the recording studio, the self-assessment instrument and the report are all fully operational in the meantime.";
+    $("#vfilter").innerHTML=""; $("#vocabCard").innerHTML='<p class="hint" style="margin:0">No entries yet.</p>'; return;
+  }
+  $("#vocabSub").textContent=`${TOPIC.vocab.length} items. Take four per session, rewrite each example sentence using something that actually happened to you, and say it aloud three times. Four items used are worth more than eighteen items read.`;
+  $("#vfilter").innerHTML=GROUPS.map(([k,l])=>`<button data-g="${k}" aria-pressed="${k===S.vfilter}">${l}</button>`).join("");
+  $("#vfilter").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.vfilter=b.dataset.g;renderVocab();};
+  const rows=TOPIC.vocab.filter(v=>S.vfilter==="all"||v.g===S.vfilter);
+  $("#vocabBody").innerHTML=rows.length?rows.map(v=>`<tr>
+    <td class="term" data-l="ITEM">${esc(v.t)}<span class="wc">${esc(v.wc)}</span></td>
+    <td class="ipa" data-l="PRONUNCIATION">${esc(v.ipa)}</td>
+    <td data-l="MEANING">${esc(v.def)} <span class="vi">(${esc(v.vi)})</span></td>
+    <td data-l="REGISTER &amp; USAGE">${v.n}</td>
+    <td class="eg" data-l="EXAMPLE">${esc(v.eg)}</td></tr>`).join("")
+   :`<tr><td colspan="5" class="hint">No items in this category.</td></tr>`;
+}
+
+/* ---------- 2 reasoning ---------- */
+function ladder(n,label,d){
+  return `<div class="ladder l${n}"><h4><span class="pill" style="background:var(--fc${n});color:var(--ink)">Band ${label}</span> &nbsp;${esc(d.h)}</h4>
+   <div class="formula">${esc(d.f)}</div><ul>${d.pts.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+}
+function renderReason(){
+  let h="";
+  if(TOPIC.strategy){
+    [["p1","Part 1"],["p2","Part 2"],["p3","Part 3"]].forEach(([k,l])=>{
+      const d=TOPIC.strategy[k];
+      h+=`<h2 class="sec">${l}</h2><p class="sub">Worked question: <b>${esc(d.q)}</b></p><div class="card">${ladder(6,"6",d.b6)}${ladder(7,"7",d.b7)}${ladder(8,"8+",d.b8)}</div>`;
+    });
+    const c=TOPIC.strategy.critical;
+    h+=`<h2 class="sec">Argument map for Part 3</h2><p class="sub">Question: <b>${esc(c.q)}</b>. A Band 8 answer is not a longer answer. It is one that can hold two positions apart and identify precisely where they conflict.</p>
+    <div class="argmap">
+      <div class="argbox for"><h5>${esc(c.for.h)}</h5><p style="font-size:14px;margin:0 0 9px"><b>Central claim.</b> ${esc(c.for.main)}</p><ul style="padding-left:18px;margin:0">${c.for.sup.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+      <div class="argbox against"><h5>${esc(c.against.h)}</h5><p style="font-size:14px;margin:0 0 9px"><b>Central claim.</b> ${esc(c.against.main)}</p><ul style="padding-left:18px;margin:0">${c.against.sup.map(s=>`<li>${s}</li>`).join("")}</ul></div>
+    </div><div class="verdict">${c.verdict.replace(/^(.*?resolution:)/,'<b>$1</b>')}</div>`;
+  } else {
+    h+=`<div class="card"><p style="margin:0" class="hint">The reasoning frames and argument maps for this module are in preparation. The full question bank below is ready to use with the recording studio.</p></div>`;
+  }
+  // question bank
+  const q=TOPIC.q;
+  h+=`<h2 class="sec">Question bank</h2><p class="sub">Every question in this module, taken from the 2026 forecast. These are the same sets the studio works through.</p><div class="card">`;
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:4px 0 8px">Part 1</h3>`;
+  q.p1.forEach(g=>{h+=`<div class="qgroup"><h3>${esc(g.g)}</h3><ol class="q">${g.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ol></div>`});
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:22px 0 10px">Part 2 — cue cards</h3>`;
+  q.p2.forEach(c=>{h+=`<div class="cue"><b>${esc(c.t)}</b><ul>${c.b.map(b=>`<li>${esc(b)}</li>`).join("")}</ul></div>`});
+  h+=`<h3 style="font-family:var(--display);font-size:19px;margin:22px 0 8px">Part 3</h3>`;
+  q.p3.forEach(g=>{h+=`<div class="qgroup"><h3>${esc(g.g)}</h3><ol class="q">${g.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ol></div>`});
+  h+=`</div>`;
+  $("#reasonBody").innerHTML=h;
+}
+
+/* ---------- 3 studio ---------- */
+const PER={p1:35,p2:120,p3:45};
+function fillSets(){
+  const q=TOPIC.q,p=S.part;
+  const opts = p==="p2" ? q.p2.map(c=>c.t) : q[p].map(g=>`${g.g} (${g.items.length} questions)`);
+  $("#setSel").innerHTML=opts.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join("");
+  loadSet();
+}
+function codeNow(){
+  const p=S.part, n=(S.setIdx|0)+1;
+  return "M"+TOPIC.no+"."+(p==="p1"?"P1.G":p==="p2"?"P2.C":"P3.G")+n;
+}
+function loadSet(){
+  const q=TOPIC.q,p=S.part,i=+$("#setSel").value||0; S.setIdx=i;
+  if(p==="p2"){const c=q.p2[i];S.queue=[{text:c.t,bullets:c.b}];S.setLabel=c.t;}
+  else {const g=q[p][i];S.queue=g.items.map(t=>({text:t,bullets:null}));S.setLabel=g.g;}
+  S.qi=0; S.started=false; S.revealed=false;
+  $("#btnPrep").hidden = p!=="p2";
+  $("#clock").textContent="00:00"; $("#clock").className="clock";
+  paintQ();
+}
+function paintQ(){
+  const item=S.queue[S.qi]; if(!item)return;
+  const q=$("#qNow"), ul=$("#qBullets");
+  /* Part 2: the candidate holds the cue card in the real test, so it is always visible. */
+  if(S.part==="p2"){
+    S.started=true; S.revealed=true;
+    $("#counter").textContent="CUE CARD · 1 MINUTE TO PREPARE · 1 TO 2 MINUTES TO SPEAK";
+    q.className="qtext"; q.textContent=item.text;
+    ul.hidden=false; ul.innerHTML=(item.bullets||[]).map(b=>`<li>${esc(b)}</li>`).join("");
+    $("#listenNote").hidden=true;
+    $("#btnStart").hidden=true; $("#btnShow").hidden=true; $("#btnNext").hidden=true;
+    $("#btnAsk").hidden=false; $("#btnAsk").textContent="Read the task aloud";
+    $("#target").textContent=`Target: 1 minute 30 to 2 minutes. Stopping before 1:30 caps Fluency and Coherence.`;
+    return;
+  }
+  $("#btnAsk").textContent="Repeat question";
+  $("#counter").textContent = S.started
+    ? `${S.setLabel.toUpperCase()} · QUESTION ${S.qi+1} OF ${S.queue.length}`
+    : `${S.setLabel.toUpperCase()} · ${S.queue.length} QUESTION${S.queue.length>1?"S":""} · NOT STARTED`;
+  if(!S.started){
+    q.className="qtext veiled";
+    q.textContent="Question hidden. Press Start and the examiner will read it to you — exactly as in the test, where nothing is written down.";
+    ul.hidden=true; ul.innerHTML=""; $("#listenNote").hidden=true;
+    $("#btnStart").hidden=false; $("#btnAsk").hidden=true; $("#btnShow").hidden=true; $("#btnNext").hidden=true;
+  } else {
+    $("#btnStart").hidden=true; $("#btnAsk").hidden=false; $("#btnShow").hidden=false; $("#btnNext").hidden=false;
+    $("#listenNote").hidden = S.revealed;
+    $("#btnShow").textContent = S.revealed ? "Hide" : "Show";
+    if(S.revealed){
+      q.className="qtext"; q.textContent=item.text;
+      if(item.bullets){ul.hidden=false;ul.innerHTML=item.bullets.map(b=>`<li>${esc(b)}</li>`).join("")}else{ul.hidden=true;ul.innerHTML=""}
+    } else {
+      q.className="qtext veiled";
+      q.textContent=`Question ${S.qi+1} of ${S.queue.length} — listening only.`;
+      ul.hidden=true; ul.innerHTML="";
+    }
+  }
+  const total=S.queue.length*PER[S.part];
+  $("#target").textContent=`Target for this set: about ${fmt(total*1000)} in total · ${PER[S.part]}s per question`;
+  $("#btnNext").disabled = S.qi>=S.queue.length-1;
+}
+/* ---------- British female voice selection ---------- */
+const V_PREF=["libby","sonia","serena","kate","stephanie","martha","google uk english female",
+ "hazel","abbi","bella","hollie","olivia","amy","maisie","female"];
+const V_MALE=/daniel|oliver|ryan|thomas|arthur|george|alfie|elliot|\bmale\b|uk english male/i;
+const V_OFF=/fiona|moira|scottish|irish|welsh|karen|tessa|veena|rishi/i;
+function vRank(v){
+ const n=(v.name||"").toLowerCase(), lang=(v.lang||"").replace("_","-");
+ if(!/^en/i.test(lang)) return -1;
+ let s=/^en-GB/i.test(lang)?100:15;
+ if(V_OFF.test(n)) s-=45;
+ if(V_MALE.test(n)) s-=70;
+ const i=V_PREF.findIndex(x=>n.includes(x));
+ if(i>=0) s+=60-i*3;
+ if(/natural|online|premium|enhanced|neural/.test(n)) s+=18;
+ return s;
+}
+function vList(){
+ if(!("speechSynthesis" in window)) return [];
+ return speechSynthesis.getVoices().map(v=>({v,s:vRank(v)}))
+  .filter(o=>o.s>=0).sort((a,b)=>b.s-a.s).map(o=>o.v);
+}
+function vChosen(){
+ const all=vList(); if(!all.length) return null;
+ if(S.voiceName){const m=all.find(v=>v.name===S.voiceName); if(m) return m;}
+ return all[0];
+}
+function speak(text,cb){
+  if(!("speechSynthesis" in window)){cb&&cb();return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text), v=vChosen();
+  if(v){u.voice=v;u.lang=v.lang} else {u.lang="en-GB"}
+  u.rate=0.94;
+  if(cb)u.onend=cb; speechSynthesis.speak(u);
+}
+$("#partSel").onchange=e=>{S.part=e.target.value;fillSets()};
+$("#setSel").onchange=loadSet;
+function say(){const it=S.queue[S.qi];if(!it)return;
+  let t=it.text; if(it.bullets)t+=". You should say: "+it.bullets.join(", ")+".";
+  speak(t)}
+$("#btnStart").onclick=()=>{S.started=true;S.revealed=false;paintQ();say()};
+$("#btnAsk").onclick=say;
+$("#btnShow").onclick=()=>{S.revealed=!S.revealed;paintQ()};
+$("#btnNext").onclick=()=>{ if(S.qi>=S.queue.length-1)return; S.qi++; S.revealed=false; paintQ(); say()};
+$("#btnPrep").onclick=()=>{clearInterval(S.prepId);let left=60;const c=$("#clock");
+  c.className="clock warn";c.textContent="01:00";
+  S.prepId=setInterval(()=>{left--;c.textContent=fmt(left*1000);
+    if(left<=0){clearInterval(S.prepId);c.className="clock";c.textContent="00:00";
+      speak("You have one to two minutes for this. You may begin.")}},1000)};
+
+async function startRec(){
+  /* Nhận diện KHÔNG được chặn đường thu âm: hệ thống của lớp hỏng thì
+     em vẫn phải luyện tập được, chỉ là chưa nộp bài được thôi. */
+  if(window.HSS&&HSS.ready()){try{const me=await HSS.identify();
+    if(me){ if(me.name&&!$("#stName").value)$("#stName").value=me.name;
+            if(me.email&&!$("#stEmail").value)$("#stEmail").value=me.email; }
+  }catch(e){}}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert("This browser cannot record audio. Use a recent version of Chrome, Edge or Safari.");return}
+  try{S.stream=await navigator.mediaDevices.getUserMedia({audio:true})}
+  catch(e){alert("Microphone access was refused. Allow the microphone and try again. Note that recording requires the page to be served over HTTPS.");return}
+  clearInterval(S.prepId);
+  S.chunks=[]; S.recorder=new MediaRecorder(S.stream);
+  S.recorder.ondataavailable=e=>{if(e.data.size)S.chunks.push(e.data)};
+  S.recorder.onstop=saveTake; S.recorder.start(); S.t0=Date.now();
+  $("#stage").classList.add("recording"); $("#btnRec").disabled=true; $("#btnStop").disabled=false;
+  const limit=S.queue.length*PER[S.part]*1000;
+  S.timerId=setInterval(()=>{const d=Date.now()-S.t0,c=$("#clock");
+    c.textContent=fmt(d); c.className="clock"+(d>limit*1.2?" over":d>limit*.8?" warn":"")},200);
+  startRecog();
+}
+function stopRec(){ if(S.recorder&&S.recorder.state!=="inactive")S.recorder.stop();
+  clearInterval(S.timerId); $("#stage").classList.remove("recording");
+  $("#btnRec").disabled=false; $("#btnStop").disabled=true;
+  if(S.stream)S.stream.getTracks().forEach(t=>t.stop());
+  try{S.recog&&S.recog.stop()}catch(e){}}
+function saveTake(){
+  const ms=Date.now()-S.t0, blob=new Blob(S.chunks,{type:(S.chunks[0]&&S.chunks[0].type)||"audio/webm"});
+  S.attempts++; S.totalMs+=ms; S.lastMs=ms;
+  S.takes.push({n:S.attempts,ms,blob,url:URL.createObjectURL(blob),set:S.setLabel,part:S.part,
+    questions:S.queue.map(q=>q.text),at:new Date()});
+  renderTakes(); countWords();
+  if(window.HSS&&HSS.ready()){
+    const note=$("#sendNote"); const show=t=>{if(note){note.hidden=false;note.textContent=t}};
+    HSS.upload(blob,{code:codeNow(),part:+S.part.slice(1),question:S.setLabel,
+      seconds:Math.round(ms/1000),take:S.attempts,takes:S.attempts,
+      module:TOPIC.no+" · "+TOPIC.name,minutes:Math.round(S.totalMs/60000),
+      recordedBeforeModels:!S.modelsOpened,onstage:show})
+      .then(r=>show(r&&r.ok===false?("Not sent: "+(r.error||"unknown error")):"Sent to your teacher."))
+      .catch(()=>show("Not sent — check your connection."));
+  }
+}
+$("#btnRec").onclick=startRec; $("#btnStop").onclick=stopRec;
+function renderTakes(){
+  if(!S.takes.length){$("#takes").innerHTML='<p class="hint" style="margin:6px 0">No recordings yet.</p>';return}
+  $("#takes").innerHTML=S.takes.slice().reverse().map(t=>`<div class="take">
+    <span class="tno">Take ${t.n} · ${fmt(t.ms)} · ${esc(t.set)}</span>
+    <audio controls src="${t.url}"></audio>
+    <a class="btn ghost" style="text-decoration:none;font-size:13px;padding:8px 13px" download="${S.sid}-take${t.n}.webm" href="${t.url}">Download</a></div>`).join("");
+}
+function startRecog(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR)return;
+  try{S.recog=new SR()}catch(e){return}
+  S.recog.lang="en-GB"; S.recog.continuous=true; S.recog.interimResults=false;
+  const base=$("#transcript").value?$("#transcript").value+"\n\n":""; let acc="";
+  S.recog.onresult=e=>{for(let i=e.resultIndex;i<e.results.length;i++)if(e.results[i].isFinal)acc+=e.results[i][0].transcript+" ";
+    $("#transcript").value=base+acc; countWords()};
+  try{S.recog.start()}catch(e){}
+}
+function countWords(){
+  const w=$("#transcript").value.trim().split(/\s+/).filter(Boolean).length;
+  let s=`${w} words`;
+  if(S.lastMs>4000){const wpm=Math.round(w/(S.lastMs/60000));
+    s+=` · ${wpm} words per minute — `+(wpm<110?"below the range associated with Band 7 and above, which typically sits between 130 and 160":wpm>180?"fast enough that clarity is likely to suffer":"within the range associated with Band 7 and above");}
+  $("#wcount").textContent=s;
+}
+$("#transcript").oninput=countWords;
+
+/* ---------- 4 models ---------- */
+const CTAG={fc:["FC","--fc8"],lr:["LR","--lr8"],gr:["GRA","--gr8"],pr:["P","--pr8"]};
+function renderModels(){
+  if(!TOPIC.models.length){$("#modelBody").innerHTML='<div class="card"><p class="hint" style="margin:0">Band models for this module are in preparation.</p></div>';return}
+  $("#modelBody").innerHTML=TOPIC.models.map(m=>{
+    const n=m.band==="6"?6:m.band==="7"?7:8;
+    return `<div class="card">
+     <div class="bandhead" style="border-bottom-color:var(--fc${n})">
+       <span class="bn" style="color:var(--fc${n===6?7:n})">Band ${esc(m.band)}</span>
+       <span class="hint">${esc(m.part)} · ${esc(m.q)}</span></div>
+     <div class="answer">${m.html}</div>
+     <div class="notes">
+       ${Object.keys(CTAG).map(k=>`<p><span class="crit-tag" style="background:var(${CTAG[k][1]})">${CTAG[k][0]}</span>${m.notes[k]}</p>`).join("")}
+       <p style="margin:14px 0 5px"><b>Rhythm and stress — read this aloud:</b></p>
+       <p class="prosody" style="margin:0 0 12px">${m.prosody}</p>
+       <p style="margin:0"><b>Practice note.</b> ${m.tip}</p>
+     </div></div>`}).join("");
+}
+$("#hlbar").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  const on=b.getAttribute("aria-pressed")!=="true";
+  b.setAttribute("aria-pressed",on); document.body.classList.toggle("show-"+b.dataset.c,on)};
+["fc","lr","gr","pr"].forEach(c=>document.body.classList.add("show-"+c));
+
+/* ---------- 5 self-assessment ---------- */
+function renderCheck(){
+  $("#chkBody").innerHTML=CRITERIA.map(c=>`<div class="crit">
+   <h4 style="background:var(--${c.k}8)">${c.name}</h4><div class="items">
+   ${c.items.map((it,i)=>{
+     const id=c.k+"-"+i;
+     const shade = it.fmt?"var(--line)":`var(--${c.k}${it.b})`;
+     const chip  = it.fmt?`background:var(--sand);color:var(--muted)`:`background:var(--${c.k}${it.b});color:${it.b===6?'var(--ink)':'#fff'}`;
+     return `<div class="chk" style="border-left-color:${shade}">
+       <input type="checkbox" id="${id}" style="accent-color:var(--${c.k}8)"${S.checks[id]?" checked":""}>
+       <label for="${id}"><span class="lvl" style="${chip}">${it.fmt?"FORMAT":"BAND "+it.b}</span>${esc(it.t)}</label></div>`}).join("")}
+   </div></div>`).join("");
+  $("#chkBody").onchange=e=>{S.checks[e.target.id]=e.target.checked;scoreIt()};
+  scoreIt();
+}
+function scoreIt(){
+  const out={}; let anyAll=true;
+  CRITERIA.forEach(c=>{
+    const got={6:0,7:0,8:0},tot={6:0,7:0,8:0}; let ticked=0;
+    c.items.forEach((it,i)=>{if(it.fmt)return; tot[it.b]++; if(S.checks[c.k+"-"+i]){got[it.b]++;ticked++}});
+    if(!ticked){out[c.k]=null;anyAll=false;return}
+    const r=b=>tot[b]?got[b]/tot[b]:0;
+    let s=5.5;
+    if(r(6)>=.6)s=6;
+    if(r(6)>=.6&&r(7)>=.4)s=6.5;
+    if(r(7)>=.7)s=7;
+    if(r(7)>=.7&&r(8)>=.4)s=7.5;
+    if(r(7)>=.7&&r(8)>=.75)s=8;
+    out[c.k]=s;
+  });
+  S.scores=out;
+  const vals=CRITERIA.map(c=>out[c.k]).filter(v=>v!==null);
+  if(vals.length===4){
+    const avg=Math.round(vals.reduce((a,b)=>a+b,0)/4*2)/2;
+    S.scores.overall=avg; $("#scoreVal").textContent=avg.toFixed(1);
+    $("#scoreNote").textContent="An indicative training signal only. It carries no official standing and does not substitute for a rating by your teacher.";
+  } else {
+    S.scores.overall=null; $("#scoreVal").textContent="—";
+    $("#scoreNote").textContent=`No band is calculated until all four criteria have been rated. ${4-vals.length} still untouched.`;
+  }
+  $("#scoreBrk").innerHTML=CRITERIA.map(c=>
+    `<span style="background:var(--${c.k}8)">${c.name.split(" ")[0].slice(0,4).toUpperCase()} ${out[c.k]===null?"—":out[c.k]}</span>`).join("");
+  const miss=[];
+  CRITERIA.forEach(c=>c.items.forEach((it,i)=>{if(it.fmt&&!S.checks[c.k+"-"+i])miss.push(it.t)}));
+  const w=$("#fmtWarn");
+  if(miss.length){w.hidden=false;w.innerHTML="<b>Format requirements not yet met.</b> These do not carry a band on their own, but the criteria above are difficult to satisfy without them.<br>"+miss.map(m=>"— "+esc(m)).join("<br>")}
+  else w.hidden=true;
+}
+
+/* ---------- 6 report ---------- */
+function reportData(){
+  const last=S.takes[S.takes.length-1];
+  const words=$("#transcript").value.trim().split(/\s+/).filter(Boolean).length;
+  return {
+    submissionId:S.sid, schemaVersion:"hsp-speaking-1.0",
+    module:{no:TOPIC.no,id:TOPIC.id,name:TOPIC.name},
+    student:{name:$("#stName").value.trim()||"(name not supplied)",email:$("#stEmail").value.trim()||"(email not supplied)"},
+    submittedAt:new Date().toISOString(),
+    submittedAtLocal:new Date().toLocaleString("en-GB",{dateStyle:"full",timeStyle:"short"}),
+    part:{p1:"Part 1",p2:"Part 2",p3:"Part 3"}[S.part],
+    questionSet:S.setLabel||"(no set selected)",
+    questions:S.queue.map(q=>q.text),
+    attempts:S.attempts,
+    totalPracticeMs:S.totalMs, totalPractice:fmt(S.totalMs),
+    finalTakeMs:S.lastMs, finalTake:fmt(S.lastMs),
+    audioFile:last?`${S.sid}-take${last.n}.webm`:null,
+    transcript:$("#transcript").value.trim()||"(no transcript recorded)",
+    wordCount:words,
+    wordsPerMinute:S.lastMs>4000?Math.round(words/(S.lastMs/60000)):null,
+    scores:S.scores||{fc:null,lr:null,gr:null,pr:null,overall:null},
+    checklist:CRITERIA.map(c=>({criterion:c.name,key:c.k,band:S.scores?S.scores[c.k]:null,
+      items:c.items.map((it,i)=>({level:it.fmt?"format":"band"+it.b,statement:it.t,checked:!!S.checks[c.k+"-"+i]}))}))
+  };
+}
+function renderReport(){
+  const d=reportData();
+  $("#repPreview").innerHTML=[
+   ["Submission ID",`<span class="sid">${esc(d.submissionId)}</span>`],
+   ["Student",esc(d.student.name)],["Email",esc(d.student.email)],
+   ["Submitted",esc(d.submittedAtLocal)],["Module",esc(d.module.no+" · "+d.module.name)],
+   ["Part",esc(d.part)],["Question set",esc(d.questionSet)],
+   ["Takes recorded",d.attempts],["Total practice time",d.totalPractice],
+   ["Final take",d.finalTake],["Audio file",esc(d.audioFile||"(none yet)")],
+   ["Self-rated band",d.scores.overall===null?"not yet complete":d.scores.overall]
+  ].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("");
+}
+function dl(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click()}
+$("#btnReport").onclick=()=>{
+  const d=reportData();
+  if(window.HSS&&HSS.ready()&&S.takes.length){
+    const self={FC:d.scores.fc,LR:d.scores.lr,GRA:d.scores.gr,P:d.scores.pr};
+    const flat=[].concat.apply([],d.checklist.map(c=>c.items));
+    const missed=flat.filter(i=>!i.checked).map(i=>i.statement);
+    HSS.markFinal({code:codeNow(),take:S.attempts,minutes:Math.round(S.totalMs/60000),
+      self:self,overall:d.scores.overall,
+      checks:JSON.stringify(d.checklist).slice(0,4000),
+      note:$("#reflect")?$("#reflect").value:""});
+    HSS.selfcheck({part:d.part,ticked:flat.length-missed.length,total:flat.length,
+      self:self,overall:d.scores.overall,missed:missed.join(" · ").slice(0,2000),
+      note:$("#reflect")?$("#reflect").value:""});
+  }
+  const html=`<!doctype html><html lang="en"><meta charset="utf-8"><title>Speaking practice report — ${esc(d.student.name)}</title>
+<style>body{font-family:Georgia,'Times New Roman',serif;max-width:780px;margin:36px auto;padding:0 24px;color:#2A1E0A;line-height:1.6}
+.eb{font-size:11px;letter-spacing:.24em;color:#B87200;font-family:Arial,sans-serif;font-weight:700;margin:0 0 6px}
+h1{font-size:25px;border-bottom:3px solid #F2A81D;padding-bottom:9px;margin:0 0 4px}
+h2{font-size:17px;margin-top:28px;border-bottom:1px solid #EADFC5;padding-bottom:5px}
+h3{font-size:14px;margin:18px 0 4px}
+dl{display:grid;grid-template-columns:190px 1fr;gap:5px 15px;font-size:14.5px}dt{color:#8D7B58}dd{margin:0}
+.sid{font-family:monospace;background:#FBF3DE;padding:2px 8px;border-radius:5px}
+.sc{background:#2A1E0A;color:#FFF8E7;padding:16px 20px;border-radius:11px;margin:18px 0;font-size:14px}
+.sc b{font-size:30px;display:block;margin:3px 0;color:#F2A81D}
+.brk span{display:inline-block;font-family:monospace;font-size:12px;padding:3px 9px;border-radius:6px;margin:3px 5px 0 0;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+td{padding:6px 8px;border-bottom:1px solid #F1EADA;vertical-align:top}
+td.y{color:#14735A;width:24px;font-weight:700}td.n{color:#CFC5AE;width:24px}
+td.lv{color:#8D7B58;width:74px;font-family:monospace;font-size:11px}
+.tr{background:#FFFCF4;border:1px solid #EADFC5;padding:15px 18px;border-radius:11px;white-space:pre-wrap;font-size:14.5px;font-family:Arial,Helvetica,sans-serif}
+.dis{background:#FBF3DE;border:1px solid #EADFC5;border-radius:11px;padding:15px 18px;font-size:12.5px;color:#5C4B2E;margin-top:28px;font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+@media print{body{margin:0}}</style>
+<p class="eb">HUONG STELLA PARADIGM</p>
+<h1>IELTS Speaking practice report</h1>
+<p style="color:#8D7B58;font-size:13px;margin:0 0 20px">Module ${esc(d.module.no)} — ${esc(d.module.name)} · Submission <span class="sid">${esc(d.submissionId)}</span></p>
+<dl>
+<dt>Student</dt><dd>${esc(d.student.name)}</dd>
+<dt>Email</dt><dd>${esc(d.student.email)}</dd>
+<dt>Submitted</dt><dd>${esc(d.submittedAtLocal)}</dd>
+<dt>Part</dt><dd>${esc(d.part)}</dd>
+<dt>Question set</dt><dd>${esc(d.questionSet)}</dd>
+<dt>Takes recorded</dt><dd>${d.attempts}</dd>
+<dt>Total practice time</dt><dd>${d.totalPractice}</dd>
+<dt>Final take duration</dt><dd>${d.finalTake}</dd>
+<dt>Audio file</dt><dd>${esc(d.audioFile||"(not downloaded)")}</dd>
+<dt>Transcript length</dt><dd>${d.wordCount} words${d.wordsPerMinute?` · ${d.wordsPerMinute} wpm`:""}</dd>
+</dl>
+<h2>Questions attempted</h2><ol style="font-size:14.5px">${d.questions.map(q=>`<li>${esc(q)}</li>`).join("")}</ol>
+<div class="sc">Self-rated band<b>${d.scores.overall===null?"not completed":d.scores.overall}</b>
+<div class="brk">
+<span style="background:#B87200">FLUENCY ${d.scores.fc===null?"—":d.scores.fc}</span>
+<span style="background:#14735A">LEXIS ${d.scores.lr===null?"—":d.scores.lr}</span>
+<span style="background:#5140A6">GRAMMAR ${d.scores.gr===null?"—":d.scores.gr}</span>
+<span style="background:#B4392A">PRONUNCIATION ${d.scores.pr===null?"—":d.scores.pr}</span></div></div>
+<h2>Transcript</h2><div class="tr">${esc(d.transcript)}</div>
+<h2>Self-assessment against the published criteria</h2>
+${d.checklist.map(c=>`<h3>${esc(c.criterion)} — self-rated ${c.band===null?"not rated":c.band}</h3><table>${c.items.map(i=>`<tr><td class="${i.checked?'y':'n'}">${i.checked?'✓':'○'}</td><td class="lv">${esc(i.level)}</td><td>${esc(i.statement)}</td></tr>`).join("")}</table>`).join("")}
+<div class="dis">${DISCLAIMER}</div>
+</html>`;
+  dl(new Blob([html],{type:"text/html;charset=utf-8"}),`${d.submissionId}-report.html`);
+};
+$("#btnAudio").onclick=()=>{const t=S.takes[S.takes.length-1];
+  if(!t){alert("There is no recording to download yet.");return}
+  dl(t.blob,`${S.sid}-take${t.n}.webm`)};
+$("#btnJson").onclick=()=>dl(new Blob([JSON.stringify(reportData(),null,2)],{type:"application/json"}),`${S.sid}-data.json`);
+$("#btnOpen").onclick=()=>{const u=$("#subLink").value.trim();
+  if(!u){alert("Paste your teacher's submission link into the field at the top of the page first.");return}
+  window.open(/^https?:/.test(u)?u:"https://"+u,"_blank","noopener")};
+
+/* ---------- boot ---------- */
+$("#disclaimerBox").innerHTML=DISCLAIMER;
+$("#foot").innerHTML=`Question source: IELTS Speaking Forecast, Quarter 3 2026 (September – December). Assessment criteria adapted from the IELTS Speaking Band Descriptors published at ielts.org. Studio produced by Huong Stella AI Academic. Nothing is stored on a server — download your report before closing this tab.`;
+function fillVoices(){
+  const sel=$("#voiceSel"); if(!sel) return;
+  const all=vList();
+  if(!all.length){sel.innerHTML='<option>No voices available in this browser</option>';
+   $("#voiceNote").textContent="This browser has no speech voices installed; read the questions yourself.";return}
+  const best=vChosen();
+  sel.innerHTML=all.map(v=>`<option value="${esc(v.name)}"${v.name===(best&&best.name)?" selected":""}>${esc(v.name)} — ${esc(v.lang)}</option>`).join("");
+  const gb=all.filter(v=>/^en-GB/i.test(v.lang||""));
+  $("#voiceNote").innerHTML = gb.length
+   ? `Preselected: the most natural British female voice on this device. ${gb.length} British voice${gb.length>1?"s":""} found.`
+   : `No British voice is installed here, so a general English voice has been chosen. For a natural British female examiner, open this page in <b>Microsoft Edge</b> (Libby or Sonia) or <b>Chrome</b> (Google UK English Female).`;
+}
+$("#voiceSel").onchange=e=>{S.voiceName=e.target.value};
+$("#btnVoice").onclick=()=>speak("Let's talk about where you live now. Which town or city do you live in?");
+fillVoices();
+if("speechSynthesis" in window) speechSynthesis.onvoiceschanged=fillVoices;
+if(window.HSS)HSS.init({endpoint:(window.__CFG||{}).submitUrl,unit:"M"+TOPIC.no});
+buildTabs(); renderVocab(); renderReason(); renderModels(); fillSets(); renderCheck(); renderTakes();
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+</script>
+</body>
+</html>
